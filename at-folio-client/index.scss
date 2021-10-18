@@ -1,0 +1,32 @@
+@import "./scss/colors.scss";
+@import "./scss/fonts.scss";
+
+@import "./components/app/app.scss";
+@import "./components/logo/logo.scss";
+@import "./components/page/page.scss";
+@import "./components/profileBackground/profileBackground.scss";
+@import "./components/socialPlatformNetwork/socialPlatformNetwork.scss";
+
+html,
+body {
+  margin: 0px;
+  min-height: 100vh;
+  padding: 0px;
+  width: 100%;
+}
+
+h1,
+p,
+a,
+span,
+button,
+input,
+textarea,
+select,
+option,
+th,
+td {
+  color: gray(100);
+  font-size: 1em;
+  margin: 0px;
+}
