@@ -4,7 +4,6 @@ import { Data, Network, Options } from "vis-network/standalone";
 import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
 
 import { ISocialLink } from "../../../at-folio-models/socialLink";
-import { SocialPlatform } from "../../../at-folio-enums/socialPlatform";
 
 interface SocialPlatformNetworkProps {
   id: string;

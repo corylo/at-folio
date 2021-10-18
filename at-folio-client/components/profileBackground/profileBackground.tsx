@@ -1,11 +1,13 @@
 import React from "react";
 
+import { LoadableImage } from "../loadableImage/loadableImage";
+
 interface ProfileBackgroundProps {
   image: string;
 }
 
 export const ProfileBackground: React.FC<ProfileBackgroundProps> = (props: ProfileBackgroundProps) => {
   return (
-    <div id="profile-background" style={{ backgroundImage: `url(${props.image})` }} />
-  )
+    <LoadableImage className="profile-background" source={props.image} />
+  );
 }

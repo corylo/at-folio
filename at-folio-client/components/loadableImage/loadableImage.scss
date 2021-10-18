@@ -1,0 +1,8 @@
+.loadable-image {
+  transition: filter 0.25s, transform 0.25s;
+  
+  &.preview {
+    filter: blur(5px);
+    transform: scale(1.1);
+  }
+}
