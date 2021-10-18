@@ -12,7 +12,7 @@
     "deploy:prod": "npm run clean && npm run build:prod && firebase deploy --only hosting",
     "deploy": "npm run deploy:prod",
     "pd": "git push && npm run deploy",
-    "list": "firebase projects:list",
+    "projects": "firebase projects:list",
     "set:prod": "firebase use at-folio"
   },
   "author": "",
