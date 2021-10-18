@@ -7,7 +7,7 @@ import { Logo } from "../logo/logo";
 export const App: React.FC = () => {
   return (
     <div id="at-folio-app">
-      <Logo />
+      <Logo wrapperID="at-folio-logo" />
       <Switch>
         <Route exact path="/">
           <HomePage />

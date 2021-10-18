@@ -1,4 +1,22 @@
 #at-folio-app {
   background-color: gray(40);
   width: 100vw;
+
+  #at-folio-logo {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    left: 0px;
+    padding: 10px;
+    pointer-events: none;
+    position: fixed;
+    top: 0px;
+    width: calc(100% - 20px);
+    z-index: 10;
+    
+    .logo {      
+      animation: fadeInDown 400ms ease-in;
+      pointer-events: all;
+    }
+  }
 }

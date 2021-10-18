@@ -1,13 +1,7 @@
 .logo {
   color: white;
   font-size: 2em;
-  left: 50%;
-  margin-top: 10px;
-  position: absolute;
   text-decoration: none;
-  top: 0px;
-  transform: translateX(-50%);
-  z-index: 10;
 
   &:hover,
   &:focus {
