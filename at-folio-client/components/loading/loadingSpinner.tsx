@@ -9,7 +9,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = (props: LoadingSpin
     return (
       <div id={props.wrapperID}>
         <div className="loading-spinner">
-          <i className="fa-solid fa-at" style={{ color: "white", height: 50 }} />
+          <i className="fa-solid fa-at" />
         </div>
       </div>
     )
@@ -17,7 +17,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = (props: LoadingSpin
 
   return (
     <div className="loading-spinner">
-      <i className="fa-solid fa-at" style={{ color: "white", height: 50 }} />
+      <i className="fa-solid fa-at" />
     </div>
   )
 }

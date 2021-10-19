@@ -6,7 +6,7 @@ import { ProfileService } from "../../../services/profileService";
 import { IProfile } from "../../../../at-folio-models/profile";
 import { IProfilePageState } from "../models/profilePageState";
 
-import { RequestStatus } from "../../../../at-folio-enums/requestStatus";
+import { RequestStatus } from "../../../enums/requestStatus";
 
 export const useFetchProfileEffect = (
   state: IProfilePageState, 

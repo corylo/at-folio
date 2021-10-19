@@ -1,6 +1,6 @@
 import { defaultProfile, IProfile } from "../../../../at-folio-models/profile";
 
-import { RequestStatus } from "../../../../at-folio-enums/requestStatus";
+import { RequestStatus } from "../../../enums/requestStatus";
 
 export interface IProfilePageState {
   profile: IProfile;

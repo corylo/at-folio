@@ -1,20 +1,17 @@
 #sign-in-form {
   width: 100%;
 
-  .form-actions {
-    .sign-up-label {
-      color: white;
-      font-weight: 400;
-      margin-top: 1em;
+  .sign-in-label {
+    color: white;
+    margin-top: 1em;
 
-      a {
-        color: $themeColor;
-        text-decoration: none;
+    a {
+      color: $themeColor;
+      text-decoration: none;
 
-        &:hover,
-        &:focus {
-          text-decoration: underline;
-        }
+      &:hover,
+      &:focus {
+        text-decoration: underline;
       }
     }
   }

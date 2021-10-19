@@ -5,7 +5,11 @@ import { HomePage, ProfilePage, SignUpPage } from "../../pages/pages";
 
 import { Logo } from "../logo/logo";
 
+import { useOnAuthStateChangedEffect } from "../../effects/authEffects";
+
 export const App: React.FC = () => {
+  useOnAuthStateChangedEffect();
+
   return (
     <div id="at-folio-app">
       <Logo wrapperID="at-folio-logo" />

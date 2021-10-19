@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { LoadingSpinner } from "../loading/loadingSpinner";
 
-import { RequestStatus } from "../../../at-folio-enums/requestStatus";
+import { AppContext } from "../app/appWrapper";
+
+import { RequestStatus } from "../../enums/requestStatus";
+import { UserStatus } from "../../enums/userStatus";
 
 interface PageProps {
   children: any;
@@ -11,8 +14,10 @@ interface PageProps {
 }
 
 export const Page: React.FC<PageProps> = (props: PageProps) => {
+  const { appState } = useContext(AppContext);
+
   const getContent = (): JSX.Element => {
-    if(props.status === RequestStatus.Loading) {
+    if(appState.userStatus === UserStatus.Loading || props.status === RequestStatus.Loading) {
       return (
         <LoadingSpinner wrapperID="page-loading-spinner" />
       )

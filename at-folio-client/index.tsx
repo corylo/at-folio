@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { App } from "./components/app/app";
+import { AppWrapper } from "./components/app/appWrapper";
 
 require("./index.scss");
 
 ReactDOM.render(
   <Router>
-    <App />
+    <AppWrapper />
   </Router>,
   document.getElementById("root")
 );
