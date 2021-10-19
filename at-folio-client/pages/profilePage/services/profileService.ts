@@ -15,6 +15,12 @@ export const ProfileService: IProfileService = {
       backgroundImage: ProfileUtility.getBackgroundImage(ProfileBackgroundImage.Mountains),
       username,
       links: [{
+        platform: SocialPlatform.Facebook,
+        url: "https://facebook.com"
+      }, {
+        platform: SocialPlatform.TikTok,
+        url: "https://tiktok.com"
+      }, {
         platform: SocialPlatform.Reddit,
         url: "https://reddit.com"
       }, {
