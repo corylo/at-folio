@@ -1,0 +1,30 @@
+.input {
+  .input-content {
+    input {
+      backdrop-filter: blur(5px);
+      background-color: rgba(white, 0.05);
+      border: 1px solid gray(120);
+      border-radius: 6px;
+      color: white;
+      font-family: 'Rubik', sans-serif;
+      font-size: 1em;
+      outline: none;
+      padding: 15px;
+      width: calc(100% - 32px);
+
+      &:focus {
+        border-color: white;
+      }
+    }
+  }
+
+  .input-info {
+    .input-label {
+      color: white;
+      font-size: 0.8em;
+      margin-left: 15px;
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+  }
+}

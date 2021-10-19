@@ -7,7 +7,7 @@ import { RequestStatus } from "../../../at-folio-enums/requestStatus";
 interface PageProps {
   children: any;
   id: string;
-  status: RequestStatus;
+  status?: RequestStatus;
 }
 
 export const Page: React.FC<PageProps> = (props: PageProps) => {

@@ -80,7 +80,10 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
   },
   getPlatforms: (): SocialPlatform[] => {
     return [
+      SocialPlatform.Discord,
       SocialPlatform.Facebook,
+      SocialPlatform.GitHub,
+      SocialPlatform.Instagram,
       SocialPlatform.Reddit,  
       SocialPlatform.TikTok,      
       SocialPlatform.Twitch,      

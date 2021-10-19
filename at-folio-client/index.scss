@@ -1,17 +1,23 @@
 @import "./scss/colors.scss";
 @import "./scss/fonts.scss";
 @import "./scss/animations.scss";
+@import "./scss/button.scss";
 
 @import "./pages/pages.scss";
 
 @import "./components/app/app.scss";
+@import "./components/form/form.scss";
+@import "./components/input/input.scss";
 @import "./components/loadableImage/loadableImage.scss";
 @import "./components/loading/loading.scss";
 @import "./components/logo/logo.scss";
 @import "./components/page/page.scss";
 @import "./components/profileBackground/profileBackground.scss";
 @import "./components/profileUsername/profileUsername.scss";
+@import "./components/socialPlatformGridBackground/socialPlatformGridBackground.scss";
 @import "./components/socialPlatformNetwork/socialPlatformNetwork.scss";
+@import "./components/signInForm/signInForm.scss";
+@import "./components/signUpForm/signUpForm.scss";
 
 html,
 body {

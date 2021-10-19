@@ -1,9 +1,9 @@
-import { ProfileUtility } from "../../../utilities/profileUtility";
+import { ProfileUtility } from "../utilities/profileUtility";
 
-import { IProfile } from "../../../../at-folio-models/profile";
+import { IProfile } from "../../at-folio-models/profile";
 
-import { ProfileBackgroundImage } from "../../../../at-folio-enums/profileBackgroundImage";
-import { SocialPlatform } from "../../../../at-folio-enums/socialPlatform";
+import { ProfileBackgroundImage } from "../../at-folio-enums/profileBackgroundImage";
+import { SocialPlatform } from "../../at-folio-enums/socialPlatform";
 
 interface IProfileService {
   getByUsername: (username: string) => Promise<IProfile>;

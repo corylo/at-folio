@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouteMatch } from "react-router";
 
-import { ProfileService } from "../services/profileService";
+import { ProfileService } from "../../../services/profileService";
 
 import { IProfile } from "../../../../at-folio-models/profile";
 import { IProfilePageState } from "../models/profilePageState";

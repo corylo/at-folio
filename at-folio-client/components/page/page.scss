@@ -1,5 +1,7 @@
 .page {  
+  background-color: gray(40);
   min-height: 100vh;
+  overflow: hidden;
 
   #page-loading-spinner {
     align-items: center;
