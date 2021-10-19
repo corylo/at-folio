@@ -41,8 +41,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
         setState({ ...updates, status: RequestStatus.Loading });
 
         await AuthService.createUser(fields.email, fields.password);
-
-        setStatusTo(RequestStatus.Success);
       } catch (err) {
         console.error(err);
         

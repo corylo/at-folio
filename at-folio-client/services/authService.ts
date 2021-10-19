@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, UserCredential } from "@firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, UserCredential } from "@firebase/auth";
 
 import { auth } from "../firebase";
 
@@ -8,6 +8,8 @@ interface IAuthService {
 
 export const AuthService: IAuthService = {
   createUser: async (email: string, password: string): Promise<void> => {
-    await createUserWithEmailAndPassword(auth, email, password);
+    const credentials: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+    await sendEmailVerification(credentials.user);
   }
 }

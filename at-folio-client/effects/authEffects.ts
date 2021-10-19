@@ -13,9 +13,9 @@ export const useOnAuthStateChangedEffect = (): void => {
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (user: User) => {
       if(user !== null) {
-        setAppState({ ...appState, userStatus: UserStatus.SignedIn });
+        setAppState({ ...appState, user, userStatus: UserStatus.SignedIn });
       } else {
-        setAppState({ ...appState, userStatus: UserStatus.SignedOut });
+        setAppState({ ...appState, user: null, userStatus: UserStatus.SignedOut });
       }
     });
 
