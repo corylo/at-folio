@@ -26,6 +26,16 @@ export const SocialPlatformNetwork: React.FC<SocialPlatformNetworkProps> = (prop
       network.on("blurNode", (params: any) => SocialPlatformNetworkUtility.handleOnNodeBlur(params, container));
 
       network.on("click", (params: any) => SocialPlatformNetworkUtility.handleOnNodeClick(params, props.links));
+
+      const handleOnResize = (): void => {
+        network.fit();
+      }
+
+      window.addEventListener("resize", handleOnResize);
+
+      return () => {
+        window.removeEventListener("resize", handleOnResize);
+      }
     }
   }, []);
 
