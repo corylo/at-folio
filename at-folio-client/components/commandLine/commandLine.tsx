@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 import { Logo } from "../logo/logo";
 import { ProfileImage } from "../profileImage/profileImage";
@@ -17,15 +17,20 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
 
   const [state, setState] = useState<ICommandLineState>(defaultCommandLineState());
 
-  const history: any = useHistory();
+  const location: any = useLocation(),
+    history: any = useHistory();
 
   const setQueryTo = (query: string): void => {
     setState({ ...state, query });
   }
-
+  
   const handleOnKeyDown = (e: any): void => {
     if(e.key === "Enter") {
-      history.push(`/${state.query}`);
+      setQueryTo("");
+
+      if(state.query !== location.pathname.slice(1)) {
+        history.push(`/${state.query}`);
+      }
     }
   }
 

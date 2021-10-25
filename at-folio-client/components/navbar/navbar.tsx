@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { CommandLine } from "../commandLine/commandLine";
 import { Logo } from "../logo/logo";
@@ -14,14 +15,27 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
   const { appState } = useContext(AppContext);
 
+  const location: any = useLocation();
+
   const getContent = (): JSX.Element => {
     if(appState.userStatus === UserStatus.SignedIn) {
       return (
         <CommandLine />
       )
     } else {
+      const getSignInLink = (): JSX.Element => {        
+        if(location.pathname !== "/") {
+          return (
+            <Link to="/" type="button" className="sign-in-link rubik-font">Sign In</Link>
+          )
+        } 
+      }
+
       return (
-        <Logo />
+        <React.Fragment>
+          <Logo />
+          {getSignInLink()}
+        </React.Fragment>
       )
     }
   }
