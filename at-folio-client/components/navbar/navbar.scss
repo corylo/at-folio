@@ -10,8 +10,13 @@
   width: calc(100% - 20px);
   z-index: 100000;
 
+  .logo {
+    animation: fadeInDown 400ms ease-in;
+  }
+
   .sign-in-link {
     align-items: center;
+    animation: fadeInRight 400ms ease-in;
     border-radius: 6px;
     color: white;
     display: flex;

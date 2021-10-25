@@ -15,7 +15,7 @@ interface LoadableImageProps {
 export const LoadableImage: React.FC<LoadableImageProps> = (props: LoadableImageProps) => {
   const previewSource: string = ImageUtility.getPreviewSource(props.source);
 
-  const { status } = useLoadImageEffect(props.source, previewSource);
+  const { status } = useLoadImageEffect(previewSource, props.source);
 
   if(status !== ImageStatus.Waiting) {
     const source: string = status === ImageStatus.Loaded ? props.source : previewSource;

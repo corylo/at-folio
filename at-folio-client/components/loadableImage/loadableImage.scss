@@ -2,7 +2,7 @@
   transition: filter 0.25s, transform 0.25s;
   
   &.preview {
-    filter: blur(5px);
+    filter: blur(8px);
     transform: scale(1.1);
   }
 }
