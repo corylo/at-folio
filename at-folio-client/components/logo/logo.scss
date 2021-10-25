@@ -1,10 +1,26 @@
 .logo {
-  color: white;
-  font-size: 2em;
+  align-items: center;  
+  display: flex;
+  font-size: 1em;
+  gap: 2px;
+  outline: none;
   text-decoration: none;
 
   &:hover,
   &:focus {
     text-shadow: 0px 0px 8px rgba(white, 0.5);
+  }
+
+  i, span {
+    color: white;
+  }
+
+  i {
+    font-size: 1.1em;
+    margin-top: 5px;
+  }
+
+  span {
+    font-size: 1.5em;
   }
 }

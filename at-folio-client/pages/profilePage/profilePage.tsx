@@ -18,7 +18,7 @@ export const ProfilePage: React.FC = () => {
 
   return (
     <Page id="profile-page" status={state.status}>
-      <ProfileUsername username={profile.username} />
+      <ProfileUsername username={profile.username} wrapperID="profile-page-username-wrapper" />
       <SocialPlatformNetwork 
         id="social-platform-network" 
         links={profile.links} 

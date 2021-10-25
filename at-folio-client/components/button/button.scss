@@ -1,3 +1,11 @@
+@import "./iconButton/iconButton.scss";
+
+.close-button {
+  i {
+    font-size: 1.25em;
+  }
+}
+
 .button {
   background-color: $themeColor;
   border: none;

@@ -24,7 +24,7 @@ export const useFetchProfileEffect = (
 
           setTimeout(() => {
             setState({ profile, status: RequestStatus.Success });
-          }, 1000);
+          }, 500);
         }
       } catch (err) {
         console.error(err);

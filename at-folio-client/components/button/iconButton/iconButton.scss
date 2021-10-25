@@ -1,0 +1,25 @@
+.icon-button {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  outline: none;
+  padding: 5px;
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+  }
+
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
+    i {
+      color: $themeColor;
+    }
+  }
+
+  i {    
+    color: white;
+    font-size: 1em;
+  }
+}

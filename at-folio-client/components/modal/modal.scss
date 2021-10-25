@@ -1,0 +1,41 @@
+.modal-wrapper {  
+  align-items: center;
+  backdrop-filter: blur(3px);
+  background-color: rgba(gray(30), 0.5);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100vw;
+  z-index: 100001;
+
+  &.loading {
+    .modal {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .loading-spinner {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  .modal,
+  .loading-spinner {
+    transition: transform 0.25s, opacity 0.25s;
+  }
+
+  .modal {
+    animation: fadeInDown 400ms ease-in;
+    width: 500px;
+  }
+
+  .loading-spinner {
+    opacity: 0;
+    position: absolute;
+    transform: translateY(-10px);
+  }
+}

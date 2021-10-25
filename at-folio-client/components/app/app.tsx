@@ -3,7 +3,8 @@ import { Redirect, Route, Switch } from "react-router";
 
 import { HomePage, ProfilePage, SignUpPage } from "../../pages/pages";
 
-import { Logo } from "../logo/logo";
+import { MainMenu } from "../mainMenu/mainMenu";
+import { Navbar } from "../navbar/navbar";
 
 import { useOnAuthStateChangedEffect } from "../../effects/authEffects";
 
@@ -12,7 +13,8 @@ export const App: React.FC = () => {
 
   return (
     <div id="at-folio-app">
-      <Logo wrapperID="at-folio-logo" />
+      <Navbar />
+      <MainMenu />
       <Switch>
         <Route exact path="/">
           <HomePage />

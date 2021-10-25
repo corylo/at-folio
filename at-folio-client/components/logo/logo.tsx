@@ -1,24 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { WrappableComponent } from "../wrappableComponent/wrappableComponent";
+
 interface LogoProps {
   wrapperID?: string;
 }
 
 export const Logo: React.FC<LogoProps> = (props: LogoProps) => {
-  if(props.wrapperID) {
-    return (
-      <div id={props.wrapperID}>
-        <Link className="logo lobster-font" to="/">
-          @folio
-        </Link>
-      </div>
-    )
-  }
-
   return (
-    <Link className="logo lobster-font" to="/">
-      @folio
-    </Link>
+    <WrappableComponent wrapperID={props.wrapperID}>
+      <Link className="logo" to="/">
+        <i className="fa-regular fa-at" />
+        <span className="rubik-font">folio</span>
+      </Link>
+    </WrappableComponent>
   )
 }

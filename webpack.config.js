@@ -26,7 +26,8 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlPlugin({
-        template: path.resolve(__dirname, "at-folio-client/index.html")
+        template: path.resolve(__dirname, "at-folio-client/index.html"),
+        favicon: "at-folio-client/img/favicon.svg"
       }),
       new CopyPlugin({
         patterns: [

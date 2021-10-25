@@ -5,6 +5,7 @@ import { Form } from "../form/form";
 import { FormActions } from "../form/formActions";
 import { FormBody } from "../form/formBody";
 import { Input } from "../input/input";
+import { WrappableComponent } from "../wrappableComponent/wrappableComponent";
 
 import { AuthService } from "../../services/authService";
 
@@ -57,10 +58,10 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
     }
   }
 
-  const getSignInBox = (): JSX.Element => {
-    return (
+  return (
+    <WrappableComponent wrapperID={props.wrapperID}>
       <Form id="sign-up-form" title="Sign Up">
-        <FormBody>
+        <FormBody status={state.status}>
           <Input label="Email" error={errors.email}>
             <input 
               type="email" 
@@ -90,16 +91,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
           Have an account? <Link to="/" className="sign-in-link">Sign In</Link>
         </h1>
       </Form>
-    );
-  }
-
-  if(props.wrapperID) {
-    return (
-      <div id={props.wrapperID}>
-        {getSignInBox()}
-      </div>
-    )
-  }
-
-  return getSignInBox();
+    </WrappableComponent>
+  );
 }

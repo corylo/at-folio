@@ -1,16 +1,5 @@
 .profile-username {
-  bottom: 0px;
   color: white;
-  font-size: 2em;
-  left: 50%;
-  margin-bottom: 20px;
-  position: absolute;
+  outline: none;
   text-decoration: none;
-  transform: translateX(-50%);
-  z-index: 10;
-
-  &:hover,
-  &:focus {
-    text-shadow: 0px 0px 8px rgba(white, 0.5);
-  }
 }

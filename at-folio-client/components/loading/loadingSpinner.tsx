@@ -1,23 +1,18 @@
 import React from "react";
 
+import { WrappableComponent } from "../wrappableComponent/wrappableComponent";
+
 interface LoadingSpinnerProps {
   wrapperID?: string;
 }
 
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = (props: LoadingSpinnerProps) => {
-  if(props.wrapperID) {
-    return (
-      <div id={props.wrapperID}>
-        <div className="loading-spinner">
-          <i className="fa-solid fa-at" />
-        </div>
-      </div>
-    )
-  }
-
+  
   return (
-    <div className="loading-spinner">
-      <i className="fa-solid fa-at" />
-    </div>
-  )
+    <WrappableComponent wrapperID={props.wrapperID}>
+      <div className="loading-spinner">
+        <i className="fa-solid fa-at" />
+      </div>
+    </WrappableComponent>
+  );
 }

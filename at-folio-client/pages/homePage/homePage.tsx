@@ -14,7 +14,6 @@ export const HomePage: React.FC = () => {
 
   const getContent = (): JSX.Element => {
     if(appState.userStatus === UserStatus.SignedIn) {
-      console.log(appState.user)
       return (
         <div />
       )

@@ -5,6 +5,14 @@ import { Form } from "../form/form";
 import { FormActions } from "../form/formActions";
 import { FormBody } from "../form/formBody";
 import { Input } from "../input/input";
+import { WrappableComponent } from "../wrappableComponent/wrappableComponent";
+
+import { AuthService } from "../../services/authService";
+
+import { SignInFormValidator } from "./validators/signInFormValidator";
+
+import { FirebaseErrorUtility } from "../../utilities/firebaseErrorUtility";
+import { FormUtility } from "../../utilities/formUtility";
 
 import { defaultSignInFormState, ISignInFormState } from "./models/signInFormState";
 
@@ -23,16 +31,41 @@ export const SignInForm: React.FC<SignInFormProps> = (props: SignInFormProps) =>
     setState({ ...state, fields: { ...fields, [key]: value } });
   }
 
-  const getSignInBox = (): JSX.Element => {
-    return (
+  const signIn = async (): Promise<void> => {
+    const updates: ISignInFormState = SignInFormValidator.validate(state);
+
+    if(FormUtility.determineIfValid(updates)) {
+      try {
+        setState({ ...updates, status: RequestStatus.Loading });
+
+        await AuthService.signIn(fields.email, fields.password);
+      } catch (err) {
+        console.error(err);
+        
+        setState({ ...updates, status: RequestStatus.Error, errorMessage: FirebaseErrorUtility.getAuthErrorMessage(err.code) });
+      }
+    } else {      
+      setState(updates);
+    }
+  }
+
+  const handleOnKeyDown = (e: any): void => {
+    if(e.key === "Enter") {
+      signIn();
+    }
+  }
+
+  return (
+    <WrappableComponent wrapperID={props.wrapperID}>
       <Form id="sign-in-form" title="Sign In">
-        <FormBody>
+        <FormBody errorMessage={state.errorMessage} status={state.status}>
           <Input className="sign-in-input" label="Email" error={errors.email}>
             <input 
               type="text" 
               placeholder="Enter email" 
               value={fields.email}
               onChange={(e: any) => setValueTo("email", e.target.value)}
+              onKeyDown={handleOnKeyDown}
             />
           </Input>
           <Input className="sign-in-input" label="Password" error={errors.password}>
@@ -41,31 +74,18 @@ export const SignInForm: React.FC<SignInFormProps> = (props: SignInFormProps) =>
               placeholder="Enter password" 
               value={fields.password}
               onChange={(e: any) => setValueTo("password", e.target.value)}
+              onKeyDown={handleOnKeyDown}
             />
           </Input>
         </FormBody>
-        <FormActions status={state.status}>
-          <button 
-            type="button" 
-            className="button rubik-font" 
-          >
-            {state.status === RequestStatus.Loading ? <i className="fa-solid fa-spinner-third spin-animation" /> : "Sign In"}
-          </button>
-        </FormActions>
+        <FormActions 
+          actions={[{ label: "Sign In", handleOnClick: signIn }]} 
+          status={state.status} 
+        />          
         <h1 className="sign-in-label rubik-font">
           Need an account? <Link to="/sign-up" className="sign-up-link">Sign Up</Link>
         </h1>
       </Form>
-    );
-  }
-
-  if(props.wrapperID) {
-    return (
-      <div id={props.wrapperID}>
-        {getSignInBox()}
-      </div>
-    )
-  }
-
-  return getSignInBox();
+    </WrappableComponent>
+  );
 }

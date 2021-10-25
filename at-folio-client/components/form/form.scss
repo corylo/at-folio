@@ -24,6 +24,12 @@
           }
         }
       }
+
+      .form-error-message {
+        h1 {
+          color: $red;
+        }
+      }
     }
 
     .form-actions {

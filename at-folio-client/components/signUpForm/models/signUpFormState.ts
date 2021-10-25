@@ -15,6 +15,7 @@ export interface ISignUpFormState extends IFormState {
 }
 
 export const defaultSignUpFormState = (): ISignUpFormState => ({
+  errorMessage: "",
   errors: {
     email: FormError.None,
     password: FormError.None
