@@ -1,16 +1,16 @@
-#sign-up-page {
-  #sign-up-form-wrapper {    
+#sign-in-page {
+  #sign-in-form-wrapper {
     align-items: center;
     display: flex;
     height: 100vh;
-    justify-content: center;
+    justify-content: flex-end;
     position: relative;
     right: 0px;
     width: 100%;
     z-index: 2;
 
-    #sign-up-form {
-      animation: fadeInDown 400ms ease-in;
+    #sign-in-form {
+      animation: fadeInRight 400ms ease-in;
       padding-right: 20px;
       width: 400px;
     }
@@ -18,13 +18,14 @@
 }
 
 @media (max-width: 500px) {
-  #sign-up-page {
-    #sign-up-form-wrapper {
+  #sign-in-page {
+    #sign-in-form-wrapper {
       align-items: flex-start;
       height: auto;
       margin-top: 120px;
       
-      #sign-up-form {
+      #sign-in-form {
+        animation: fadeInDown 400ms ease-in;
         padding: 0px 20px;
         width: 100%;
       }

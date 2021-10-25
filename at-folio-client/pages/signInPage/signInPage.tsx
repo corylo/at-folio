@@ -2,15 +2,15 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router";
 
 import { Page } from "../../components/page/page";
-import { SignUpForm } from "../../components/signUpForm/signUpForm";
 import { SocialPlatformGridBackground } from "../../components/socialPlatformGridBackground/socialPlatformGridBackground";
+import { SignInForm } from "../../components/signInForm/signInForm";
 
 import { AppContext } from "../../components/app/appWrapper";
 
+import { RequestStatus } from "../../enums/requestStatus";
 import { UserStatus } from "../../enums/userStatus";
 
-
-export const SignUpPage: React.FC = () => {
+export const SignInPage: React.FC = () => {
   const { appState } = useContext(AppContext);
 
   if(appState.userStatus === UserStatus.SignedIn) {
@@ -19,10 +19,10 @@ export const SignUpPage: React.FC = () => {
     )
   }
 
-  return (  
-    <Page id="sign-up-page">
-      <SignUpForm wrapperID="sign-up-form-wrapper" />
+  return (
+    <Page id="sign-in-page" status={RequestStatus.Success}>
+      <SignInForm wrapperID="sign-in-form-wrapper" />
       <SocialPlatformGridBackground />
     </Page>
-  );
+  )
 }

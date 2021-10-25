@@ -88,7 +88,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
           status={state.status} 
         />          
         <h1 className="sign-in-label rubik-font">
-          Have an account? <Link to="/" className="sign-in-link">Sign In</Link>
+          Have an account? <Link to="/sign-in" className="sign-in-link">Sign In</Link>
         </h1>
       </Form>
     </WrappableComponent>

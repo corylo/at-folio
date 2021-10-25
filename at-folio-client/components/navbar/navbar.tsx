@@ -24,9 +24,9 @@ export const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
       )
     } else {
       const getSignInLink = (): JSX.Element => {        
-        if(location.pathname !== "/") {
+        if(location.pathname !== "/sign-in") {
           return (
-            <Link to="/" type="button" className="sign-in-link rubik-font">Sign In</Link>
+            <Link to="/sign-in" type="button" className="sign-in-link rubik-font">Sign In</Link>
           )
         } 
       }

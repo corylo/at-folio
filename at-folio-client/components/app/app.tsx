@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 
-import { HomePage, ProfilePage, SignUpPage } from "../../pages/pages";
+import { HomePage, ProfilePage, SignInPage, SignUpPage } from "../../pages/pages";
 
 import { MainMenu } from "../mainMenu/mainMenu";
 import { Navbar } from "../navbar/navbar";
@@ -18,6 +18,9 @@ export const App: React.FC = () => {
       <Switch>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route exact path="/sign-in">
+          <SignInPage />
         </Route>
         <Route exact path="/sign-up">
           <SignUpPage />

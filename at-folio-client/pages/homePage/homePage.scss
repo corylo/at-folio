@@ -1,33 +1,20 @@
 #home-page {
-  #home-page-sign-in {
+  #brand-statement {
     align-items: center;
     display: flex;
     height: 100vh;
-    justify-content: flex-end;
-    position: relative;
-    right: 0px;
-    width: 100%;
-    z-index: 2;
+    justify-content: center;
+    width: 100vw;
 
-    #sign-in-form {
-      animation: fadeInRight 400ms ease-in;
-      padding-right: 20px;
-      width: 400px;
-    }
-  }
-}
+    h1 {
+      animation: fadeIn 400ms ease-in;
+      color: white;
+      font-size: 2em;
+      padding: 20px;
+      text-align: center;
 
-@media (max-width: 500px) {
-  #home-page {
-    #home-page-sign-in {
-      align-items: flex-start;
-      height: auto;
-      margin-top: 120px;
-      
-      #sign-in-form {
-        animation: fadeInDown 400ms ease-in;
-        padding: 0px 20px;
-        width: 100%;
+      .highlight {
+        color: $themeColor;
       }
     }
   }

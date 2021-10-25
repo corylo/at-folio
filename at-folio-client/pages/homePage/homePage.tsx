@@ -1,35 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { Page } from "../../components/page/page";
-import { SocialPlatformGridBackground } from "../../components/socialPlatformGridBackground/socialPlatformGridBackground";
-import { SignInForm } from "../../components/signInForm/signInForm";
-
-import { AppContext } from "../../components/app/appWrapper";
 
 import { RequestStatus } from "../../enums/requestStatus";
-import { UserStatus } from "../../enums/userStatus";
 
-export const HomePage: React.FC = () => {
-  const { appState } = useContext(AppContext);
-
-  const getContent = (): JSX.Element => {
-    if(appState.userStatus === UserStatus.SignedIn) {
-      return (
-        <div />
-      )
-    }
-    
-    return (        
-      <React.Fragment>        
-        <SignInForm wrapperID="home-page-sign-in" />
-        <SocialPlatformGridBackground />
-      </React.Fragment>
-    )
-  }
-
+export const HomePage: React.FC = () => {  
   return (
     <Page id="home-page" status={RequestStatus.Success}>
-      {getContent()}
+      <div id="brand-statement">
+        <h1 className="rubik-font">The link in bio that <span className="highlight">looks good</span>.</h1>
+      </div>
     </Page>
   )
 }
