@@ -12,7 +12,7 @@ interface IProfileService {
 export const ProfileService: IProfileService = {
   getByUsername: async (username: string): Promise<IProfile> => {
     return {
-      backgroundImage: ProfileUtility.getBackgroundImage(ProfileBackgroundImage.Mountains),
+      backgroundImage: ProfileUtility.getBackgroundImage(ProfileBackgroundImage.Parrots),
       username,
       links: [{
         platform: SocialPlatform.Facebook,

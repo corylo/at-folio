@@ -1,22 +1,14 @@
 import { ProfileBackgroundImage } from "../../at-folio-enums/profileBackgroundImage";
 
 interface IProfileUtility {
-  getBackgroundImage: (backgroundImage: ProfileBackgroundImage | string) => string;
+  getBackgroundImage: (backgroundImage: ProfileBackgroundImage) => string;
   getBackgroundImageUrl: (backgroundImage: ProfileBackgroundImage) => string;
   getBackgroundImages: () => ProfileBackgroundImage[];
 }
 
 export const ProfileUtility: IProfileUtility = {
-  getBackgroundImage: (backgroundImage: ProfileBackgroundImage | string): string => {
-    switch(backgroundImage) {
-      case ProfileBackgroundImage.Beach:
-      case ProfileBackgroundImage.City:
-      case ProfileBackgroundImage.Flowers:
-      case ProfileBackgroundImage.Mountains:
-        return ProfileUtility.getBackgroundImageUrl(backgroundImage);
-      default:
-        return backgroundImage;
-    }
+  getBackgroundImage: (backgroundImage: ProfileBackgroundImage): string => {
+    return ProfileUtility.getBackgroundImageUrl(backgroundImage);
   },
   getBackgroundImageUrl: (backgroundImage: ProfileBackgroundImage): string => {
     return `/img/backgrounds/${backgroundImage.toLowerCase()}.jpg`;
@@ -25,8 +17,10 @@ export const ProfileUtility: IProfileUtility = {
     return [
       ProfileBackgroundImage.Beach,
       ProfileBackgroundImage.City,
+      ProfileBackgroundImage.Coffee,
       ProfileBackgroundImage.Flowers,
-      ProfileBackgroundImage.Mountains
+      ProfileBackgroundImage.Mountains,
+      ProfileBackgroundImage.Parrots
     ]
   }
 }

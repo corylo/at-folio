@@ -17,7 +17,7 @@ export const useLoadImageEffect = (previewSource: string, loadedSource: string):
       setStatus(ImageStatus.Preview);
     };
 
-    preview.onerror = () => {
+    preview.onerror = (e: any) => {
       setStatus(ImageStatus.Loaded);
     }
   }, []);

@@ -9,6 +9,7 @@ interface ISocialPlatformNetworkUtility {
   getOptions: () => Options;
   getPlatformByName: (platform: string) => SocialPlatform;
   getPlatformData: (profileImage: string, links: ISocialLink[]) => Data;
+  getPlatformImageUrl: (platform: SocialPlatform) => string;
   getPlatforms: () => SocialPlatform[];
   getPlatformEdges: (nodes: Node[]) => Edge[];
   getPlatformNodes: (links: ISocialLink[]) => Node[];
@@ -77,6 +78,9 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
       ],
       edges
     }
+  },
+  getPlatformImageUrl: (platform: SocialPlatform): string => {
+    return `img/icons/${platform.toLowerCase()}.svg`;
   },
   getPlatforms: (): SocialPlatform[] => {
     return [

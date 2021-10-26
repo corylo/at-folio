@@ -15,12 +15,10 @@ export const SocialPlatformGridBackground: React.FC<SocialPlatformGridBackground
   const platforms: SocialPlatform[] = SocialPlatformNetworkUtility.getPlatforms();
 
   const getTiles = (): JSX.Element[] => {
-    return [...platforms, ...platforms, ...platforms].map((platform: SocialPlatform, index: number) => {
-      const image: string = `img/icons/${platform.toLowerCase()}.svg`;
-
+    return [...platforms, ...platforms, ...platforms].map((platform: SocialPlatform, index: number) => {      
       const styles: React.CSSProperties = { 
         animationDelay: `${NumberUtility.random(-1000, -20000)}ms`,
-        backgroundImage: `url(${image})` 
+        backgroundImage: `url(${SocialPlatformNetworkUtility.getPlatformImageUrl(platform)})` 
       };
 
       return (
