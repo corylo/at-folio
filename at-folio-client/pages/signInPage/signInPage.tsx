@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router";
 
+import { CreatorGridBackground } from "../../components/creatorGridBackground/creatorGridBackground";
 import { Page } from "../../components/page/page";
-import { SocialPlatformGridBackground } from "../../components/socialPlatformGridBackground/socialPlatformGridBackground";
 import { SignInForm } from "../../components/signInForm/signInForm";
+import { SvgBackground } from "../../components/svgBackground/svgBackground";
 
 import { AppContext } from "../../components/app/appWrapper";
 
@@ -22,7 +23,8 @@ export const SignInPage: React.FC = () => {
   return (
     <Page id="sign-in-page" status={RequestStatus.Success}>
       <SignInForm wrapperID="sign-in-form-wrapper" />
-      <SocialPlatformGridBackground />
+      <CreatorGridBackground />
+      <SvgBackground wrapperID="sign-in-svg" />
     </Page>
   )
 }

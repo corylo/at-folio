@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router";
 
+import { CreatorGridBackground } from "../../components/creatorGridBackground/creatorGridBackground";
 import { Page } from "../../components/page/page";
 import { SignUpForm } from "../../components/signUpForm/signUpForm";
-import { SocialPlatformGridBackground } from "../../components/socialPlatformGridBackground/socialPlatformGridBackground";
+import { SvgBackground } from "../../components/svgBackground/svgBackground";
 
 import { AppContext } from "../../components/app/appWrapper";
 
@@ -22,7 +23,8 @@ export const SignUpPage: React.FC = () => {
   return (  
     <Page id="sign-up-page">
       <SignUpForm wrapperID="sign-up-form-wrapper" />
-      <SocialPlatformGridBackground />
+      <CreatorGridBackground />
+      <SvgBackground wrapperID="sign-up-svg" />
     </Page>
   );
 }

@@ -13,6 +13,26 @@
       animation: fadeInRight 400ms ease-in;
       padding-right: 20px;
       width: 400px;
+      z-index: 2;
+    }
+  }
+
+  #sign-in-svg {
+    height: 100vh;
+    left: 0px;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    top: 0px;
+    width: 50vw;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  #sign-in-page {
+    #sign-in-svg {
+      width: 100vw;
     }
   }
 }

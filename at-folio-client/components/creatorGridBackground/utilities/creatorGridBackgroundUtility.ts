@@ -38,7 +38,7 @@ export const CreatorGridBackgroundUtility: ICreatorGridBackgroundUtility = {
 
     let unit: string = "vw";
 
-    if(window.innerWidth < 1600) {
+    if(window.innerWidth < 800) {
       unit = "vh";
     }
     

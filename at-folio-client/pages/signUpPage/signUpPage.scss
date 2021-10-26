@@ -15,7 +15,27 @@
       width: 400px;
     }
   }
+
+  #sign-up-svg {
+    height: 100vh;
+    left: 0px;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    top: 0px;
+    width: 50vw;
+    z-index: 1;
+  }
 }
+
+@media (max-width: 1200px) {
+  #sign-up-page {
+    #sign-up-svg {
+      width: 100vw;
+    }
+  }
+}
+
 
 @media (max-width: 500px) {
   #sign-up-page {
