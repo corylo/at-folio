@@ -10,6 +10,13 @@
   padding: 10px 15px;
   width: 500px;
 
+  &.active {
+    #command-line-go-button-wrapper {
+      opacity: 1;
+      width: 40px;
+    }
+  }
+
   .logo {
     font-size: 0.75em;
     justify-content: center;
@@ -29,6 +36,26 @@
 
     &::placeholder {
       color: rgba(white, 0.5);
+    }
+  }
+
+  #command-line-go-button-wrapper {
+    flex-shrink: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.25s, width 0.25s;
+    width: 0px;
+
+    .go-button {
+      background-color: rgba(white, 0.05);
+      border-radius: 6px;
+
+      i {
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        width: 30px;
+      }
     }
   }
 }
