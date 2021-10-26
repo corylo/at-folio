@@ -1,5 +1,3 @@
-import { ProfileUtility } from "../utilities/profileUtility";
-
 import { IProfile } from "../../at-folio-models/profile";
 
 import { ProfileBackgroundImage } from "../../at-folio-enums/profileBackgroundImage";
@@ -12,7 +10,7 @@ interface IProfileService {
 export const ProfileService: IProfileService = {
   getByUsername: async (username: string): Promise<IProfile> => {
     return {
-      backgroundImage: ProfileUtility.getBackgroundImage(ProfileBackgroundImage.Parrots),
+      background: ProfileBackgroundImage.Parrots,
       username,
       links: [{
         platform: SocialPlatform.Facebook,
@@ -30,7 +28,7 @@ export const ProfileService: IProfileService = {
         platform: SocialPlatform.Twitch,
         url: "https://twitch.tv"
       }],
-      profileImage: "/img/profile.png"
+      pic: "/img/profile.png"
     }
   }
 }

@@ -3,15 +3,15 @@ import { ISocialLink } from "./socialLink";
 import { ProfileBackgroundImage } from "../at-folio-enums/profileBackgroundImage";
 
 export interface IProfile {
-  backgroundImage: ProfileBackgroundImage | string;
+  background: ProfileBackgroundImage;
   links: ISocialLink[];
-  profileImage: string;
+  pic: string;
   username: string;
 }
 
 export const defaultProfile = (): IProfile => ({
-  backgroundImage: "",
+  background: ProfileBackgroundImage.Parrots,
   links: [],
-  profileImage: "",
+  pic: "",
   username: ""
 })

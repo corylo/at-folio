@@ -1,3 +1,5 @@
+@import "./components/backgroundPicker/backgroundPicker.scss";
+
 #profile-page {
   height: 100vh;
   overflow: hidden;
@@ -8,6 +10,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    pointer-events: none;
     position: absolute;
     width: 100%;
     z-index: 10;
@@ -20,5 +23,12 @@
         text-shadow: 0px 0px 8px rgba(white, 0.5);
       }
     }
+  }
+
+  #profile-background-picker-wrapper {
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+    z-index: 2;
   }
 }
