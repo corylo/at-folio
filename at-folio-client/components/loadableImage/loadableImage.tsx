@@ -5,20 +5,23 @@ import { useLoadImageEffect } from "../../effects/imageEffects";
 
 import { ImageUtility } from "../../utilities/imageUtility";
 
-import { ImageStatus } from "../../../at-folio-enums/imageStatus";
+import { ImageSize } from "../../enums/imageSize";
+import { ImageStatus } from "../../enums/imageStatus";
 
 interface LoadableImageProps {
   className?: string;
+  size?: ImageSize;
   source: string;
 }
 
 export const LoadableImage: React.FC<LoadableImageProps> = (props: LoadableImageProps) => {
-  const previewSource: string = ImageUtility.getPreviewSource(props.source);
+  const imageSource: string = ImageUtility.getSourceBySize(props.source, props.size),
+    previewSource: string = ImageUtility.getPreviewSource(props.source);
 
-  const { status } = useLoadImageEffect(previewSource, props.source);
+  const { status } = useLoadImageEffect(previewSource, imageSource);
 
   if(status !== ImageStatus.Waiting) {
-    const source: string = status === ImageStatus.Loaded ? props.source : previewSource;
+    const source: string = status === ImageStatus.Loaded ? imageSource : previewSource;
 
     return (
       <div 

@@ -9,6 +9,7 @@ import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetw
 import { defaultCreatorGridBackgroundState, ICreatorGridBackgroundState } from "./models/creatorGridBackgroundState";
 import { IPosition } from "../../models/position";
 
+import { ImageSize } from "../../enums/imageSize";
 import { ProfileBackgroundImage } from "../../../at-folio-enums/profileBackgroundImage";
 import { SocialPlatform } from "../../../at-folio-enums/socialPlatform";
 
@@ -86,6 +87,7 @@ export const CreatorGridBackground: React.FC = () => {
         <div key={`background-${i}`} className="creator-tile background" style={styles}>
           <LoadableImage 
             className="creator-tile-image" 
+            size={ImageSize.Small}
             source={ProfileUtility.getBackgroundImageUrl(backgrounds[i])} 
           />
         </div>

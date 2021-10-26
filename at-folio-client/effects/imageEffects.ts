@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { ImageStatus } from "../../at-folio-enums/imageStatus";
+import { ImageStatus } from "../enums/imageStatus";
 
 interface IUseLoadImageEffect {
   status: ImageStatus;
