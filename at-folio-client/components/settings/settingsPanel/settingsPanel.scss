@@ -57,12 +57,18 @@
 }
 
 #toggle-settings-panel-button {
-  bottom: 0px;
-  font-size: 1.75em;
+  bottom: 0px;  
   margin: 15px;
   position: fixed;
   right: 0px;
   z-index: 3;
+
+  i {
+    font-size: 1.5em;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+  }
 }
 
 @media(max-width: 600px) {
