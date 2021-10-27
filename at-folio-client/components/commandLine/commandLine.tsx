@@ -60,6 +60,7 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
         <IconButton 
           className="go-button" 
           icon="fa-regular fa-arrow-right" 
+          tabIndex={active ? 0 : -1}
           handleOnClick={handleGo} 
         />
       </div>

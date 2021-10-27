@@ -10,6 +10,10 @@ export const useLoadImageEffect = (previewSource: string, loadedSource: string):
   const [status, setStatus] = useState<ImageStatus>(ImageStatus.Waiting);
 
   useEffect(() => {
+    setStatus(ImageStatus.Waiting);
+  }, [loadedSource]);
+
+  useEffect(() => {
     const preview: HTMLImageElement = new Image();
     preview.src = previewSource;
 
@@ -20,7 +24,7 @@ export const useLoadImageEffect = (previewSource: string, loadedSource: string):
     preview.onerror = (e: any) => {
       setStatus(ImageStatus.Loaded);
     }
-  }, []);
+  }, [loadedSource]);
 
   useEffect(() => {
     if(status === ImageStatus.Preview) {
@@ -31,7 +35,7 @@ export const useLoadImageEffect = (previewSource: string, loadedSource: string):
         setStatus(ImageStatus.Loaded);
       };
     }
-  }, [status])
+  }, [status]);
 
   return {
     status
