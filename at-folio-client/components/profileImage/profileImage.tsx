@@ -8,12 +8,22 @@ interface ProfileImageProps {
 }
 
 export const ProfileImage: React.FC<ProfileImageProps> = (props: ProfileImageProps) => {
-  const getImage = (): JSX.Element => (
-    <LoadableImage 
-      className="profile-image" 
-      source={props.image} 
-    />
-  )
+  const getImage = (): JSX.Element => {
+    if(props.image !== "") {
+      return (
+        <LoadableImage 
+          className="profile-image" 
+          source={props.image} 
+        />
+      )
+    }
+
+    return (
+      <div className="profile-image">
+        <i className="fa-regular fa-user" />
+      </div>
+    )
+  }
 
   if(props.handleOnClick) {
     return (

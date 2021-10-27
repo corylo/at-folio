@@ -21,6 +21,8 @@ interface MainMenuProps {
 export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
   const { appState, setAppTogglesTo } = useContext(AppContext);
 
+  const { profile } = appState;
+
   const [state, setState] = useState<IMainMenuState>(defaultMainMenuState());
 
   const setStatusTo = (status: RequestStatus): void => {
@@ -47,8 +49,8 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
       <div id="main-menu-content">
         <div id="main-menu-toolbar">
           <ProfileHeader 
-            image="/img/profile.png"
-            username="WaffApps"
+            image={profile.image}
+            username={profile.username}
             wrapperID="main-menu-header" 
           />
           <IconButton 

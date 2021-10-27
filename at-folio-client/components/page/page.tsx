@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Redirect } from "react-router";
 
 import { LoadingSpinner } from "../loading/loadingSpinner";
 
@@ -10,6 +11,7 @@ import { UserStatus } from "../../enums/userStatus";
 interface PageProps {
   children: any;
   id: string;
+  signInRequired?: boolean;
   status?: RequestStatus;
 }
 
@@ -24,6 +26,12 @@ export const Page: React.FC<PageProps> = (props: PageProps) => {
     }
 
     return props.children;
+  }
+
+  if(props.signInRequired && appState.userStatus === UserStatus.SignedOut) {
+    return (
+      <Redirect to="/" />
+    )
   }
 
   return (

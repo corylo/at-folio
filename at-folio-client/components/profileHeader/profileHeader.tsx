@@ -11,11 +11,19 @@ interface ProfileHeaderProps {
 }
 
 export const ProfileHeader: React.FC<ProfileHeaderProps> = (props: ProfileHeaderProps) => {
+  const getUsername = (): JSX.Element => {
+    if(props.username) {
+      return (
+        <ProfileUsername username={props.username} />
+      )
+    }
+  }
+
   return (
     <WrappableComponent wrapperID={props.wrapperID}>
       <div className="profile-header">
         <ProfileImage image={props.image} />
-        <ProfileUsername username={props.username} />
+        {getUsername()}
       </div>
     </WrappableComponent>
   );

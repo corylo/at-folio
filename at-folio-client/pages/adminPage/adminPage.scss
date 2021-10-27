@@ -1,5 +1,7 @@
 @import "./components/initialSetup/initialSetup.scss";
 
 #admin-page {
-
+  #settings-panel-wrapper {
+    z-index: 3;
+  }
 }

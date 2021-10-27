@@ -53,6 +53,16 @@ td {
 }
 
 .scroll-bar {
+  &.light {
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(white, 0.5);
+    }
+  }
+
   &::-webkit-scrollbar-track {
     background-color: gray(30);
   }

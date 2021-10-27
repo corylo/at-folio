@@ -4,6 +4,7 @@ import { CreatorGridBackground } from "../../components/creatorGridBackground/cr
 import { InitialSetup } from "./components/initialSetup/initialSetup";
 import { Page } from "../../components/page/page";
 import { Profile } from "../../components/profile/profile";
+import { SettingsPanel } from "../../components/settings/settingsPanel/settingsPanel";
 
 import { AppContext } from "../../components/app/appWrapper";
 
@@ -28,19 +29,22 @@ export const AdminPage: React.FC = () => {
   useFetchLinksEffect(state, setStatusTo);
 
   const getContent = (): JSX.Element => {
-    console.log(profile)
     if(profile.username === "" || profile.background === ProfileBackgroundImage.None) {
       return (
         <React.Fragment>
           <CreatorGridBackground />
           <InitialSetup />
         </React.Fragment>
-      )
+      );
+    } else {
+      return (
+        <SettingsPanel />
+      );
     }
   }
 
   return (
-    <Page id="admin-page" status={state.status}>
+    <Page id="admin-page" status={state.status} signInRequired>
       <Profile profile={profile} />
       {getContent()}
     </Page>

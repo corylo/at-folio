@@ -15,7 +15,9 @@ interface CommandLineProps {
 }
 
 export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps) => {
-  const { setAppTogglesTo } = useContext(AppContext);
+  const { appState, setAppTogglesTo } = useContext(AppContext);
+
+  const { profile } = appState;
 
   const [state, setState] = useState<ICommandLineState>(defaultCommandLineState());
 
@@ -65,7 +67,7 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
         />
       </div>
       <ProfileImage 
-        image="/img/profile.png" 
+        image={profile.image}
         handleOnClick={() => setAppTogglesTo({ mainMenu: true })} 
       />
     </div>

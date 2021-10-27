@@ -9,14 +9,33 @@ interface InputProps {
   children: any;
   className?: string;
   error?: FormError;
-  label: string;
+  label?: string;
 }
 
 export const Input: React.FC<InputProps> = (props: InputProps) => {
-  const getError = (): JSX.Element => {
-    if(props.error) {
+  const getInfo = (): JSX.Element => {
+    if(props.error || props.label) {
+      const getLabel = (): JSX.Element => {
+        if(props.label) {
+          return (
+            <h1 className="input-label rubik-font">{props.label}</h1>      
+          )
+        }
+      }
+
+      const getError = (): JSX.Element => {
+        if(props.error) {
+          return (
+            <h1 className="input-error rubik-font">{FormUtility.getErrorMessage(props.error)}</h1>
+          )
+        }
+      }
+
       return (
-        <h1 className="input-error rubik-font">{FormUtility.getErrorMessage(props.error)}</h1>
+        <div className="input-info">  
+          {getLabel()}
+          {getError()}
+        </div>
       )
     }
   }
@@ -26,10 +45,7 @@ export const Input: React.FC<InputProps> = (props: InputProps) => {
       <div className="input-content">
         {props.children}
       </div>
-      <div className="input-info">
-        <h1 className="input-label rubik-font">{props.label}</h1>        
-        {getError()}
-      </div>
+      {getInfo()}
     </div>
   );
 }

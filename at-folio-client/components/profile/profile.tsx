@@ -29,12 +29,12 @@ export const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   }
 
   const getNetwork = (): JSX.Element => {
-    if(profile.pic !== "") {
+    if(profile.image !== "") {
       return (
         <SocialPlatformNetwork 
           id="social-platform-network" 
           links={profile.links} 
-          profileImage={profile.pic}
+          profileImage={profile.image}
         />
       )
     }

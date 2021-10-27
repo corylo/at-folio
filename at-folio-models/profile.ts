@@ -7,7 +7,7 @@ import { ProfileBackgroundImage } from "../at-folio-enums/profileBackgroundImage
 export interface IProfile {
   background: ProfileBackgroundImage;
   links: ILink[];
-  pic: string;
+  image: string;
   uid: string;
   username: string;
 }
@@ -15,7 +15,7 @@ export interface IProfile {
 export interface IProfileUpdate {
   background?: ProfileBackgroundImage;
   links?: ILink[];
-  pic?: string;
+  image?: string;
   uid?: string;
   username?: string;
 }
@@ -23,7 +23,7 @@ export interface IProfileUpdate {
 export const defaultProfile = (): IProfile => ({
   background: ProfileBackgroundImage.None,
   links: [],
-  pic: "",
+  image: "",
   uid: "",
   username: ""
 });
@@ -32,7 +32,7 @@ export const profileConverter: FirestoreDataConverter<IProfile> = {
   toFirestore(profile: IProfile): DocumentData {
     return {
       background: profile.background,
-      pic: profile.pic,
+      image: profile.image,
       uid: profile.uid
     }
   },
@@ -42,7 +42,7 @@ export const profileConverter: FirestoreDataConverter<IProfile> = {
     return {
       background: data.background,
       links: [],
-      pic: data.pic,
+      image: data.image,
       uid: data.uid,
       username: snapshot.id
     }

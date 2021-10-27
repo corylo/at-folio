@@ -1,7 +1,9 @@
 import React from "react";
+import classNames from "classnames";
 
 interface SettingsSectionProps {
   children: any;
+  className?: string;
   label?: string;
 }
 
@@ -15,9 +17,9 @@ export const SettingsSection: React.FC<SettingsSectionProps> = (props: SettingsS
   }
 
   return (
-    <div className="settings-section">
+    <div className={classNames("settings-section", props.className)}>
       {getLabel()}
-      <div className="settings-section-contents">
+      <div className="settings-section-content">
         {props.children}
       </div>
     </div>

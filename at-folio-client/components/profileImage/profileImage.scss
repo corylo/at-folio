@@ -4,6 +4,16 @@
   border-radius: 1000px;
   height: 40px;
   width: 40px;
+
+  i {
+    background-color: rgba(black, 0.15);
+    border-radius: 1000px;
+    color: white;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+  }
 }
 
 .profile-image-button {

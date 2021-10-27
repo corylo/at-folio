@@ -45,7 +45,7 @@ export const InitialSetup: React.FC<InitialSetupProps> = (props: InitialSetupPro
 
         const profile: IProfileUpdate = {
           background: fields.background,
-          pic: "",
+          image: "",
           uid: appState.user.uid,
           username: fields.username
         }
