@@ -49,6 +49,8 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
   },
   getPlatformByName: (platform: string): SocialPlatform => {
     switch(platform) {
+    case SocialPlatform.Discord:
+      return SocialPlatform.Discord;
       case SocialPlatform.Facebook:
         return SocialPlatform.Facebook;
       case SocialPlatform.Reddit:

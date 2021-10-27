@@ -5,7 +5,7 @@ import { AppContext } from "../../../components/app/appWrapper";
 import { LinkService } from "../../../services/linkService";
 
 import { IAdminPageState } from "../models/adminPageState";
-import { IProfile } from "../../../../at-folio-models/profile";
+import { ILink } from "../../../../at-folio-models/link";
 
 import { RequestStatus } from "../../../enums/requestStatus";
 import { UserStatus } from "../../../enums/userStatus";
@@ -14,16 +14,16 @@ export const useFetchLinksEffect = (
   state: IAdminPageState, 
   setStatusTo: (status: RequestStatus) => void
 ): void => {
-  const { appState } = useContext(AppContext);
+  const { appState, setProfileTo } = useContext(AppContext);
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {
       try {
-        if(appState.userStatus === UserStatus.SignedIn) {
-          const profile: IProfile = { ...appState.profile };
-
+        if(appState.userStatus === UserStatus.SignedIn) {          
           if(appState.profile.username !== "") {
-            profile.links = await LinkService.getByUsername(appState.profile.username);
+            const links: ILink[] = await LinkService.getByUsername(appState.profile.username);
+
+            setProfileTo({ links });
           }
 
           setStatusTo(RequestStatus.Success);

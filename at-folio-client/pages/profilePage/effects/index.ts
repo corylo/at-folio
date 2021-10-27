@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRouteMatch } from "react-router";
 
+import { LinkService } from "../../../services/linkService";
 import { ProfileService } from "../../../services/profileService";
 
 import { IProfile } from "../../../../at-folio-models/profile";
@@ -23,6 +24,8 @@ export const useFetchProfileEffect = (
           const profile: IProfile = await ProfileService.getByUsername(username);
 
           if(profile) {
+            profile.links = await LinkService.getByUsername(profile.username);
+
             setStateTo({ profile, status: RequestStatus.Success });
           } else {
             throw new Error(`Profile: ${match.params.username} does not exist.`);
