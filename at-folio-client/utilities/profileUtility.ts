@@ -7,7 +7,7 @@ interface IProfileUtility {
 
 export const ProfileUtility: IProfileUtility = {
   getBackgroundImageUrl: (backgroundImage: ProfileBackgroundImage): string => {
-    return `/img/backgrounds/${backgroundImage.toLowerCase()}.jpg`;
+    return `/img/backgrounds/${backgroundImage.toLowerCase()}.webp`;
   },
   getBackgroundImages: (): ProfileBackgroundImage[] => {
     return [
