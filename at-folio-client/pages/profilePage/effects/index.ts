@@ -4,13 +4,13 @@ import { useRouteMatch } from "react-router";
 import { ProfileService } from "../../../services/profileService";
 
 import { IProfile } from "../../../../at-folio-models/profile";
-import { IProfilePageState } from "../models/profilePageState";
+import { defaultProfilePageState, IProfilePageState } from "../models/profilePageState";
 
 import { RequestStatus } from "../../../enums/requestStatus";
 
 export const useFetchProfileEffect = (
   state: IProfilePageState, 
-  setState: (state: IProfilePageState) => void
+  setStateTo: (state: IProfilePageState) => void
 ): void => {
   const match: any = useRouteMatch();
 
@@ -22,15 +22,19 @@ export const useFetchProfileEffect = (
 
           const profile: IProfile = await ProfileService.getByUsername(username);
 
-          setTimeout(() => {
-            setState({ profile, status: RequestStatus.Success });
-          }, 500);
+          if(profile) {
+            setStateTo({ profile, status: RequestStatus.Success });
+          } else {
+            throw new Error(`Profile: ${match.params.username} does not exist.`);
+          }
         }
       } catch (err) {
         console.error(err);
+
+        setStateTo({ ...defaultProfilePageState(), status: RequestStatus.Error });
       }
     }
 
     fetch();
-  }, []);
+  }, [match.params]);
 }

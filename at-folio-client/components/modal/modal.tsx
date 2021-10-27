@@ -8,6 +8,7 @@ interface ModalProps {
   children: any;
   contentID?: string;
   status?: RequestStatus;
+  title?: string;
   toggled: boolean;
   wrapperID?: string;
 }
@@ -18,6 +19,7 @@ export const Modal: React.FC<ModalProps> = (props: ModalProps) => {
       <ModalComponent 
         contentID={props.contentID} 
         status={props.status}
+        title={props.title}
         wrapperID={props.wrapperID}
       >
         {props.children}

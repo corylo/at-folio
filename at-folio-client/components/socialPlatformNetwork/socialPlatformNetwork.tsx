@@ -3,11 +3,11 @@ import { Data, Network, Options } from "vis-network/standalone";
 
 import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
 
-import { ISocialLink } from "../../../at-folio-models/socialLink";
+import { ILink } from "../../../at-folio-models/link";
 
 interface SocialPlatformNetworkProps {
   id: string;
-  links: ISocialLink[];
+  links: ILink[];
   profileImage: string;
 }
 

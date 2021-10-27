@@ -2,6 +2,8 @@
   width: 100%;
 
   .form-header {
+    margin-bottom: 1em;
+
     .form-title {
       color: white;
       font-size: 2.5em;
@@ -13,7 +15,6 @@
       display: flex;
       flex-direction: column;
       gap: 1em;
-      margin-top: 1em;
 
       .input {
         width: 100%;

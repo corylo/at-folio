@@ -22,7 +22,7 @@ export const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
       return (
         <CommandLine />
       )
-    } else {
+    } else if (appState.userStatus === UserStatus.SignedOut) {
       const getSignInLink = (): JSX.Element => {        
         if(location.pathname !== "/sign-in") {
           return (

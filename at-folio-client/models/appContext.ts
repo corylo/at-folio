@@ -1,7 +1,9 @@
 import { IAppState, IAppTogglesUpdate } from "./appState";
+import { IProfileUpdate } from "../../at-folio-models/profile";
 
 export interface IAppContext {
   appState: IAppState;
-  setAppState: (state: IAppState) => void;
-  setAppToggles: (toggles: IAppTogglesUpdate) => void;
+  setAppStateTo: (state: IAppState) => void;
+  setAppTogglesTo: (toggles: IAppTogglesUpdate) => void;
+  setProfileTo: (profile: IProfileUpdate) => void;
 }

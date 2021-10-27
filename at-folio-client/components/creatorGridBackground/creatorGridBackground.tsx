@@ -71,7 +71,7 @@ export const CreatorGridBackground: React.FC = () => {
 
   const getTiles = (): JSX.Element[] => {
     const platforms: SocialPlatform[] = SocialPlatformNetworkUtility.getPlatforms(),
-      backgrounds: ProfileBackgroundImage[] = ProfileUtility.getBackgroundImages();
+      backgrounds: ProfileBackgroundImage[] = ProfileUtility.getGridBackgroundImages();
 
     let tiles: JSX.Element[] = [];
 

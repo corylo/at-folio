@@ -4,14 +4,15 @@ import { App } from "./app";
 
 import { IAppContext } from "../../models/appContext";
 import { defaultAppState, IAppState, IAppTogglesUpdate } from "../../models/appState";
+import { IProfileUpdate } from "../../../at-folio-models/profile";
 
 export const AppContext = createContext<IAppContext>(null);
 
 export const AppWrapper: React.FC = () => {
-  const [appState, setAppState] = useState<IAppState>(defaultAppState());
+  const [appState, setAppStateTo] = useState<IAppState>(defaultAppState());
 
-  const setAppToggles = (toggles: IAppTogglesUpdate): void => {
-    setAppState({ 
+  const setAppTogglesTo = (toggles: IAppTogglesUpdate): void => {
+    setAppStateTo({ 
       ...appState, 
       toggles: { 
         ...appState.toggles,
@@ -20,8 +21,25 @@ export const AppWrapper: React.FC = () => {
     });
   }
 
+  const setProfileTo = (profile: IProfileUpdate): void => {
+    setAppStateTo({ 
+      ...appState, 
+      profile: { 
+        ...appState.profile,
+        ...profile
+      }
+    });
+  }
+
+  const value: IAppContext = { 
+    appState, 
+    setAppStateTo, 
+    setAppTogglesTo,
+    setProfileTo
+  };
+
   return (
-    <AppContext.Provider value={{ appState, setAppState, setAppToggles }}>
+    <AppContext.Provider value={value}>
       <App />
     </AppContext.Provider>
   )

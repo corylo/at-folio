@@ -4,5 +4,6 @@ export enum ProfileBackgroundImage {
   Coffee = "Coffee",
   Flowers = "Flowers",
   Mountains = "Mountains",
+  None = "",
   Parrots = "Parrots"
 }

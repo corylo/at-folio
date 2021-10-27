@@ -6,6 +6,7 @@
   }
 }
 
+.link,
 .button {
   background-color: $themeColor;
   border: none;
@@ -29,4 +30,11 @@
   h1 {
     color: white;
   }
+}
+
+.link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  width: calc(100% - 30px);
 }

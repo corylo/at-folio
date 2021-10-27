@@ -6,6 +6,7 @@
   height: 100vh;
   justify-content: center;
   left: 0px;
+  overflow: auto;
   position: absolute;
   top: 0px;
   width: 100vw;
@@ -31,6 +32,15 @@
   .modal {
     animation: fadeInDown 400ms ease-in;
     width: 500px;
+
+    .modal-title {      
+      align-items: center;
+      color: white;
+      display: flex;
+      font-size: 1.75em;
+      justify-content: center;
+      text-shadow: 0px 0px 1px rgba(black, 0.25);
+    }
   }
 
   .loading-spinner {
@@ -40,12 +50,19 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px), (max-height: 600px) {
   .modal-wrapper {
     align-items: flex-start;
 
     .modal {
       padding: 20px 0px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-wrapper {
+    .modal {
       width: calc(100% - 40px);
     }
   }

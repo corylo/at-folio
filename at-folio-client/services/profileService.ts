@@ -1,34 +1,44 @@
-import { IProfile } from "../../at-folio-models/profile";
+import { collection, doc, getDoc, getDocs, query, setDoc, where, DocumentReference, DocumentSnapshot, Query, QuerySnapshot } from "@firebase/firestore";
 
-import { ProfileBackgroundImage } from "../../at-folio-enums/profileBackgroundImage";
-import { SocialPlatform } from "../../at-folio-enums/socialPlatform";
+import { db } from "../firebase";
+
+import { IProfile, IProfileUpdate, profileConverter } from "../../at-folio-models/profile";
 
 interface IProfileService {
+  getByUID: (uid: string) => Promise<IProfile>;
   getByUsername: (username: string) => Promise<IProfile>;
+  update: (username: string, update: IProfileUpdate) => Promise<void>;
 }
 
 export const ProfileService: IProfileService = {
-  getByUsername: async (username: string): Promise<IProfile> => {
-    return {
-      background: ProfileBackgroundImage.Parrots,
-      username,
-      links: [{
-        platform: SocialPlatform.Facebook,
-        url: "https://facebook.com"
-      }, {
-        platform: SocialPlatform.TikTok,
-        url: "https://tiktok.com"
-      }, {
-        platform: SocialPlatform.Reddit,
-        url: "https://reddit.com"
-      }, {
-        platform: SocialPlatform.YouTube,
-        url: "https://youtube.com"
-      }, {
-        platform: SocialPlatform.Twitch,
-        url: "https://twitch.tv"
-      }],
-      pic: "/img/profile.png"
+  getByUID: async (uid: string): Promise<IProfile> => {
+    const q: Query<IProfile> = query(collection(db, "profiles"), where("uid", "==", uid))
+      .withConverter<IProfile>(profileConverter);
+
+    const snap: QuerySnapshot<IProfile> = await getDocs(q);
+    
+    if(snap.size === 1) {
+      return snap.docs[0].data();
     }
+
+    return null;
+  },
+  getByUsername: async (username: string): Promise<IProfile> => {
+    const ref: DocumentReference<IProfile> = doc(db, "profiles", username)
+      .withConverter<IProfile>(profileConverter);
+
+    const snap: DocumentSnapshot<IProfile> = await getDoc(ref);
+    
+    if(snap.exists()) {
+      return snap.data();
+    }
+
+    return null;
+  },
+  update: async (username: string, update: IProfileUpdate): Promise<void> => {
+    const ref: DocumentReference<IProfile> = doc(db, "profiles", username)
+      .withConverter<IProfile>(profileConverter);
+
+    await setDoc(ref, update);
   }
 }

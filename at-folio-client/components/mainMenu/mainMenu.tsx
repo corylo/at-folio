@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { IconButton } from "../button/iconButton/iconButton";
 import { Logo } from "../logo/logo";
@@ -18,7 +19,7 @@ interface MainMenuProps {
 }
 
 export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
-  const { appState, setAppToggles } = useContext(AppContext);
+  const { appState, setAppTogglesTo } = useContext(AppContext);
 
   const [state, setState] = useState<IMainMenuState>(defaultMainMenuState());
 
@@ -53,10 +54,15 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
           <IconButton 
             className="close-button"
             icon="fa-regular fa-xmark" 
-            handleOnClick={() => setAppToggles({ mainMenu: false })} 
+            handleOnClick={() => setAppTogglesTo({ mainMenu: false })} 
           />
         </div>  
         <div id="main-menu-body">
+          <div className="main-menu-body-section">
+            <Link to="/me" className="link rubik-font" onClick={() => setAppTogglesTo({ mainMenu: false })}>
+              Profile
+            </Link>
+          </div>
           <div className="main-menu-body-section">
             <button type="button" className="button rubik-font" onClick={signOut}>
               Sign Out

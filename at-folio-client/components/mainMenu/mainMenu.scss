@@ -31,11 +31,15 @@
 
     #main-menu-body {
       .main-menu-body-section {
-        border-top: 1px solid rgba(white, 0.05);
         margin-top: 10px;
-        padding-top: 10px;
 
-        .button {
+        &:nth-child(n + 2) {
+          border-top: 1px solid rgba(white, 0.05);
+          padding-top: 10px;
+        }
+
+        .button,
+        .link {
           background-color: transparent;
           font-size: 1em;
 

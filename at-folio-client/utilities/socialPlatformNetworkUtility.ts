@@ -1,27 +1,27 @@
 import { ChosenNodeValues, Data, Edge, IdType, Node, Options } from "vis-network/standalone";
 
-import { ISocialLink } from "../../at-folio-models/socialLink";
+import { ILink } from "../../at-folio-models/link";
 
 import { SocialPlatform } from "../../at-folio-enums/socialPlatform";
 
 interface ISocialPlatformNetworkUtility {
-  getLinkByPlatform: (platform: SocialPlatform, links: ISocialLink[]) => ISocialLink;
+  getLinkByPlatform: (platform: SocialPlatform, links: ILink[]) => ILink;
   getOptions: () => Options;
   getPlatformByName: (platform: string) => SocialPlatform;
-  getPlatformData: (profileImage: string, links: ISocialLink[]) => Data;
+  getPlatformData: (profileImage: string, links: ILink[]) => Data;
   getPlatformImageUrl: (platform: SocialPlatform) => string;
   getPlatforms: () => SocialPlatform[];
   getPlatformEdges: (nodes: Node[]) => Edge[];
-  getPlatformNodes: (links: ISocialLink[]) => Node[];
+  getPlatformNodes: (links: ILink[]) => Node[];
   getProfileNode: (image: string) => Node;
   handleOnNodeBlur: (params: any, container: HTMLElement) => void;
-  handleOnNodeClick: (params: any, links: ISocialLink[]) => void;
+  handleOnNodeClick: (params: any, links: ILink[]) => void;
   handleOnNodeHover: (params: any, container: HTMLElement) => void;
 }
 
 export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
-  getLinkByPlatform: (platform: SocialPlatform, links: ISocialLink[]): ISocialLink => {
-    return links.find((link: ISocialLink) => link.platform === platform);
+  getLinkByPlatform: (platform: SocialPlatform, links: ILink[]): ILink => {
+    return links.find((link: ILink) => link.platform === platform);
   },
   getOptions: (): Options => {
     return {
@@ -65,7 +65,7 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
         throw new Error(`Unknown platform: ${platform}`);
     }
   },
-  getPlatformData: (profileImage: string, links: ISocialLink[]): Data => {
+  getPlatformData: (profileImage: string, links: ILink[]): Data => {
     const profileNode: Node = SocialPlatformNetworkUtility.getProfileNode(profileImage);
 
     const nodes: Node[] = SocialPlatformNetworkUtility.getPlatformNodes(links),
@@ -103,8 +103,8 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
         length: 200
       }));
   },
-  getPlatformNodes: (links: ISocialLink[]): Node[] => {
-    return links.map((link: ISocialLink) => ({        
+  getPlatformNodes: (links: ILink[]): Node[] => {
+    return links.map((link: ILink) => ({        
       borderWidth: 5,
       color: {
         background: "white",
@@ -151,12 +151,12 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
       container.style.cursor = "default";
     }
   },
-  handleOnNodeClick: (params: any, links: ISocialLink[]): void => {
+  handleOnNodeClick: (params: any, links: ILink[]): void => {
     const id: string | number = params.nodes[0];
     
     if(id && id !== 1) {
       const platform: SocialPlatform = SocialPlatformNetworkUtility.getPlatformByName(id as string),
-        link: ISocialLink = SocialPlatformNetworkUtility.getLinkByPlatform(platform, links);
+        link: ILink = SocialPlatformNetworkUtility.getLinkByPlatform(platform, links);
       
       window.open(link.url, "_blank").focus();
     }

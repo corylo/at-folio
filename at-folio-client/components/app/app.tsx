@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 
-import { HomePage, ProfilePage, SignInPage, SignUpPage } from "../../pages/pages";
+import { AdminPage, HomePage, ProfilePage, SignInPage, SignUpPage } from "../../pages/pages";
 
 import { MainMenu } from "../mainMenu/mainMenu";
 import { Navbar } from "../navbar/navbar";
@@ -24,6 +24,9 @@ export const App: React.FC = () => {
         </Route>
         <Route exact path="/sign-up">
           <SignUpPage />
+        </Route>
+        <Route exact path="/me">
+          <AdminPage />
         </Route>
         <Route exact path="/:username">
           <ProfilePage />

@@ -2,20 +2,20 @@ import React, { useContext, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import classNames from "classnames";
 
+import { IconButton } from "../button/iconButton/iconButton";
 import { Logo } from "../logo/logo";
 import { ProfileImage } from "../profileImage/profileImage";
 
 import { AppContext } from "../app/appWrapper";
 
 import { defaultCommandLineState, ICommandLineState } from "./models/commandLineState";
-import { IconButton } from "../button/iconButton/iconButton";
 
 interface CommandLineProps {
   
 }
 
 export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps) => {
-  const { setAppToggles } = useContext(AppContext);
+  const { setAppTogglesTo } = useContext(AppContext);
 
   const [state, setState] = useState<ICommandLineState>(defaultCommandLineState());
 
@@ -66,7 +66,7 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
       </div>
       <ProfileImage 
         image="/img/profile.png" 
-        handleOnClick={() => setAppToggles({ mainMenu: true })} 
+        handleOnClick={() => setAppTogglesTo({ mainMenu: true })} 
       />
     </div>
   );

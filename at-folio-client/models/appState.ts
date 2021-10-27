@@ -1,5 +1,7 @@
 import { User } from "@firebase/auth";
 
+import { defaultProfile, IProfile } from "../../at-folio-models/profile";
+
 import { UserStatus } from "../enums/userStatus";
 
 export interface IAppToggles {
@@ -15,12 +17,14 @@ export const defaultAppToggles = (): IAppToggles => ({
 });
 
 export interface IAppState {
+  profile: IProfile
   toggles: IAppToggles;
   user: User;
   userStatus: UserStatus;
 }
 
 export const defaultAppState = (): IAppState => ({
+  profile: defaultProfile(),
   toggles: defaultAppToggles(),
   user: null,
   userStatus: UserStatus.Loading
