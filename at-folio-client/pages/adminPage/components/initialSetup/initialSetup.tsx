@@ -18,7 +18,7 @@ import { FormUtility } from "../../../../utilities/formUtility";
 import { defaultInitialSetupState, IInitialSetupState } from "./models/initialSetupState";
 import { IProfileUpdate } from "../../../../../at-folio-models/profile";
 
-import { ProfileBackgroundImage } from "../../../../../at-folio-enums/profileBackgroundImage";
+import { ProfileImageOption } from "../../../../../at-folio-enums/profileImageOption";
 import { RequestStatus } from "../../../../enums/requestStatus";
 
 interface InitialSetupProps {
@@ -45,7 +45,7 @@ export const InitialSetup: React.FC<InitialSetupProps> = (props: InitialSetupPro
 
         const profile: IProfileUpdate = {
           background: fields.background,
-          image: "",
+          image: ProfileImageOption.None,
           uid: appState.user.uid,
           username: fields.username
         }
@@ -79,7 +79,7 @@ export const InitialSetup: React.FC<InitialSetupProps> = (props: InitialSetupPro
             <Input label="Select A Background" error={errors.background}>
               <BackgroundPicker 
                 selectedBackground={fields.background}
-                handleOnClick={(background: ProfileBackgroundImage) => setValueTo("background", background)} 
+                handleOnClick={(background: ProfileImageOption) => setValueTo("background", background)} 
               />
             </Input>
           </FormBody>

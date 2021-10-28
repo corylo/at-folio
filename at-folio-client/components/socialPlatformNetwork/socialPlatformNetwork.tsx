@@ -3,20 +3,21 @@ import { Data, Network, Options } from "vis-network/standalone";
 
 import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
 
-import { ILink } from "../../../at-folio-models/link";
+import { IProfile } from "../../../at-folio-models/profile";
 
 interface SocialPlatformNetworkProps {
   id: string;
-  links: ILink[];
-  profileImage: string;
+  profile: IProfile;
 }
 
 export const SocialPlatformNetwork: React.FC<SocialPlatformNetworkProps> = (props: SocialPlatformNetworkProps) => {
+  const { profile } = props;
+
   useEffect(() => {
     const container: HTMLElement | null = document.getElementById(props.id);
 
     if(container) {
-      const data: Data = SocialPlatformNetworkUtility.getPlatformData(props.profileImage, props.links),
+      const data: Data = SocialPlatformNetworkUtility.getPlatformData(profile),
         options: Options = SocialPlatformNetworkUtility.getOptions();
 
       const network: Network = new Network(container, data, options);
@@ -25,7 +26,7 @@ export const SocialPlatformNetwork: React.FC<SocialPlatformNetworkProps> = (prop
 
       network.on("blurNode", (params: any) => SocialPlatformNetworkUtility.handleOnNodeBlur(params, container));
 
-      network.on("click", (params: any) => SocialPlatformNetworkUtility.handleOnNodeClick(params, props.links));
+      network.on("click", (params: any) => SocialPlatformNetworkUtility.handleOnNodeClick(params, profile.links));
 
       const handleOnResize = (): void => {
         network.fit();
@@ -37,7 +38,7 @@ export const SocialPlatformNetwork: React.FC<SocialPlatformNetworkProps> = (prop
         window.removeEventListener("resize", handleOnResize);
       }
     }
-  }, []);
+  }, [profile.image]);
 
   return(
     <div id={props.id} className="social-platform-network" />

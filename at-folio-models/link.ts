@@ -1,10 +1,9 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot } from "@firebase/firestore";
 
-import { SocialPlatformNetworkUtility } from "../at-folio-client/utilities/socialPlatformNetworkUtility";
-
 import { SocialPlatform } from "../at-folio-enums/socialPlatform";
 
 export interface ILink {
+  id: string;
   platform: SocialPlatform;
   url: string;
 }
@@ -12,6 +11,7 @@ export interface ILink {
 export const linkConverter: FirestoreDataConverter<ILink> = {
   toFirestore(link: ILink): DocumentData {
     return {
+      platform: link.platform,
       url: link.url
     }
   },
@@ -19,7 +19,8 @@ export const linkConverter: FirestoreDataConverter<ILink> = {
     const data: ILink = snapshot.data();
 
     return {
-      platform: SocialPlatformNetworkUtility.getPlatformByName(snapshot.id),
+      id: snapshot.id,
+      platform: data.platform,
       url: data.url
     }
   }

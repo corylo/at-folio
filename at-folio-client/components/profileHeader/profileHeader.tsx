@@ -4,8 +4,10 @@ import { ProfileImage } from "../profileImage/profileImage";
 import { ProfileUsername } from "../profileUsername/profileUsername";
 import { WrappableComponent } from "../wrappableComponent/wrappableComponent";
 
+import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
+
 interface ProfileHeaderProps {
-  image: string;
+  image: ProfileImageOption;
   username: string;  
   wrapperID?: string;
 }

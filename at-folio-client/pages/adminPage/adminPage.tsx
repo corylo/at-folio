@@ -12,7 +12,7 @@ import { useFetchLinksEffect } from "./effects";
 
 import { defaultAdminPageState, IAdminPageState } from "./models/adminPageState";
 
-import { ProfileBackgroundImage } from "../../../at-folio-enums/profileBackgroundImage";
+import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
 import { RequestStatus } from "../../enums/requestStatus";
 
 export const AdminPage: React.FC = () => {  
@@ -29,7 +29,7 @@ export const AdminPage: React.FC = () => {
   useFetchLinksEffect(state, setStatusTo);
 
   const getContent = (): JSX.Element => {
-    if(profile.username === "" || profile.background === ProfileBackgroundImage.None) {
+    if(profile.username === "" || profile.background === ProfileImageOption.None) {
       return (
         <React.Fragment>
           <CreatorGridBackground />

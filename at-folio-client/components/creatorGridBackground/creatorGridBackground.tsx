@@ -10,7 +10,7 @@ import { defaultCreatorGridBackgroundState, ICreatorGridBackgroundState } from "
 import { IPosition } from "../../models/position";
 
 import { ImageSize } from "../../enums/imageSize";
-import { ProfileBackgroundImage } from "../../../at-folio-enums/profileBackgroundImage";
+import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
 import { SocialPlatform } from "../../../at-folio-enums/socialPlatform";
 
 export const CreatorGridBackground: React.FC = () => {
@@ -71,7 +71,7 @@ export const CreatorGridBackground: React.FC = () => {
 
   const getTiles = (): JSX.Element[] => {
     const platforms: SocialPlatform[] = SocialPlatformNetworkUtility.getPlatforms(),
-      backgrounds: ProfileBackgroundImage[] = ProfileUtility.getGridBackgroundImages();
+      backgrounds: ProfileImageOption[] = ProfileUtility.getGridImages();
 
     let tiles: JSX.Element[] = [];
 
@@ -88,7 +88,7 @@ export const CreatorGridBackground: React.FC = () => {
           <LoadableImage 
             className="creator-tile-image" 
             size={ImageSize.Small}
-            source={ProfileUtility.getBackgroundImageUrl(backgrounds[i])} 
+            source={ProfileUtility.getImageUrl(backgrounds[i])} 
           />
         </div>
       );

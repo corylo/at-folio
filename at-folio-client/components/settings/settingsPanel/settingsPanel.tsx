@@ -7,7 +7,7 @@ import { SettingsSection } from "../settingsSection/settingsSection";
 
 import { AppContext } from "../../app/appWrapper";
 
-import { ProfileBackgroundImage } from "../../../../at-folio-enums/profileBackgroundImage";
+import { ProfileImageOption } from "../../../../at-folio-enums/profileImageOption";
 
 export const SettingsPanel: React.FC = () => {
   const { appState, setProfileTo } = useContext(AppContext);
@@ -21,7 +21,7 @@ export const SettingsPanel: React.FC = () => {
       <div id="settings-panel-wrapper">
         <div id="settings-panel" className="scroll-bar light">
           <div id="settings-panel-header">
-            <h1 id="settings-panel-title" className="rubik-font">Profile Settings</h1>          
+            <h1 id="settings-panel-title" className="rubik-font">My Profile</h1>          
             <IconButton 
               className="close-button"
               icon="fa-regular fa-xmark" 
@@ -29,7 +29,7 @@ export const SettingsPanel: React.FC = () => {
             />
           </div>
           <div id="settings-panel-sections">
-            <SettingsSection className="my-link-section" label="My Link">
+            <SettingsSection className="link-section" label="Link">
               <Input>
                 <input 
                   type="text" 
@@ -49,10 +49,16 @@ export const SettingsPanel: React.FC = () => {
                 />
               </Input>          
             </SettingsSection>
-            <SettingsSection label="Background">
+            <SettingsSection label="Profile Image">
+              <BackgroundPicker 
+                selectedBackground={profile.image as ProfileImageOption}
+                handleOnClick={(image: ProfileImageOption) => setProfileTo({ ...profile, image })} 
+              />
+            </SettingsSection>
+            <SettingsSection label="Profile Background">
               <BackgroundPicker 
                 selectedBackground={profile.background}
-                handleOnClick={(background: ProfileBackgroundImage) => setProfileTo({ ...profile, background })} 
+                handleOnClick={(background: ProfileImageOption) => setProfileTo({ ...profile, background })} 
               />
             </SettingsSection>
           </div>

@@ -1,7 +1,7 @@
 import { IFormState } from "../../../../../models/formState";
 
 import { FormError } from "../../../../../enums/formError";
-import { ProfileBackgroundImage } from "../../../../../../at-folio-enums/profileBackgroundImage";
+import { ProfileImageOption } from "../../../../../../at-folio-enums/profileImageOption";
 import { RequestStatus } from "../../../../../enums/requestStatus";
 
 export interface IInitialSetupState extends IFormState {
@@ -10,7 +10,7 @@ export interface IInitialSetupState extends IFormState {
     username: FormError;
   };
   fields: {
-    background: ProfileBackgroundImage;
+    background: ProfileImageOption;
     username: string;
   };
 }
@@ -22,7 +22,7 @@ export const defaultInitialSetupState = (): IInitialSetupState => ({
     username: FormError.None
   },
   fields: {
-    background: ProfileBackgroundImage.None,
+    background: ProfileImageOption.None,
     username: ""
   },
   status: RequestStatus.Idle

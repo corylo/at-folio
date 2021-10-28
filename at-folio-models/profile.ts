@@ -2,28 +2,28 @@ import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot } from "@fi
 
 import { ILink } from "./link";
 
-import { ProfileBackgroundImage } from "../at-folio-enums/profileBackgroundImage";
+import { ProfileImageOption } from "../at-folio-enums/profileImageOption";
 
 export interface IProfile {
-  background: ProfileBackgroundImage;
+  background: ProfileImageOption;
   links: ILink[];
-  image: string;
+  image: ProfileImageOption;
   uid: string;
   username: string;
 }
 
 export interface IProfileUpdate {
-  background?: ProfileBackgroundImage;
+  background?: ProfileImageOption;
   links?: ILink[];
-  image?: string;
+  image?: ProfileImageOption;
   uid?: string;
   username?: string;
 }
 
 export const defaultProfile = (): IProfile => ({
-  background: ProfileBackgroundImage.None,
+  background: ProfileImageOption.None,
   links: [],
-  image: "",
+  image: ProfileImageOption.None,
   uid: "",
   username: ""
 });

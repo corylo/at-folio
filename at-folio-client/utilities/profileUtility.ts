@@ -1,33 +1,33 @@
-import { ProfileBackgroundImage } from "../../at-folio-enums/profileBackgroundImage";
+import { ProfileImageOption } from "../../at-folio-enums/profileImageOption";
 
 interface IProfileUtility {
-  getBackgroundImageUrl: (backgroundImage: ProfileBackgroundImage) => string;
-  getBackgroundImages: () => ProfileBackgroundImage[];
-  getGridBackgroundImages: () => ProfileBackgroundImage[];
+  getImageUrl: (backgroundImage: ProfileImageOption) => string;
+  getImages: () => ProfileImageOption[];
+  getGridImages: () => ProfileImageOption[];
 }
 
 export const ProfileUtility: IProfileUtility = {
-  getBackgroundImageUrl: (backgroundImage: ProfileBackgroundImage): string => {
+  getImageUrl: (backgroundImage: ProfileImageOption): string => {
     return `/img/backgrounds/${backgroundImage.toLowerCase()}.webp`;
   },
-  getBackgroundImages: (): ProfileBackgroundImage[] => {
+  getImages: (): ProfileImageOption[] => {
     return [
-      ProfileBackgroundImage.Beach,
-      ProfileBackgroundImage.City,
-      ProfileBackgroundImage.Coffee,
-      ProfileBackgroundImage.Flowers,
-      ProfileBackgroundImage.Mountains,
-      ProfileBackgroundImage.Parrots
+      ProfileImageOption.Beach,
+      ProfileImageOption.City,
+      ProfileImageOption.Coffee,
+      ProfileImageOption.Flowers,
+      ProfileImageOption.Mountains,
+      ProfileImageOption.Parrots
     ]
   },
-  getGridBackgroundImages: (): ProfileBackgroundImage[] => {
+  getGridImages: (): ProfileImageOption[] => {
     return [
-      ProfileBackgroundImage.Beach,
-      ProfileBackgroundImage.City,
-      ProfileBackgroundImage.Coffee,
-      ProfileBackgroundImage.Flowers,
-      ProfileBackgroundImage.Mountains,
-      ProfileBackgroundImage.Parrots
+      ProfileImageOption.Beach,
+      ProfileImageOption.City,
+      ProfileImageOption.Coffee,
+      ProfileImageOption.Flowers,
+      ProfileImageOption.Mountains,
+      ProfileImageOption.Parrots
     ]
   }
 }

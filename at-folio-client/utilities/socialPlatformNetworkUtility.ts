@@ -1,14 +1,16 @@
 import { ChosenNodeValues, Data, Edge, IdType, Node, Options } from "vis-network/standalone";
 
 import { ILink } from "../../at-folio-models/link";
+import { IProfile } from "../../at-folio-models/profile";
 
 import { SocialPlatform } from "../../at-folio-enums/socialPlatform";
+import { ProfileUtility } from "./profileUtility";
 
 interface ISocialPlatformNetworkUtility {
   getLinkByPlatform: (platform: SocialPlatform, links: ILink[]) => ILink;
   getOptions: () => Options;
   getPlatformByName: (platform: string) => SocialPlatform;
-  getPlatformData: (profileImage: string, links: ILink[]) => Data;
+  getPlatformData: (profile: IProfile) => Data;
   getPlatformImageUrl: (platform: SocialPlatform) => string;
   getPlatforms: () => SocialPlatform[];
   getPlatformEdges: (nodes: Node[]) => Edge[];
@@ -67,8 +69,10 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
         throw new Error(`Unknown platform: ${platform}`);
     }
   },
-  getPlatformData: (profileImage: string, links: ILink[]): Data => {
-    const profileNode: Node = SocialPlatformNetworkUtility.getProfileNode(profileImage);
+  getPlatformData: (profile: IProfile): Data => {
+    const { image, links } = profile;
+
+    const profileNode: Node = SocialPlatformNetworkUtility.getProfileNode(ProfileUtility.getImageUrl(image));
 
     const nodes: Node[] = SocialPlatformNetworkUtility.getPlatformNodes(links),
       edges: Edge[] = SocialPlatformNetworkUtility.getPlatformEdges(nodes);

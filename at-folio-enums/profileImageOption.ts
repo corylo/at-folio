@@ -1,4 +1,4 @@
-export enum ProfileBackgroundImage {
+export enum ProfileImageOption {
   Beach = "Beach",
   City = "City",
   Coffee = "Coffee",

@@ -6,16 +6,16 @@ import { LoadableImage } from "../loadableImage/loadableImage";
 import { ProfileUtility } from "../../utilities/profileUtility";
 
 import { ImageSize } from "../../enums/imageSize";
-import { ProfileBackgroundImage } from "../../../at-folio-enums/profileBackgroundImage";
+import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
 
 interface BackgroundPickerProps {
-  selectedBackground: ProfileBackgroundImage;
-  handleOnClick: (background: ProfileBackgroundImage) => void;
+  selectedBackground: ProfileImageOption;
+  handleOnClick: (background: ProfileImageOption) => void;
 }
 
 export const BackgroundPicker: React.FC<BackgroundPickerProps> = (props: BackgroundPickerProps) => {
   const getOptions = (): JSX.Element[] => {
-    return ProfileUtility.getBackgroundImages().map((background: ProfileBackgroundImage) => {
+    return ProfileUtility.getImages().map((background: ProfileImageOption) => {
       const selected: boolean = background === props.selectedBackground;
 
       return (
@@ -26,7 +26,7 @@ export const BackgroundPicker: React.FC<BackgroundPickerProps> = (props: Backgro
           onClick={() => props.handleOnClick(background)}
         >
           <LoadableImage 
-            source={ProfileUtility.getBackgroundImageUrl(background)} 
+            source={ProfileUtility.getImageUrl(background)} 
             size={ImageSize.Small} 
           />
         </button>

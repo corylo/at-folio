@@ -8,6 +8,8 @@ import { ProfileImage } from "../profileImage/profileImage";
 
 import { AppContext } from "../app/appWrapper";
 
+import { ProfileUtility } from "../../utilities/profileUtility";
+
 import { defaultCommandLineState, ICommandLineState } from "./models/commandLineState";
 
 interface CommandLineProps {
@@ -66,8 +68,8 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
           handleOnClick={handleGo} 
         />
       </div>
-      <ProfileImage 
-        image={profile.image}
+      <ProfileImage
+        image={ProfileUtility.getImageUrl(profile.image)}
         handleOnClick={() => setAppTogglesTo({ mainMenu: true })} 
       />
     </div>
