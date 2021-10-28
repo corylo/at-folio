@@ -1,9 +1,7 @@
-.link-item {
+#add-link-form {
   background: linear-gradient(to bottom, rgba(white, 0.1), rgba(white, 0.05));
   border: 1px solid rgba(white, 0.25);
   border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   padding: 10px;
+  width: auto;
 }

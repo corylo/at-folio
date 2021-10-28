@@ -66,7 +66,7 @@ export const AddLinkForm: React.FC = () => {
   }
 
   return (
-    <Form id="sign-in-form">
+    <Form id="add-link-form">
       <FormBody errorMessage={state.errorMessage} status={state.status}>
         <Input label="Platform" error={errors.platform}>
           <SocialPlatformPicker 
