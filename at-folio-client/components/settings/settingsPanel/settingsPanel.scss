@@ -25,6 +25,8 @@
     }
 
     #settings-panel-sections {
+      backdrop-filter: blur(3px);
+      background-color: rgba(white, 0.05);
       border: 1px solid rgba(white, 0.25);
       border-radius: 6px;
       display: flex; 
@@ -45,8 +47,6 @@
         }
 
         .settings-section-content {
-          backdrop-filter: blur(3px);
-          background-color: rgba(white, 0.05);
           border: 1px solid rgba(white, 0.25);
           border-radius: 6px;
           padding: 10px;
