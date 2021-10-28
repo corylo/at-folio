@@ -43,6 +43,7 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
         }
       },
       interaction: {
+        dragNodes: false,
         dragView: false,
         hover: true,
         zoomView: false

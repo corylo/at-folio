@@ -1,7 +1,11 @@
 #initial-setup-wrapper {
+  align-items: flex-start;
   z-index: 99999;
 
   #initial-setup {
+    margin-bottom: 100px;
+    margin-top: 100px;
+
     #initial-setup-content {
       backdrop-filter: blur(5px);
       background-color: rgba(gray(30), 0.25);
@@ -9,6 +13,14 @@
       box-shadow: $shadow3;
       margin-top: 10px;
       padding: 15px;
+
+      .image-picker {
+        backdrop-filter: blur(5px);
+        background-color: rgba(white, 0.05);
+        border: 1px solid rgba(white, 0.25);
+        border-radius: 6px;
+        padding: 10px;
+      }
     }
   }
 }

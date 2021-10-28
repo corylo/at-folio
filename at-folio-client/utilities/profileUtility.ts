@@ -8,7 +8,11 @@ interface IProfileUtility {
 
 export const ProfileUtility: IProfileUtility = {
   getImageUrl: (backgroundImage: ProfileImageOption): string => {
-    return `/img/backgrounds/${backgroundImage.toLowerCase()}.webp`;
+    if(backgroundImage) {
+      return `/img/backgrounds/${backgroundImage.toLowerCase()}.webp`;
+    }
+
+    return ProfileImageOption.None;
   },
   getImages: (): ProfileImageOption[] => {
     return [

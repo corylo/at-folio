@@ -20,6 +20,10 @@ export const SocialPlatformNetwork: React.FC<SocialPlatformNetworkProps> = (prop
       const data: Data = SocialPlatformNetworkUtility.getPlatformData(profile),
         options: Options = SocialPlatformNetworkUtility.getOptions();
 
+      if(profile.links.length > 0) {
+        options.interaction.dragNodes = true;
+      }
+
       const network: Network = new Network(container, data, options);
 
       network.on("hoverNode", (params: any) => SocialPlatformNetworkUtility.handleOnNodeHover(params, container));
@@ -38,7 +42,7 @@ export const SocialPlatformNetwork: React.FC<SocialPlatformNetworkProps> = (prop
         window.removeEventListener("resize", handleOnResize);
       }
     }
-  }, [profile.image]);
+  }, [profile.image, profile.links]);
 
   return(
     <div id={props.id} className="social-platform-network" />

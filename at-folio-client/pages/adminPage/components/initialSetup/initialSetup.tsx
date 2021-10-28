@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 
-import { BackgroundPicker } from "../../../../components/backgroundPicker/backgroundPicker";
 import { Form } from "../../../../components/form/form";
 import { FormActions } from "../../../../components/form/formActions";
 import { FormBody } from "../../../../components/form/formBody";
+import { ImagePicker } from "../../../../components/imagePicker/imagePicker";
 import { Input } from "../../../../components/input/input";
 import { Modal } from "../../../../components/modal/modal";
 
@@ -16,7 +16,7 @@ import { InitialSetupValidator } from "./validators/initialSetupValidator";
 import { FormUtility } from "../../../../utilities/formUtility";
 
 import { defaultInitialSetupState, IInitialSetupState } from "./models/initialSetupState";
-import { IProfileUpdate } from "../../../../../at-folio-models/profile";
+import { IProfile } from "../../../../../at-folio-models/profile";
 
 import { ProfileImageOption } from "../../../../../at-folio-enums/profileImageOption";
 import { RequestStatus } from "../../../../enums/requestStatus";
@@ -39,18 +39,19 @@ export const InitialSetup: React.FC<InitialSetupProps> = (props: InitialSetupPro
   const save = async (): Promise<void> => {
     const updates: IInitialSetupState = InitialSetupValidator.validate(state);
 
-    if(FormUtility.determineIfValid(updates)) {
+    if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
         setState({ ...updates, status: RequestStatus.Loading });
 
-        const profile: IProfileUpdate = {
+        const profile: IProfile = {
           background: fields.background,
-          image: ProfileImageOption.None,
+          image: fields.image,
+          links: [],
           uid: appState.user.uid,
           username: fields.username
         }
 
-        await ProfileService.update(fields.username, profile);
+        await ProfileService.create(profile);
 
         setProfileTo(profile);
       } catch (err) {
@@ -76,9 +77,15 @@ export const InitialSetup: React.FC<InitialSetupProps> = (props: InitialSetupPro
                 onChange={(e: any) => setValueTo("username", e.target.value)}
               />
             </Input>
+            <Input label="Select A Profile Image" error={errors.image}>
+              <ImagePicker 
+                selectedImage={fields.image}
+                handleOnClick={(image: ProfileImageOption) => setValueTo("image", image)} 
+              />
+            </Input>
             <Input label="Select A Background" error={errors.background}>
-              <BackgroundPicker 
-                selectedBackground={fields.background}
+              <ImagePicker 
+                selectedImage={fields.background}
                 handleOnClick={(background: ProfileImageOption) => setValueTo("background", background)} 
               />
             </Input>

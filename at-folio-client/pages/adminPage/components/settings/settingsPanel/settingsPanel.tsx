@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 
-import { BackgroundPicker } from "../../backgroundPicker/backgroundPicker";
-import { IconButton } from "../../button/iconButton/iconButton";
-import { Input } from "../../input/input";
+import { ImagePicker } from "../../../../../components/imagePicker/imagePicker";
+import { IconButton } from "../../../../../components/button/iconButton/iconButton";
+import { Input } from "../../../../../components/input/input";
+import { LinkManager } from "../../../../../components/linkManager/linkManager";
 import { SettingsSection } from "../settingsSection/settingsSection";
 
-import { AppContext } from "../../app/appWrapper";
+import { AppContext } from "../../../../../components/app/appWrapper";
 
-import { ProfileImageOption } from "../../../../at-folio-enums/profileImageOption";
+import { ProfileImageOption } from "../../../../../../at-folio-enums/profileImageOption";
+import { ProfileService } from "../../../../../services/profileService";
 
 export const SettingsPanel: React.FC = () => {
   const { appState, setProfileTo } = useContext(AppContext);
@@ -17,6 +19,26 @@ export const SettingsPanel: React.FC = () => {
   const [toggled, setToggledTo] = useState<boolean>(false);
 
   if(toggled) {
+    const saveProfileImage = async (image: ProfileImageOption): Promise<void> => {
+      try {
+        await ProfileService.update(profile.username, { image });
+
+        setProfileTo({ ...profile, image });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    const saveProfileBackground = async (background: ProfileImageOption): Promise<void> => {
+      try {
+        await ProfileService.update(profile.username, { background });
+
+        setProfileTo({ ...profile, background });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
     return (
       <div id="settings-panel-wrapper">
         <div id="settings-panel" className="scroll-bar light">
@@ -29,7 +51,7 @@ export const SettingsPanel: React.FC = () => {
             />
           </div>
           <div id="settings-panel-sections">
-            <SettingsSection className="link-section" label="Link">
+            <SettingsSection className="url-section" label="Url">
               <Input>
                 <input 
                   type="text" 
@@ -50,16 +72,19 @@ export const SettingsPanel: React.FC = () => {
               </Input>          
             </SettingsSection>
             <SettingsSection label="Profile Image">
-              <BackgroundPicker 
-                selectedBackground={profile.image as ProfileImageOption}
-                handleOnClick={(image: ProfileImageOption) => setProfileTo({ ...profile, image })} 
+              <ImagePicker 
+                selectedImage={profile.image}
+                handleOnClick={saveProfileImage} 
               />
             </SettingsSection>
             <SettingsSection label="Profile Background">
-              <BackgroundPicker 
-                selectedBackground={profile.background}
-                handleOnClick={(background: ProfileImageOption) => setProfileTo({ ...profile, background })} 
+              <ImagePicker 
+                selectedImage={profile.background}
+                handleOnClick={saveProfileBackground} 
               />
+            </SettingsSection>
+            <SettingsSection className="links-section" label="Links">
+              <LinkManager links={profile.links} />
             </SettingsSection>
           </div>
         </div>

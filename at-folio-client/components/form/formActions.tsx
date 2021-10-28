@@ -1,5 +1,7 @@
 import React from "react";
 
+import { LoadingIcon } from "../loading/loadingIcon";
+
 import { IFormAction } from "../../models/formAction";
 
 import { RequestStatus } from "../../enums/requestStatus";
@@ -22,7 +24,7 @@ export const FormActions: React.FC<FormActionsProps> = (props: FormActionsProps)
             disabled={props.status === RequestStatus.Loading}
             onClick={action.handleOnClick}
           >
-            {props.status === RequestStatus.Loading ? <i className="fas fa-spinner-third spin-animation" /> : action.label}
+            {props.status === RequestStatus.Loading ? <LoadingIcon /> : action.label}
           </button>
         )
       });

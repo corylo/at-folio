@@ -4,7 +4,7 @@ import { CreatorGridBackground } from "../../components/creatorGridBackground/cr
 import { InitialSetup } from "./components/initialSetup/initialSetup";
 import { Page } from "../../components/page/page";
 import { Profile } from "../../components/profile/profile";
-import { SettingsPanel } from "../../components/settings/settingsPanel/settingsPanel";
+import { SettingsPanel } from "./components/settings/settingsPanel/settingsPanel";
 
 import { AppContext } from "../../components/app/appWrapper";
 

@@ -1,16 +1,23 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, where, DocumentReference, DocumentSnapshot, Query, QuerySnapshot } from "@firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where, DocumentReference, DocumentSnapshot, Query, QuerySnapshot } from "@firebase/firestore";
 
 import { db } from "../firebase";
 
 import { IProfile, IProfileUpdate, profileConverter } from "../../at-folio-models/profile";
 
 interface IProfileService {
+  create: (profile: IProfile) => Promise<void>;
   getByUID: (uid: string) => Promise<IProfile>;
   getByUsername: (username: string) => Promise<IProfile>;
   update: (username: string, update: IProfileUpdate) => Promise<void>;
 }
 
 export const ProfileService: IProfileService = {
+  create: async (profile: IProfile): Promise<void> => {
+    const ref: DocumentReference<IProfile> = doc(db, "profiles", profile.username)
+      .withConverter<IProfile>(profileConverter);
+
+    await setDoc(ref, profile);
+  },
   getByUID: async (uid: string): Promise<IProfile> => {
     const q: Query<IProfile> = query(collection(db, "profiles"), where("uid", "==", uid))
       .withConverter<IProfile>(profileConverter);
@@ -39,6 +46,6 @@ export const ProfileService: IProfileService = {
     const ref: DocumentReference<IProfile> = doc(db, "profiles", username)
       .withConverter<IProfile>(profileConverter);
 
-    await setDoc(ref, update);
+    await updateDoc(ref, update);
   }
 }

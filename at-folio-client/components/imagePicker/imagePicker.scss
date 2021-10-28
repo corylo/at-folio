@@ -1,10 +1,10 @@
-#background-picker {
+.image-picker {
   display: grid;
   grid-gap: 1em;
   gap: 1em;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));  
 
-  .background-picker-option {
+  .image-picker-option {
     background-color: transparent;
     border: 2px solid transparent;
     border-radius: 6px;
@@ -12,6 +12,7 @@
     outline: none;
     overflow: hidden;
     padding: 0px;
+    position: relative;
 
     &:hover,
     &:focus,

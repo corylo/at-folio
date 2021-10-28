@@ -6,8 +6,7 @@ interface LoadingSpinnerProps {
   wrapperID?: string;
 }
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = (props: LoadingSpinnerProps) => {
-  
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = (props: LoadingSpinnerProps) => {  
   return (
     <WrappableComponent wrapperID={props.wrapperID}>
       <div className="loading-spinner">

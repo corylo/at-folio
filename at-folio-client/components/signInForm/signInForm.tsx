@@ -34,7 +34,7 @@ export const SignInForm: React.FC<SignInFormProps> = (props: SignInFormProps) =>
   const signIn = async (): Promise<void> => {
     const updates: ISignInFormState = SignInFormValidator.validate(state);
 
-    if(FormUtility.determineIfValid(updates)) {
+    if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
         setState({ ...updates, status: RequestStatus.Loading });
 

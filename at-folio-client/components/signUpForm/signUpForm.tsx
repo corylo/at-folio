@@ -37,7 +37,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
   const createAccount = async (): Promise<void> => {
     const updates: ISignUpFormState = SignUpFormValidator.validate(state);
 
-    if(FormUtility.determineIfValid(updates)) {
+    if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
         setState({ ...updates, status: RequestStatus.Loading });
 

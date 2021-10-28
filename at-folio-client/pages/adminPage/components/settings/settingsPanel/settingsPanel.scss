@@ -1,6 +1,6 @@
 #settings-panel-wrapper {
   animation: fadeInRight 400ms ease-in;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 100px);
   margin: 10px;  
   position: fixed;
   right: 0px;
@@ -36,7 +36,7 @@
       padding: 10px;
 
       .settings-section {
-        &.link-section,
+        &.url-section,
         &.username-section {
           .settings-section-content {
             background-color: transparent;

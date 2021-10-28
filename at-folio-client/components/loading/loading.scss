@@ -1,6 +1,25 @@
+.loading-icon,
 .loading-spinner {
-  animation: spinAndScale 2s ease-in-out infinite;  
   color: white;
+}
+
+.loading-icon {
+  font-size: 1.5em;
+}
+
+.loading-spinner {
+  animation: spinAndScale 2s ease-in-out infinite;    
   font-size: 3em;
   pointer-events: none;
+}
+
+.default-loading-icon-wrapper {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
 }
