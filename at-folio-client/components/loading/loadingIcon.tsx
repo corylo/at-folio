@@ -15,20 +15,8 @@ export const LoadingIcon: React.FC<LoadingIconProps> = (props: LoadingIconProps)
     "spin-animation"
   );
 
-  const getWrapperClass = (): string => {
-    if(props.wrapperClass !== undefined) {
-      if(props.wrapperClass === true) {
-        return "default-loading-icon-wrapper";
-      }
-      
-      return props.wrapperClass;
-    }
-
-    return null;
-  }
-
   return (
-    <WrappableComponent wrapperClass={getWrapperClass()}>
+    <WrappableComponent wrapperClass={props.wrapperClass} defaultWrapperClass="default-loading-icon-wrapper">
       <i className={classes} />
     </WrappableComponent>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
 import { LoadableImage } from "../loadableImage/loadableImage";
@@ -9,6 +9,7 @@ import { ProfileUtility } from "../../utilities/profileUtility";
 import { ImageSize } from "../../enums/imageSize";
 import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
 import { RequestStatus } from "../../enums/requestStatus";
+import { StatusMessage } from "../statusMessage/statusMessage";
 
 interface ImagePickerOptionProps {
   image: ProfileImageOption;
@@ -21,15 +22,31 @@ export const ImagePickerOption: React.FC<ImagePickerOptionProps> = (props: Image
 
   const [status, setStatusTo] = useState<RequestStatus>(RequestStatus.Idle);
 
+  useEffect(() => {
+    if(status === RequestStatus.Success) {
+      const timeout: NodeJS.Timeout = setTimeout(() => {
+        setStatusTo(RequestStatus.Idle);
+      }, 2000);
+
+      if(!selected) {
+        setStatusTo(RequestStatus.Idle);
+      }
+
+      return () => {
+        clearTimeout(timeout);
+      }
+    }
+  }, [status, selected]);
+
   const handleOnClick = async (): Promise<void> => {
     if(!props.selected && status !== RequestStatus.Loading) {
       try {
         setStatusTo(RequestStatus.Loading);
 
         await props.handleOnClick(image);
-      } finally {
-        setStatusTo(RequestStatus.Idle);    
-      }
+
+        setStatusTo(RequestStatus.Success);
+      } catch(err) {}
     }
   }
 
@@ -52,6 +69,13 @@ export const ImagePickerOption: React.FC<ImagePickerOptionProps> = (props: Image
         size={ImageSize.Small} 
       />
       {getLoadingIcon()}
+      <StatusMessage 
+        activeStatuses={[RequestStatus.Success]} 
+        icon
+        status={status} 
+        text="Saved"
+        wrapperClass
+      />
     </button>
   );
 }

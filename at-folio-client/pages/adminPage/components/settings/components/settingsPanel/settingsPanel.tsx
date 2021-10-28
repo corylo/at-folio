@@ -68,7 +68,7 @@ export const SettingsPanel: React.FC = () => {
                   type="text" 
                   placeholder="Enter username" 
                   value={profile.username}
-                  onChange={(e: any) => {}}
+                  onChange={() => {}}
                 />
               </Input>          
             </SettingsSection>

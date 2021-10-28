@@ -23,6 +23,11 @@
       &:focus {
         border-color: rgba(white, 0.75);
       }
+      
+      option {
+        background-color: gray(40);
+        color: white;
+      }
     }
 
     input {
