@@ -4,6 +4,8 @@ import { ProfileImage } from "../profileImage/profileImage";
 import { ProfileUsername } from "../profileUsername/profileUsername";
 import { WrappableComponent } from "../wrappableComponent/wrappableComponent";
 
+import { ProfileUtility } from "../../utilities/profileUtility";
+
 import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
 
 interface ProfileHeaderProps {
@@ -24,7 +26,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = (props: ProfileHeader
   return (
     <WrappableComponent wrapperID={props.wrapperID}>
       <div className="profile-header">
-        <ProfileImage image={props.image} />
+        <ProfileImage image={ProfileUtility.getImageUrl(props.image)} />
         {getUsername()}
       </div>
     </WrappableComponent>
