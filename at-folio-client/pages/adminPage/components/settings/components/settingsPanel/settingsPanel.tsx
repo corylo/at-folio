@@ -17,7 +17,7 @@ export const SettingsPanel: React.FC = () => {
 
   const { profile } = appState;
 
-  const [toggled, setToggledTo] = useState<boolean>(true);
+  const [toggled, setToggledTo] = useState<boolean>(false);
 
   if(toggled) {
     const saveProfileImage = async (image: ProfileImageOption): Promise<void> => {
