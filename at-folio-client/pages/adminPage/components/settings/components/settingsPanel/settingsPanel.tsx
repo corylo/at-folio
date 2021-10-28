@@ -1,27 +1,28 @@
 import React, { useContext, useState } from "react";
 
-import { ImagePicker } from "../../../../../components/imagePicker/imagePicker";
-import { IconButton } from "../../../../../components/button/iconButton/iconButton";
-import { Input } from "../../../../../components/input/input";
-import { LinkManager } from "../../../../../components/linkManager/linkManager";
+import { ImagePicker } from "../../../../../../components/imagePicker/imagePicker";
+import { IconButton } from "../../../../../../components/button/iconButton/iconButton";
+import { Input } from "../../../../../../components/input/input";
+import { LinkManager } from "../../../../../../components/linkManager/linkManager";
 import { SettingsSection } from "../settingsSection/settingsSection";
 
-import { AppContext } from "../../../../../components/app/appWrapper";
+import { AppContext } from "../../../../../../components/app/appWrapper";
 
-import { ProfileImageOption } from "../../../../../../at-folio-enums/profileImageOption";
-import { ProfileService } from "../../../../../services/profileService";
+import { ProfileService } from "../../../../../../services/profileService";
+
+import { ProfileImageOption } from "../../../../../../../at-folio-enums/profileImageOption";
 
 export const SettingsPanel: React.FC = () => {
   const { appState, setProfileTo } = useContext(AppContext);
 
   const { profile } = appState;
 
-  const [toggled, setToggledTo] = useState<boolean>(false);
+  const [toggled, setToggledTo] = useState<boolean>(true);
 
   if(toggled) {
     const saveProfileImage = async (image: ProfileImageOption): Promise<void> => {
       try {
-        await ProfileService.update(profile.username, { image });
+        await ProfileService.update(profile.uid, { image });
 
         setProfileTo({ ...profile, image });
       } catch (err) {
@@ -31,7 +32,7 @@ export const SettingsPanel: React.FC = () => {
 
     const saveProfileBackground = async (background: ProfileImageOption): Promise<void> => {
       try {
-        await ProfileService.update(profile.username, { background });
+        await ProfileService.update(profile.uid, { background });
 
         setProfileTo({ ...profile, background });
       } catch (err) {

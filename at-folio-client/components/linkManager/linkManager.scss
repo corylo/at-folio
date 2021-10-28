@@ -1,3 +1,10 @@
+@import "./components/linkItem/linkItem.scss";
+
 .link-manager {
-  
+  .link-manager-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
 }

@@ -33,7 +33,7 @@ export const profileConverter: FirestoreDataConverter<IProfile> = {
     return {
       background: profile.background,
       image: profile.image,
-      uid: profile.uid
+      username: profile.username
     }
   },
   fromFirestore(snapshot: QueryDocumentSnapshot<IProfile>): IProfile {
@@ -43,8 +43,8 @@ export const profileConverter: FirestoreDataConverter<IProfile> = {
       background: data.background,
       links: [],
       image: data.image,
-      uid: data.uid,
-      username: snapshot.id
+      uid: snapshot.id,
+      username: data.username
     }
   }
 }

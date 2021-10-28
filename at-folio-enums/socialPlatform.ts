@@ -3,6 +3,7 @@ export enum SocialPlatform {
   Facebook = "Facebook",
   GitHub = "GitHub",
   Instagram = "Instagram",
+  None = "",
   Reddit = "Reddit",
   TikTok = "TikTok",
   Twitch = "Twitch",

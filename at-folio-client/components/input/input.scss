@@ -8,7 +8,8 @@
   }
 
   .input-content {
-    input {
+    input,
+    select {
       backdrop-filter: blur(5px);
       background-color: rgba(white, 0.05);
       border: 1px solid rgba(white, 0.25);
@@ -18,11 +19,18 @@
       font-size: 1em;
       outline: none;
       padding: 15px;
-      width: calc(100% - 32px);
 
       &:focus {
         border-color: rgba(white, 0.75);
       }
+    }
+
+    input {
+      width: calc(100% - 32px);
+    }
+
+    select {
+      width: 100%;
     }
   }
 
@@ -47,5 +55,11 @@
     .input-error {
       color: $red;
     }
+  }
+}
+
+input {
+  &::placeholder {
+    color: rgba(white, 0.5);
   }
 }

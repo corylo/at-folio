@@ -21,7 +21,7 @@ export const useFetchLinksEffect = (
       try {
         if(appState.userStatus === UserStatus.SignedIn) {          
           if(appState.profile.username !== "") {
-            const links: ILink[] = await LinkService.getByUsername(appState.profile.username);
+            const links: ILink[] = await LinkService.getByUID(appState.profile.uid);
 
             setProfileTo({ links });
           }

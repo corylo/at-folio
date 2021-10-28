@@ -21,11 +21,7 @@ import { IProfile } from "../../../../../at-folio-models/profile";
 import { ProfileImageOption } from "../../../../../at-folio-enums/profileImageOption";
 import { RequestStatus } from "../../../../enums/requestStatus";
 
-interface InitialSetupProps {
-
-}
-
-export const InitialSetup: React.FC<InitialSetupProps> = (props: InitialSetupProps) => {
+export const InitialSetup: React.FC = () => {
   const { appState, setProfileTo } = useContext(AppContext);
 
   const [state, setState] = useState<IInitialSetupState>(defaultInitialSetupState());

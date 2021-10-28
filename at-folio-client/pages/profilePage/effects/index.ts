@@ -24,7 +24,7 @@ export const useFetchProfileEffect = (
           const profile: IProfile = await ProfileService.getByUsername(username);
 
           if(profile) {
-            profile.links = await LinkService.getByUsername(profile.username);
+            profile.links = await LinkService.getByUID(profile.uid);
 
             setStateTo({ profile, status: RequestStatus.Success });
           } else {

@@ -33,6 +33,7 @@ export const AppWrapper: React.FC = () => {
 
   const value: IAppContext = { 
     appState, 
+    profile: appState.profile,
     setAppStateTo, 
     setAppTogglesTo,
     setProfileTo
