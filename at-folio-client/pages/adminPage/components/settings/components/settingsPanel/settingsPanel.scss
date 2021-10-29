@@ -26,8 +26,7 @@
     }
 
     #settings-panel-sections {
-      backdrop-filter: blur(3px);
-      background-color: rgba(gray(30), 0.5);
+      background-color: gray(30);
       border-radius: 6px;
       display: flex; 
       flex-direction: column;
