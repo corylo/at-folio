@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
 import { AddLinkForm } from "../../../addLinkForm/addLinkForm";
-import { LinkItem } from "../../../linkItem/linkItem";
 import { SettingsPanel } from "../settingsPanel/settingsPanel"
 import { SettingsSection } from "../settingsSection/settingsSection";
+import { UpdateLinkForm } from "../../../updateLinkForm/updateLinkForm";
 
 import { AppContext } from "../../../../../../components/app/appWrapper";
 
@@ -17,7 +17,7 @@ export const LinkSettingsPanel: React.FC = () => {
   const getLinksSection = (): JSX.Element => {
     if(profile.links.length > 0) {
       const links: JSX.Element[] = profile.links.map((link: ILink) => (
-        <LinkItem key={link.id} platform={link.platform} url={link.url} />
+        <UpdateLinkForm key={link.id} link={link} />
       ));
 
       return (       

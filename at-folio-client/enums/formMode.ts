@@ -1,5 +1,6 @@
 export enum FormMode {
-  Delete = "Delete",
-  Edit = "Edit",
-  Idle = "Idle"
+  Create = "Create",
+  Delete = "Delete",  
+  Idle = "Idle",
+  Update = "Update",
 }

@@ -1,10 +1,11 @@
 import { IFormState } from "../../../../../models/formState";
+import { ILink } from "../../../../../../at-folio-models/link";
 
 import { FormError } from "../../../../../enums/formError";
 import { RequestStatus } from "../../../../../enums/requestStatus";
 import { SocialPlatform } from "../../../../../../at-folio-enums/socialPlatform";
 
-export interface IAddLinkFormState extends IFormState {
+export interface ILinkFormState extends IFormState {
   errors: {
     platform: FormError;
     url: FormError;
@@ -15,15 +16,15 @@ export interface IAddLinkFormState extends IFormState {
   };
 }
 
-export const defaultAddLinkFormState = (): IAddLinkFormState => ({
+export const defaultLinkFormState = (link?: ILink): ILinkFormState => ({
   errorMessage: "",
   errors: {
     platform: FormError.None,
     url: FormError.None
   },
   fields: {
-    platform: SocialPlatform.None,
-    url: ""
+    platform: link ? link.platform : SocialPlatform.None,
+    url: link ? link.url : ""
   },
   status: RequestStatus.Idle
 });

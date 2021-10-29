@@ -1,22 +1,21 @@
 import { FormValidator } from "../../../../../validators/formValidator";
+import { UrlValidator } from "../../../../../validators/urlValidator";
 
 import { LodashUtility } from "../../../../../utilities/lodashUtility";
-import { UrlUtility } from "../../../../../utilities/urlUtility";
 
-import { IAddLinkFormState } from "../models/addLinkFormState";
+import { ILinkFormState } from "../models/linkFormState";
 
 import { FormError } from "../../../../../enums/formError";
 import { SocialPlatform } from "../../../../../../at-folio-enums/socialPlatform";
-import { UrlValidator } from "../../../../../validators/urlValidator";
 
-interface IAddLinkFormValidator {
-  validate: (state: IAddLinkFormState) => IAddLinkFormState;
+interface ILinkFormValidator {
+  validate: (state: ILinkFormState) => ILinkFormState;
   validateUrl: (platform: SocialPlatform, url: string) => boolean;
 }
 
-export const AddLinkFormValidator: IAddLinkFormValidator = {
-  validate: (state: IAddLinkFormState): IAddLinkFormState => {
-    const copy: IAddLinkFormState = LodashUtility.clone(state);
+export const LinkFormValidator: ILinkFormValidator = {
+  validate: (state: ILinkFormState): ILinkFormState => {
+    const copy: ILinkFormState = LodashUtility.clone(state);
 
     const { errors, fields } = copy;
 
@@ -28,7 +27,7 @@ export const AddLinkFormValidator: IAddLinkFormValidator = {
 
     if(!FormValidator.isNotEmpty(fields.url)) {
       errors.url = FormError.MissingValue;
-    } else if (!AddLinkFormValidator.validateUrl(fields.platform, fields.url)) {
+    } else if (!LinkFormValidator.validateUrl(fields.platform, fields.url)) {
       errors.url = FormError.InvalidValue;
     } else {
       errors.url = FormError.None;

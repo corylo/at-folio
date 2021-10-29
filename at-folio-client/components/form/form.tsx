@@ -1,7 +1,9 @@
 import React from "react";
+import classNames from "classnames";
 
 interface FormProps {
   children: any;
+  className?: string;
   id?: string;
   title?: string;
 }
@@ -18,7 +20,7 @@ export const Form: React.FC<FormProps> = (props: FormProps) => {
   }
 
   return (
-    <div id={props.id} className="form">
+    <div id={props.id} className={classNames("form", props.className)}>
       {getHeader()}
       <div className="form-content">
         {props.children}

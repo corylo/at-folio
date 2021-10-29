@@ -1,7 +1,8 @@
 .input {
   &.error {
     .input-content {
-      input {    
+      input,   
+      select {
         border-color: $red;
       }
     }

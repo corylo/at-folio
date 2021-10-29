@@ -79,7 +79,7 @@ export const SignInForm: React.FC<SignInFormProps> = (props: SignInFormProps) =>
           </Input>
         </FormBody>
         <FormActions 
-          actions={[{ label: "Sign In", handleOnClick: signIn }]} 
+          actions={[{ label: "Sign In", id: "Sign In", handleOnClick: signIn }]} 
           status={state.status} 
         />          
         <h1 className="sign-in-label rubik-font">

@@ -1,0 +1,32 @@
+.update-link-form {
+  &:not(.update) {
+    .input {
+      .input-content {
+        .social-platform-picker {          
+          .social-platform-picker-selected-option,
+          select {
+            appearance: none;
+            background-color: transparent;
+            border: none;
+          }          
+
+          select {
+            padding: 0px;
+          }
+        }
+  
+        input {
+          background-color: transparent;
+          border: none;
+          border-radius: 0px;
+          padding: 0px;
+          width: calc(100% - 2px);
+        }
+      } 
+
+      .input-info {
+        display: none;
+      }
+    }
+  }
+}

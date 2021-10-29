@@ -87,7 +87,7 @@ export const InitialSetup: React.FC = () => {
             </Input>
           </FormBody>
           <FormActions 
-            actions={[{ label: "Save", handleOnClick: save }]} 
+            actions={[{ id: "Save", label: "Save", handleOnClick: save }]} 
             status={state.status} 
           />
         </Form>

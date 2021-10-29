@@ -84,7 +84,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
           </Input>
         </FormBody>
         <FormActions 
-          actions={[{ label: "Create Account", handleOnClick: createAccount }]} 
+          actions={[{ label: "Create Account", id: "Create Account", handleOnClick: createAccount }]} 
           status={state.status} 
         />          
         <h1 className="sign-in-label rubik-font">
