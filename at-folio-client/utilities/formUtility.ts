@@ -4,7 +4,7 @@ import { FormError } from "../enums/formError";
 
 interface IFormUtility {
   determineIfValid: (state: IFormState) => boolean;
-  getErrorMessage: (error: FormError) => string;
+  getErrorMessage: (error: FormError, errorMessage?: string) => string;
 }
 
 export const FormUtility: IFormUtility = {
@@ -16,7 +16,11 @@ export const FormUtility: IFormUtility = {
       .filter((value: FormError) => value !== FormError.None)
       .length === 0;
   },
-  getErrorMessage: (error: FormError): string => {
+  getErrorMessage: (error: FormError, errorMessage?: string): string => {
+    if(errorMessage) {
+      return errorMessage;
+    }
+
     switch(error) {
       case FormError.InvalidValue:
         return "Invalid";
@@ -26,5 +30,5 @@ export const FormUtility: IFormUtility = {
       default:
         return "";
     }
-  }
+  },
 }

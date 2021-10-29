@@ -9,6 +9,7 @@ interface InputProps {
   children: any;
   className?: string;
   error?: FormError;
+  errorMessage?: string;
   label?: string;
 }
 
@@ -26,7 +27,7 @@ export const Input: React.FC<InputProps> = (props: InputProps) => {
       const getError = (): JSX.Element => {
         if(props.error) {
           return (
-            <h1 className="input-error rubik-font">{FormUtility.getErrorMessage(props.error)}</h1>
+            <h1 className="input-error rubik-font">{FormUtility.getErrorMessage(props.error, props.errorMessage)}</h1>
           )
         }
       }

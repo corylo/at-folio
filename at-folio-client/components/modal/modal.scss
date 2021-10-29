@@ -32,6 +32,7 @@
   .modal {
     animation: fadeInDown 400ms ease-in;
     width: 500px;
+    z-index: 2;
 
     .modal-title {      
       align-items: center;
@@ -41,6 +42,15 @@
       justify-content: center;
       text-shadow: 0px 0px 1px rgba(black, 0.25);
     }
+  }
+
+  .modal-background-click-listener {
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 1;
   }
 
   .loading-spinner {

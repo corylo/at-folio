@@ -14,7 +14,8 @@ import { StatusMessage } from "../statusMessage/statusMessage";
 interface ImagePickerOptionProps {
   image: ProfileImageOption;
   selected: boolean;
-  handleOnClick: (image: ProfileImageOption) => void;
+  handleOnClick?: (image: ProfileImageOption) => void;
+  handleOnClickAsync?: (image: ProfileImageOption) => Promise<void>;
 }
 
 export const ImagePickerOption: React.FC<ImagePickerOptionProps> = (props: ImagePickerOptionProps) => {
@@ -39,14 +40,18 @@ export const ImagePickerOption: React.FC<ImagePickerOptionProps> = (props: Image
   }, [status, selected]);
 
   const handleOnClick = async (): Promise<void> => {
-    if(!props.selected && status !== RequestStatus.Loading) {
-      try {
-        setStatusTo(RequestStatus.Loading);
+    if(props.handleOnClickAsync) {
+      if(!props.selected && status !== RequestStatus.Loading) {
+        try {
+          setStatusTo(RequestStatus.Loading);
 
-        await props.handleOnClick(image);
+          await props.handleOnClickAsync(image);
 
-        setStatusTo(RequestStatus.Success);
-      } catch(err) {}
+          setStatusTo(RequestStatus.Success);
+        } catch(err) {}
+      }
+    } else if (props.handleOnClick) {
+      props.handleOnClick(image);
     }
   }
 

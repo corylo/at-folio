@@ -1,13 +1,15 @@
 import { ChosenNodeValues, Data, Edge, IdType, Node, Options } from "vis-network/standalone";
 
+import { LinkUtility } from "./linkUtility";
+import { ProfileUtility } from "./profileUtility";
+import { UrlUtility } from "./urlUtility";
+
 import { ILink } from "../../at-folio-models/link";
 import { IProfile } from "../../at-folio-models/profile";
 
 import { SocialPlatform } from "../../at-folio-enums/socialPlatform";
-import { ProfileUtility } from "./profileUtility";
 
 interface ISocialPlatformNetworkUtility {
-  getLinkByPlatform: (platform: SocialPlatform, links: ILink[]) => ILink;
   getOptions: () => Options;
   getPlatformByName: (platform: string) => SocialPlatform;
   getPlatformData: (profile: IProfile) => Data;
@@ -22,9 +24,6 @@ interface ISocialPlatformNetworkUtility {
 }
 
 export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
-  getLinkByPlatform: (platform: SocialPlatform, links: ILink[]): ILink => {
-    return links.find((link: ILink) => link.platform === platform);
-  },
   getOptions: (): Options => {
     return {
       nodes: {    
@@ -52,10 +51,14 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
   },
   getPlatformByName: (platform: string): SocialPlatform => {
     switch(platform) {
-    case SocialPlatform.Discord:
-      return SocialPlatform.Discord;
+      case SocialPlatform.Discord:
+        return SocialPlatform.Discord;
       case SocialPlatform.Facebook:
         return SocialPlatform.Facebook;
+      case SocialPlatform.GitHub:
+        return SocialPlatform.GitHub;
+      case SocialPlatform.Instagram:
+        return SocialPlatform.Instagram;
       case SocialPlatform.Reddit:
         return SocialPlatform.Reddit;
       case SocialPlatform.TikTok:
@@ -117,12 +120,15 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
         background: "white",
         border: "white"
       },
-      id: link.platform,
+      font: {
+        color: "white"
+      },
+      id: link.id,
       image: `img/icons/${link.platform.toLowerCase()}.svg`,
-      imagePadding: 20,
+      imagePadding: 20,      
       shape: "circularImage",
       size: 60,
-      title: link.platform,
+      title: UrlUtility.removeHttpProtocol(link.url),
       url: "https://google.com",
       chosen: {
         label: () => {},
@@ -162,8 +168,7 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
     const id: string | number = params.nodes[0];
     
     if(id && id !== 1) {
-      const platform: SocialPlatform = SocialPlatformNetworkUtility.getPlatformByName(id as string),
-        link: ILink = SocialPlatformNetworkUtility.getLinkByPlatform(platform, links);
+      const link: ILink = LinkUtility.getByID(id as string, links);
       
       window.open(link.url, "_blank").focus();
     }

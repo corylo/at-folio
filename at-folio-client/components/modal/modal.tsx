@@ -11,6 +11,7 @@ interface ModalProps {
   title?: string;
   toggled: boolean;
   wrapperID?: string;
+  handleOnBackgroundClick?: () => void;
 }
 
 export const Modal: React.FC<ModalProps> = (props: ModalProps) => {
@@ -21,6 +22,7 @@ export const Modal: React.FC<ModalProps> = (props: ModalProps) => {
         status={props.status}
         title={props.title}
         wrapperID={props.wrapperID}
+        handleOnBackgroundClick={props.handleOnBackgroundClick}
       >
         {props.children}
       </ModalComponent>

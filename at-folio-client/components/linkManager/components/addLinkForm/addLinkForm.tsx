@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Form } from "../../../../components/form/form";
 import { FormActions } from "../../../../components/form/formActions";
@@ -17,8 +17,10 @@ import { FormUtility } from "../../../../utilities/formUtility";
 import { defaultAddLinkFormState, IAddLinkFormState } from "./models/addLinkFormState";
 import { ILink } from "../../../../../at-folio-models/link";
 
+import { FormError } from "../../../../enums/formError";
 import { RequestStatus } from "../../../../enums/requestStatus";
 import { SocialPlatform } from "../../../../../at-folio-enums/socialPlatform";
+import { UrlUtility } from "../../../../utilities/urlUtility";
 
 export const AddLinkForm: React.FC = () => {
   const { profile, setProfileTo } = useContext(AppContext);
@@ -31,6 +33,12 @@ export const AddLinkForm: React.FC = () => {
     setState({ ...state, fields: { ...fields, [key]: value } });
   }
 
+  useEffect(() => {
+    if(fields.platform === SocialPlatform.None) {
+      setValueTo("url", "");
+    }
+  }, [fields.platform]);
+
   const add = async (): Promise<void> => {
     const updates: IAddLinkFormState = AddLinkFormValidator.validate(state);
 
@@ -40,7 +48,7 @@ export const AddLinkForm: React.FC = () => {
 
         const link: ILink = { 
           platform: fields.platform, 
-          url: fields.url,
+          url: UrlUtility.finalize(fields.url),
           id: ""
         }
 
@@ -65,6 +73,28 @@ export const AddLinkForm: React.FC = () => {
     }
   }
 
+  const getUrlField = (): JSX.Element => {
+    if(fields.platform !== SocialPlatform.None) {
+      const getUrlErrorMessage = (): string => {
+        if(errors.url === FormError.InvalidValue) {
+          return `Please enter a valid ${fields.platform} url.`;
+        }
+      }
+
+      return (        
+        <Input label="Url" error={errors.url} errorMessage={getUrlErrorMessage()}>
+          <input 
+            type="text" 
+            placeholder="Enter url" 
+            value={fields.url}
+            onChange={(e: any) => setValueTo("url", e.target.value)}
+            onKeyDown={handleOnKeyDown}
+          />
+        </Input>
+      )
+    }
+  }
+
   return (
     <Form id="add-link-form">
       <FormBody errorMessage={state.errorMessage} status={state.status}>
@@ -74,15 +104,7 @@ export const AddLinkForm: React.FC = () => {
             handleOnChange={(platform: SocialPlatform) => setValueTo("platform", platform)} 
           />
         </Input>
-        <Input label="Url" error={errors.url}>
-          <input 
-            type="text" 
-            placeholder="Enter url" 
-            value={fields.url}
-            onChange={(e: any) => setValueTo("url", e.target.value)}
-            onKeyDown={handleOnKeyDown}
-          />
-        </Input>
+        {getUrlField()}
       </FormBody>
       <FormActions 
         actions={[{ label: "Create", handleOnClick: add }]} 

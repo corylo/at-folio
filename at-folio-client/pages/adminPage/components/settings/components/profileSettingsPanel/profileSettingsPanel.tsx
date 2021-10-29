@@ -61,13 +61,13 @@ export const ProfileSettingsPanel: React.FC = () => {
       <SettingsSection label="Profile Image">
         <ImagePicker 
           selectedImage={profile.image}
-          handleOnClick={saveProfileImage} 
+          handleOnClickAsync={saveProfileImage} 
         />
       </SettingsSection>
       <SettingsSection label="Profile Background">
         <ImagePicker 
           selectedImage={profile.background}
-          handleOnClick={saveProfileBackground} 
+          handleOnClickAsync={saveProfileBackground} 
         />
       </SettingsSection>
     </SettingsPanel>

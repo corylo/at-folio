@@ -8,7 +8,8 @@ import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
 
 interface ImagePickerProps {
   selectedImage: ProfileImageOption;
-  handleOnClick: (background: ProfileImageOption) => void;
+  handleOnClick?: (background: ProfileImageOption) => void;
+  handleOnClickAsync?: (background: ProfileImageOption) => Promise<void>;
 }
 
 export const ImagePicker: React.FC<ImagePickerProps> = (props: ImagePickerProps) => {
@@ -20,6 +21,7 @@ export const ImagePicker: React.FC<ImagePickerProps> = (props: ImagePickerProps)
           image={image}
           selected={image === props.selectedImage}
           handleOnClick={props.handleOnClick}
+          handleOnClickAsync={props.handleOnClickAsync}
         />
       )
     });

@@ -44,7 +44,12 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
   }
   
   return (
-    <Modal contentID="main-menu" status={state.status} toggled={toggles.mainMenu}>
+    <Modal 
+      contentID="main-menu" 
+      status={state.status} 
+      toggled={toggles.mainMenu}
+      handleOnBackgroundClick={() => setAppTogglesTo({ mainMenu: false })}
+    >
       <Logo wrapperID="main-menu-logo" />
       <div id="main-menu-content">
         <div id="main-menu-toolbar">
