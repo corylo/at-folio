@@ -4,7 +4,7 @@ import { Form } from "../../../../components/form/form";
 import { FormActions } from "../../../../components/form/formActions";
 import { FormBody } from "../../../../components/form/formBody";
 import { Input } from "../../../../components/input/input";
-import { SocialPlatformPicker } from "../../../socialPlatformPicker/socialPlatformPicker";
+import { SocialPlatformPicker } from "../../../../components/socialPlatformPicker/socialPlatformPicker";
 
 import { AppContext } from "../../../../components/app/appWrapper";
 
@@ -13,6 +13,7 @@ import { LinkService } from "../../../../services/linkService";
 import { AddLinkFormValidator } from "./validators/addLinkFormValidator";
 
 import { FormUtility } from "../../../../utilities/formUtility";
+import { UrlUtility } from "../../../../utilities/urlUtility";
 
 import { defaultAddLinkFormState, IAddLinkFormState } from "./models/addLinkFormState";
 import { ILink } from "../../../../../at-folio-models/link";
@@ -20,7 +21,6 @@ import { ILink } from "../../../../../at-folio-models/link";
 import { FormError } from "../../../../enums/formError";
 import { RequestStatus } from "../../../../enums/requestStatus";
 import { SocialPlatform } from "../../../../../at-folio-enums/socialPlatform";
-import { UrlUtility } from "../../../../utilities/urlUtility";
 
 export const AddLinkForm: React.FC = () => {
   const { profile, setProfileTo } = useContext(AppContext);

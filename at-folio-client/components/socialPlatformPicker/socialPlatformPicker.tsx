@@ -5,6 +5,7 @@ import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetw
 import { SocialPlatform } from "../../../at-folio-enums/socialPlatform";
 
 interface SocialPlatformPickerProps {
+  disabled?: boolean;
   selectedPlatform: SocialPlatform;
   handleOnChange: (platform: SocialPlatform) => void;
 }
@@ -31,7 +32,7 @@ export const SocialPlatformPicker: React.FC<SocialPlatformPickerProps> = (props:
   return (
     <div className="social-platform-picker">
       {getSelectedOption()}
-      <select value={props.selectedPlatform} onChange={(e: any) => props.handleOnChange(e.target.value)}>
+      <select value={props.selectedPlatform} disabled={props.disabled || false} onChange={(e: any) => props.handleOnChange(e.target.value)}>
         <option value={SocialPlatform.None}>Select a platform</option>
         {getOptions()}
       </select>

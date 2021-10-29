@@ -37,10 +37,11 @@ export const ProfileSettingsPanel: React.FC = () => {
   }
 
   return (
-    <SettingsPanel icon="fa-regular fa-user" title="Profile">
+    <SettingsPanel id="profile-settings-panel" icon="fa-regular fa-user" title="Profile">
       <SettingsSection className="url-section" label="Url">
         <Input>
           <input 
+            disabled
             type="text" 
             placeholder="Enter username" 
             value={`https://atfol.io/${profile.username}`}
@@ -51,6 +52,7 @@ export const ProfileSettingsPanel: React.FC = () => {
       <SettingsSection className="username-section" label="Username">
         <Input>
           <input 
+            disabled
             type="text" 
             placeholder="Enter username" 
             value={profile.username}

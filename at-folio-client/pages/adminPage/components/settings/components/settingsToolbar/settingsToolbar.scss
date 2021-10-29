@@ -34,11 +34,19 @@
 
         i {
           font-size: 1.5em;
-          height: 50px;
-          line-height: 50px;
-          width: 50px;
+          height: 40px;
+          line-height: 40px;
+          width: 40px;
         }
       }
+    }
+  }
+}
+
+@media(max-width: 600px) {
+  #settings-toolbar-outer-wrapper {
+    #settings-toolbar-inner-wrapper {
+      width: 100%;
     }
   }
 }

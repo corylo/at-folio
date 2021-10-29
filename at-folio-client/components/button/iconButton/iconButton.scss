@@ -4,9 +4,10 @@
   border: none;
   border-radius: 4px;
   display: flex;
+  gap: 8px;
   justify-content: center;
   outline: none;
-  padding: 0px;
+  padding: 5px;
 
   &:not(:disabled):hover {
     cursor: pointer;
@@ -17,17 +18,28 @@
     backdrop-filter: blur(3px);
     background-color: rgba(white, 0.05);
 
-    i {
+    i, h1 {
       color: $themeColor;
     }
   }
 
-  i {    
+  i, h1 {
     color: white;
-    font-size: 1em;
-    height: 30px;
-    line-height: 30px;
+    height: 20px;
+    line-height: 20px;
+  }
+
+  i {    
     text-align: center;
-    width: 30px;
+    width: 20px;
+  }
+}
+
+.icon-delete-button {
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
+    i, h1 {
+      color: $red;
+    }
   }
 }

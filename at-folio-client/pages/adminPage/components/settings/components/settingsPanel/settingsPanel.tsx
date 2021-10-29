@@ -18,7 +18,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = (props: SettingsPanel
 
   return (
     <div id={props.id} className="settings-panel-wrapper">
-      <div className="settings-panel scroll-bar light">
+      <div className="settings-panel">
         <div className="settings-panel-header">
           <div className="settings-panel-title">
             <i className={props.icon} />
@@ -30,8 +30,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = (props: SettingsPanel
             handleOnClick={() => setOptionTo(SettingsPanelOption.None)} 
           />
         </div>
-        <div className="settings-panel-sections">
-          {props.children}
+        <div className="settings-panel-sections-wrapper">
+          <div className="settings-panel-sections scroll-bar light">
+            {props.children}
+          </div>
         </div>
       </div>
     </div>
