@@ -1,31 +1,44 @@
-#settings-panel-wrapper {
+.settings-panel-wrapper {
   animation: fadeInRight 400ms ease-in;
   height: calc(100vh - 20px);
   margin: 10px;  
   position: fixed;
   right: 0px;
-  top: 0px;
+  top: 140px;
   width: 500px;
   z-index: 3;
 
-  #settings-panel {  
-    height: calc(100% - 80px);
+  .settings-panel {  
+    height: calc(100% - 140px);
     overflow: auto;  
     padding-right: 10px;
-    padding-top: 80px;
 
-    #settings-panel-header {  
+    .settings-panel-header {  
       align-items: center;
       display: flex;
       justify-content: space-between;
 
-      #settings-panel-title {
-        color: white;
-        font-size: 1.5em;
+      .settings-panel-title {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        padding-left: 15px;
+
+        h1, i {
+          color: white;
+        }
+
+        h1 {
+          font-size: 1.5em;
+        }
+
+        i {
+          font-size: 1.25em;
+        }
       }
     }
 
-    #settings-panel-sections {
+    .settings-panel-sections {
       background-color: gray(30);
       border-radius: 6px;
       display: flex; 
@@ -33,39 +46,12 @@
       gap: 1em;
       margin-top: 10px;
       padding: 15px;
-
-      .settings-section {
-        &.url-section,
-        &.username-section {
-          .settings-section-content {
-            background-color: transparent;
-            backdrop-filter: none;
-            border: none;
-            padding: 0px; 
-          }
-        }
-      }
     }
   }
 }
 
-#toggle-settings-panel-button {
-  bottom: 0px;  
-  margin: 15px;
-  position: fixed;
-  right: 0px;
-  z-index: 3;
-
-  i {
-    font-size: 1.5em;
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-  }
-}
-
 @media(max-width: 600px) {
-  #settings-panel-wrapper {
+  .settings-panel-wrapper {
     animation: fadeIn 400ms ease-in;
     width: calc(100% - 20px); 
   }

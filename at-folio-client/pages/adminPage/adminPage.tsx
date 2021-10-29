@@ -4,7 +4,7 @@ import { CreatorGridBackground } from "../../components/creatorGridBackground/cr
 import { InitialSetup } from "./components/initialSetup/initialSetup";
 import { Page } from "../../components/page/page";
 import { Profile } from "../../components/profile/profile";
-import { SettingsPanel } from "./components/settings/components/settingsPanel/settingsPanel";
+import { SettingsWrapper } from "./components/settings/settingsWrapper";
 
 import { AppContext } from "../../components/app/appWrapper";
 
@@ -38,7 +38,7 @@ export const AdminPage: React.FC = () => {
       );
     } else {
       return (
-        <SettingsPanel />
+        <SettingsWrapper />
       );
     }
   }

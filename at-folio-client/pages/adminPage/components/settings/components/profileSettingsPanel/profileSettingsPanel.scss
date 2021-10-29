@@ -1,0 +1,17 @@
+#profile-settings-panel {
+  .settings-panel {  
+    .settings-panel-sections {
+      .settings-section {
+        &.url-section,
+        &.username-section {
+          .settings-section-content {
+            background-color: transparent;
+            backdrop-filter: none;
+            border: none;
+            padding: 0px; 
+          }
+        }
+      }
+    }
+  }
+}

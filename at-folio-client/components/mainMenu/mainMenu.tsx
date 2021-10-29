@@ -21,7 +21,7 @@ interface MainMenuProps {
 export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
   const { appState, setAppTogglesTo } = useContext(AppContext);
 
-  const { profile } = appState;
+  const { profile, toggles } = appState;
 
   const [state, setState] = useState<IMainMenuState>(defaultMainMenuState());
 
@@ -44,7 +44,7 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
   }
   
   return (
-    <Modal contentID="main-menu" status={state.status} toggled={appState.toggles.mainMenu}>
+    <Modal contentID="main-menu" status={state.status} toggled={toggles.mainMenu}>
       <Logo wrapperID="main-menu-logo" />
       <div id="main-menu-content">
         <div id="main-menu-toolbar">

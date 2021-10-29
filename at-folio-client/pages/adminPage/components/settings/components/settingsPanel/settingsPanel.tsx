@@ -1,103 +1,39 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
-import { ImagePicker } from "../../../../../../components/imagePicker/imagePicker";
 import { IconButton } from "../../../../../../components/button/iconButton/iconButton";
-import { Input } from "../../../../../../components/input/input";
-import { LinkManager } from "../../../../../../components/linkManager/linkManager";
-import { SettingsSection } from "../settingsSection/settingsSection";
 
-import { AppContext } from "../../../../../../components/app/appWrapper";
+import { SettingsContext } from "../../settingsWrapper";
 
-import { ProfileService } from "../../../../../../services/profileService";
+import { SettingsPanelOption } from "../../enums/settingsPanelOption";
 
-import { ProfileImageOption } from "../../../../../../../at-folio-enums/profileImageOption";
+interface SettingsPanelProps {
+  children: any;
+  icon: string;
+  id?: string;
+  title: string;
+}
 
-export const SettingsPanel: React.FC = () => {
-  const { appState, setProfileTo } = useContext(AppContext);
+export const SettingsPanel: React.FC<SettingsPanelProps> = (props: SettingsPanelProps) => {
+  const { setOptionTo } = useContext(SettingsContext);
 
-  const { profile } = appState;
-
-  const [toggled, setToggledTo] = useState<boolean>(false);
-
-  if(toggled) {
-    const saveProfileImage = async (image: ProfileImageOption): Promise<void> => {
-      try {
-        await ProfileService.update(profile.uid, { image });
-
-        setProfileTo({ ...profile, image });
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    const saveProfileBackground = async (background: ProfileImageOption): Promise<void> => {
-      try {
-        await ProfileService.update(profile.uid, { background });
-
-        setProfileTo({ ...profile, background });
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    return (
-      <div id="settings-panel-wrapper">
-        <div id="settings-panel" className="scroll-bar light">
-          <div id="settings-panel-header">
-            <h1 id="settings-panel-title" className="rubik-font">My Profile</h1>          
-            <IconButton 
-              className="close-button"
-              icon="fa-regular fa-xmark" 
-              handleOnClick={() => setToggledTo(false)} 
-            />
+  return (
+    <div id={props.id} className="settings-panel-wrapper">
+      <div className="settings-panel scroll-bar light">
+        <div className="settings-panel-header">
+          <div className="settings-panel-title">
+            <i className={props.icon} />
+            <h1 className="rubik-font">{props.title}</h1>          
           </div>
-          <div id="settings-panel-sections">
-            <SettingsSection className="url-section" label="Url">
-              <Input>
-                <input 
-                  type="text" 
-                  placeholder="Enter username" 
-                  value={`https://atfol.io/${profile.username}`}
-                  onChange={() => {}}
-                />
-              </Input>          
-            </SettingsSection>
-            <SettingsSection className="username-section" label="Username">
-              <Input>
-                <input 
-                  type="text" 
-                  placeholder="Enter username" 
-                  value={profile.username}
-                  onChange={() => {}}
-                />
-              </Input>          
-            </SettingsSection>
-            <SettingsSection label="Profile Image">
-              <ImagePicker 
-                selectedImage={profile.image}
-                handleOnClick={saveProfileImage} 
-              />
-            </SettingsSection>
-            <SettingsSection label="Profile Background">
-              <ImagePicker 
-                selectedImage={profile.background}
-                handleOnClick={saveProfileBackground} 
-              />
-            </SettingsSection>
-            <SettingsSection className="links-section" label="Links">
-              <LinkManager links={profile.links} />
-            </SettingsSection>
-          </div>
+          <IconButton 
+            className="close-button"
+            icon="fa-regular fa-xmark" 
+            handleOnClick={() => setOptionTo(SettingsPanelOption.None)} 
+          />
+        </div>
+        <div className="settings-panel-sections">
+          {props.children}
         </div>
       </div>
-    );
-  }
-
-  return (     
-    <IconButton 
-      id="toggle-settings-panel-button"
-      icon="fa-regular fa-gear" 
-      handleOnClick={() => setToggledTo(true)} 
-    />
-  )
+    </div>
+  );
 }
