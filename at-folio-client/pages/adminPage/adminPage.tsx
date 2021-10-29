@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import { CreatorGridBackground } from "../../components/creatorGridBackground/creatorGridBackground";
-import { InitialSetup } from "./components/initialSetup/initialSetup";
+import { InitialProfileSetup } from "./components/initialProfileSetup/initialProfileSetup";
 import { Page } from "../../components/page/page";
 import { Profile } from "../../components/profile/profile";
 import { SettingsWrapper } from "./components/settings/settingsWrapper";
@@ -33,7 +33,7 @@ export const AdminPage: React.FC = () => {
       return (
         <React.Fragment>
           <CreatorGridBackground />
-          <InitialSetup />
+          <InitialProfileSetup />
         </React.Fragment>
       );
     } else {

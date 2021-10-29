@@ -21,7 +21,7 @@ import { IProfile } from "../../../../../at-folio-models/profile";
 import { ProfileImageOption } from "../../../../../at-folio-enums/profileImageOption";
 import { RequestStatus } from "../../../../enums/requestStatus";
 
-export const InitialSetup: React.FC = () => {
+export const InitialProfileSetup: React.FC = () => {
   const { appState, setProfileTo } = useContext(AppContext);
 
   const [state, setState] = useState<IInitialSetupState>(defaultInitialSetupState());
@@ -61,9 +61,9 @@ export const InitialSetup: React.FC = () => {
   }
 
   return (
-    <Modal contentID="initial-setup" wrapperID="initial-setup-wrapper" title="Profile Setup" toggled>      
-      <div id="initial-setup-content">
-        <Form id="sign-in-form">
+    <Modal contentID="initial-profile-setup" wrapperID="initial-profile-setup-wrapper" title="Profile Setup" toggled>      
+      <div id="initial-profile-setup-content">
+        <Form id="initial-profile-setup-form">
           <FormBody errorMessage={state.errorMessage} status={state.status}>
             <Input label="Username" error={errors.username}>
               <input 

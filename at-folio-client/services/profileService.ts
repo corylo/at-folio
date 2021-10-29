@@ -1,8 +1,9 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where, DocumentReference, DocumentSnapshot, Query, QuerySnapshot } from "@firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, updateDoc, where, writeBatch, DocumentReference, DocumentSnapshot, Query, QuerySnapshot, WriteBatch } from "@firebase/firestore";
 
 import { db } from "../firebase";
 
 import { IProfile, IProfileUpdate, profileConverter } from "../../at-folio-models/profile";
+import { IUsername, usernameConverter } from "../../at-folio-models/username";
 
 interface IProfileService {
   create: (profile: IProfile) => Promise<void>;
@@ -13,10 +14,19 @@ interface IProfileService {
 
 export const ProfileService: IProfileService = {
   create: async (profile: IProfile): Promise<void> => {
-    const ref: DocumentReference<IProfile> = doc(db, "profiles", profile.uid)
+    const batch: WriteBatch = writeBatch(db);
+
+    const profileRef: DocumentReference<IProfile> = doc(db, "profiles", profile.uid)
       .withConverter<IProfile>(profileConverter);
 
-    await setDoc(ref, profile);
+    batch.set(profileRef, profile);
+
+    const usernameRef: DocumentReference<IUsername> = doc(db, "usernames", profile.username)
+      .withConverter(usernameConverter);
+
+    batch.set(usernameRef, { id: "", uid: profile.uid });
+
+    await batch.commit();
   },
   getByUID: async (uid: string): Promise<IProfile> => {
     const ref: DocumentReference<IProfile> = doc(db, "profiles", uid)
