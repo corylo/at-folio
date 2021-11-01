@@ -18,7 +18,7 @@ interface IDefaultPhotoService {
 export const DefaultPhotoService: IDefaultPhotoService = {
   updateAll: async (context: EventContext): Promise<void> => {
     try {
-      const backgrounds: IUnsplashPhoto[] = await UnsplashService.getRandom(12);
+      const backgrounds: IUnsplashPhoto[] = await UnsplashService.getRandom(24);
 
       await DefaultPhotoService.updateByType(DefaultPhotoType.Background, backgrounds);
     } catch (err) {
@@ -26,7 +26,7 @@ export const DefaultPhotoService: IDefaultPhotoService = {
     }
     
     try {      
-      const displays: IUnsplashPhoto[] = await UnsplashService.getRandom(12);
+      const displays: IUnsplashPhoto[] = await UnsplashService.getRandom(24);
 
       await DefaultPhotoService.updateByType(DefaultPhotoType.Display, displays);
     } catch (err) {
@@ -34,7 +34,7 @@ export const DefaultPhotoService: IDefaultPhotoService = {
     }
     
     try {      
-      const profiles: IUnsplashPhoto[] = await UnsplashService.getRandom(12);
+      const profiles: IUnsplashPhoto[] = await UnsplashService.getRandom(24);
 
       await DefaultPhotoService.updateByType(DefaultPhotoType.Profile, profiles);
     } catch (err) {

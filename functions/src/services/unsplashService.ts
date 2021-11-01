@@ -14,7 +14,12 @@ export const UnsplashService: IUnsplashService = {
       count: count || 4, 
       contentFilter: "high",
       orientation: "landscape",
-      topicIds: ["nature"]
+      collectionIds: [
+        "327760", // Nature
+        "q5tDUKB0fxk", // Space
+        "4285541", // Abstract
+        "461370" // City
+      ]
     });
 
     return UnsplashUtility.mapPhotos(res.response);
