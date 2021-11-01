@@ -42,7 +42,7 @@ export const SocialPlatformNetwork: React.FC<SocialPlatformNetworkProps> = (prop
         window.removeEventListener("resize", handleOnResize);
       }
     }
-  }, [profile.image, profile.links]);
+  }, [profile.photo, profile.links]);
 
   return(
     <div id={props.id} className="social-platform-network" />

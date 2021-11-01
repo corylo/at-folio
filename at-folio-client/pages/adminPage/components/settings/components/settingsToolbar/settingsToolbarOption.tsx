@@ -10,12 +10,13 @@ import { SettingsPanelOption } from "../../enums/settingsPanelOption";
 interface SettingsToolbarOptionProps {
   icon: string;
   option: SettingsPanelOption;
+  suboptions?: SettingsPanelOption[];
 }
 
 export const SettingsToolbarOption: React.FC<SettingsToolbarOptionProps> = (props: SettingsToolbarOptionProps) => {  
   const { option, setOptionTo } = useContext(SettingsContext);
 
-  const selected: boolean = props.option === option;
+  const selected: boolean = props.option === option || (props.suboptions && props.suboptions.includes(option));
 
   const handleOnClick = (): void => {    
     setOptionTo(selected ? SettingsPanelOption.None : props.option);

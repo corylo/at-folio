@@ -21,19 +21,7 @@ export const InitialSetupValidator: IInitialSetupValidator = {
     } else {
       errors.username = FormError.None;
     }
-
-    if(!FormValidator.isNotEmpty(fields.image)) {
-      errors.image = FormError.MissingValue;
-    } else {
-      errors.image = FormError.None;
-    }
-
-    if(!FormValidator.isNotEmpty(fields.background)) {
-      errors.background = FormError.MissingValue;
-    } else {
-      errors.background = FormError.None;
-    }
-
+    
     return copy;
   }
 }

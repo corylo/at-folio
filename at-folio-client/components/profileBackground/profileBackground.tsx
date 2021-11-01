@@ -1,13 +1,13 @@
 import React from "react";
 
-import { LoadableImage } from "../loadableImage/loadableImage";
+import { IUnsplashPhotoReference } from "../../../at-folio-models/unsplashPhotoReference";
 
 interface ProfileBackgroundProps {
-  image: string;
+  photo: IUnsplashPhotoReference;
 }
 
-export const ProfileBackground: React.FC<ProfileBackgroundProps> = (props: ProfileBackgroundProps) => {
+export const ProfileBackground: React.FC<ProfileBackgroundProps> = (props: ProfileBackgroundProps) => {  
   return (
-    <LoadableImage className="profile-background" source={props.image} />
+    <div className="profile-background" style={{ backgroundImage: `url(${props.photo.urls.regular})` }} />
   );
 }

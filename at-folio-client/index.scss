@@ -9,7 +9,6 @@
 @import "./components/commandLine/commandLine.scss";
 @import "./components/creatorGridBackground/creatorGridBackground.scss";
 @import "./components/form/form.scss";
-@import "./components/imagePicker/imagePicker.scss";
 @import "./components/input/input.scss";
 @import "./components/loadableImage/loadableImage.scss";
 @import "./components/loading/loading.scss";
@@ -18,9 +17,10 @@
 @import "./components/modal/modal.scss";
 @import "./components/navbar/navbar.scss";
 @import "./components/page/page.scss";
+@import "./components/photoPickerToggle/photoPickerToggle.scss";
 @import "./components/profileBackground/profileBackground.scss";
-@import "./components/profileImage/profileImage.scss";
 @import "./components/profileHeader/profileHeader.scss";
+@import "./components/profilePhoto/profilePhoto.scss";
 @import "./components/profileUsername/profileUsername.scss";
 @import "./components/signInForm/signInForm.scss";
 @import "./components/signUpForm/signUpForm.scss";
@@ -28,6 +28,7 @@
 @import "./components/socialPlatformPicker/socialPlatformPicker.scss";
 @import "./components/statusMessage/statusMessage.scss";
 @import "./components/svgBackground/svgBackground.scss";
+@import "./components/unsplashPhotoPicker/unsplashPhotoPicker.scss";
 
 html,
 body {

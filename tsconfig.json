@@ -6,5 +6,5 @@
     "noImplicitAny": true,
     "target": "es6"
   },
-  "include": ["at-folio-client", "at-folio-models", "at-folio-enums"]
+  "include": ["at-folio-client", "at-folio-models", "at-folio-enums", "at-folio-utilities"]
 }

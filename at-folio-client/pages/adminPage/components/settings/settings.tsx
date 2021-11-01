@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 
-import { LinkSettingsPanel } from "./components/linkSettingsPanel/linkSettingsPanel";
-import { ProfileSettingsPanel } from "./components/profileSettingsPanel/profileSettingsPanel";
+import { BackgroundPanel } from "./components/backgroundPanel/backgroundPanel";
+import { LinkPanel } from "./components/linkPanel/linkPanel";
+import { PhotoPanel } from "./components/photoPanel/photoPanel";
+import { ProfilePanel } from "./components/profilePanel/profilePanel";
 import { SettingsToolbar } from "./components/settingsToolbar/settingsToolbar";
 
 import { SettingsContext } from "./settingsWrapper";
@@ -12,14 +14,17 @@ export const Settings: React.FC = () => {
   const { option } = useContext(SettingsContext);
 
   const getSettingsPanel = (): JSX.Element => {
-    if(option === SettingsPanelOption.Profile) {
-      return (
-        <ProfileSettingsPanel />
-      )
-    } else if (option === SettingsPanelOption.Links) {
-      return (
-        <LinkSettingsPanel />
-      )
+    switch(option) {
+      case SettingsPanelOption.Profile:
+        return <ProfilePanel />;
+      case SettingsPanelOption.Photo:
+        return <PhotoPanel />;
+      case SettingsPanelOption.Background:
+        return <BackgroundPanel />;
+      case SettingsPanelOption.Links:
+        return <LinkPanel />;
+      default:
+        return null;
     }
   }
 

@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { LoadableImage } from "../loadableImage/loadableImage";
+import { DefaultPhotoService } from "../../services/defaultPhotoService";
 
 import { CreatorGridBackgroundUtility } from "./utilities/creatorGridBackgroundUtility";
-import { ProfileUtility } from "../../utilities/profileUtility";
 import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
 
 import { defaultCreatorGridBackgroundState, ICreatorGridBackgroundState } from "./models/creatorGridBackgroundState";
 import { IPosition } from "../../models/position";
+import { IUnsplashPhoto } from "../../../at-folio-models/unsplashPhoto";
 
-import { ImageSize } from "../../enums/imageSize";
-import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
+import { DefaultPhotoType } from "../../../at-folio-enums/defaultPhotoType";
 import { SocialPlatform } from "../../../at-folio-enums/socialPlatform";
+
+import { RequestStatus } from "../../enums/requestStatus";
 
 export const CreatorGridBackground: React.FC = () => {
   const ref: React.MutableRefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
@@ -31,8 +32,22 @@ export const CreatorGridBackground: React.FC = () => {
     setState({ ...state, position });
   }
 
+  useEffect(() => {
+    const fetch = async (): Promise<void> => {
+      try {
+        const photos: IUnsplashPhoto[] = await DefaultPhotoService.getByType(DefaultPhotoType.Background);
+
+        setState({ ...state, photos, status: RequestStatus.Success });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetch();
+  }, []);
+
   useEffect(() => {    
-    if(ref.current) {
+    if(ref.current && state.status === RequestStatus.Success) {
       const { clientHeight: height, clientWidth: width } = ref.current;
 
       setRandomPosition(height, width);
@@ -57,21 +72,23 @@ export const CreatorGridBackground: React.FC = () => {
         clearInterval(interval);
       }
     }
-  }, [state.interval, state.window]);
+  }, [state.status, state.interval, state.window]);
 
   useEffect(() => {
-    setIntervalTo(1000);
+    if(state.status === RequestStatus.Success) {
+      setIntervalTo(1000);
 
-    const timeout: NodeJS.Timeout = setTimeout(() => setIntervalTo(5000), 1000);
+      const timeout: NodeJS.Timeout = setTimeout(() => setIntervalTo(5000), 1000);
 
-    return () => {
-      clearTimeout(timeout);
+      return () => {
+        clearTimeout(timeout);
+      }
     }
-  }, [state.window]);
+  }, [state.status, state.window]);
 
   const getTiles = (): JSX.Element[] => {
     const platforms: SocialPlatform[] = SocialPlatformNetworkUtility.getPlatforms(),
-      backgrounds: ProfileImageOption[] = ProfileUtility.getGridImages();
+      backgrounds: IUnsplashPhoto[] = state.photos.slice(0, 9);
 
     let tiles: JSX.Element[] = [];
 
@@ -85,10 +102,9 @@ export const CreatorGridBackground: React.FC = () => {
 
       tiles.push(
         <div key={`background-${i}`} className="creator-tile background" style={styles}>
-          <LoadableImage 
+          <div 
             className="creator-tile-image" 
-            size={ImageSize.Small}
-            source={ProfileUtility.getImageUrl(backgrounds[i])} 
+            style={{ backgroundImage: `url(${backgrounds[i].urls.regular})` }}
           />
         </div>
       );
@@ -108,11 +124,15 @@ export const CreatorGridBackground: React.FC = () => {
 
   const styles: React.CSSProperties = CreatorGridBackgroundUtility.getGridStyles(state);
 
-  return (
-    <div className="creator-grid-background">
-      <div ref={ref} className="creator-grid-tiles" style={styles}>
-        {getTiles()}
+  if(state.status === RequestStatus.Success) {
+    return (
+      <div className="creator-grid-background">
+        <div ref={ref} className="creator-grid-tiles" style={styles}>
+          {getTiles()}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 }

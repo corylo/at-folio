@@ -12,6 +12,7 @@ export const SettingsToolbar: React.FC = () => {
           <SettingsToolbarOption
             icon="fa-regular fa-user"
             option={SettingsPanelOption.Profile}
+            suboptions={[SettingsPanelOption.Photo, SettingsPanelOption.Background]}
           />
           <SettingsToolbarOption
             icon="fa-regular fa-link"

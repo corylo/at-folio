@@ -5,6 +5,8 @@ import { db } from "../firebase";
 import { IProfile, IProfileUpdate, profileConverter } from "../../at-folio-models/profile";
 import { IUsername, usernameConverter } from "../../at-folio-models/username";
 
+import { FirestoreCollectionID } from "../../at-folio-enums/firestoreCollectionID";
+
 interface IProfileService {
   create: (profile: IProfile) => Promise<void>;
   getByUID: (uid: string) => Promise<IProfile>;
@@ -16,12 +18,12 @@ export const ProfileService: IProfileService = {
   create: async (profile: IProfile): Promise<void> => {
     const batch: WriteBatch = writeBatch(db);
 
-    const profileRef: DocumentReference<IProfile> = doc(db, "profiles", profile.uid)
+    const profileRef: DocumentReference<IProfile> = doc(db, FirestoreCollectionID.Profiles, profile.uid)
       .withConverter<IProfile>(profileConverter);
 
     batch.set(profileRef, profile);
 
-    const usernameRef: DocumentReference<IUsername> = doc(db, "usernames", profile.username)
+    const usernameRef: DocumentReference<IUsername> = doc(db, FirestoreCollectionID.Usernames, profile.username)
       .withConverter(usernameConverter);
 
     batch.set(usernameRef, { id: "", uid: profile.uid });
@@ -41,7 +43,7 @@ export const ProfileService: IProfileService = {
     return null;
   },
   getByUsername: async (username: string): Promise<IProfile> => {
-    const q: Query<IProfile> = query(collection(db, "profiles"), where("username", "==", username))
+    const q: Query<IProfile> = query(collection(db, FirestoreCollectionID.Profiles), where("username", "==", username))
       .withConverter<IProfile>(profileConverter);
 
     const snap: QuerySnapshot<IProfile> = await getDocs(q);
@@ -53,7 +55,7 @@ export const ProfileService: IProfileService = {
     return null;
   },
   update: async (uid: string, update: IProfileUpdate): Promise<void> => {
-    const ref: DocumentReference<IProfile> = doc(db, "profiles", uid)
+    const ref: DocumentReference<IProfile> = doc(db, FirestoreCollectionID.Profiles, uid)
       .withConverter<IProfile>(profileConverter);
 
     await updateDoc(ref, update);

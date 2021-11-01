@@ -54,7 +54,7 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
       <div id="main-menu-content">
         <div id="main-menu-toolbar">
           <ProfileHeader 
-            image={profile.image}
+            photo={profile.photo}
             username={profile.username}
             wrapperID="main-menu-header" 
           />

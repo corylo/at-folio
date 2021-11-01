@@ -3,7 +3,6 @@ import React, { useContext, useState } from "react";
 import { Form } from "../../../../components/form/form";
 import { FormActions } from "../../../../components/form/formActions";
 import { FormBody } from "../../../../components/form/formBody";
-import { ImagePicker } from "../../../../components/imagePicker/imagePicker";
 import { Input } from "../../../../components/input/input";
 import { Modal } from "../../../../components/modal/modal";
 
@@ -17,8 +16,8 @@ import { FormUtility } from "../../../../utilities/formUtility";
 
 import { defaultInitialSetupState, IInitialSetupState } from "./models/initialSetupState";
 import { IProfile } from "../../../../../at-folio-models/profile";
+import { defaultUnsplashPhotoReference } from "../../../../../at-folio-models/unsplashPhotoReference";
 
-import { ProfileImageOption } from "../../../../../at-folio-enums/profileImageOption";
 import { RequestStatus } from "../../../../enums/requestStatus";
 
 export const InitialProfileSetup: React.FC = () => {
@@ -40,9 +39,9 @@ export const InitialProfileSetup: React.FC = () => {
         setState({ ...updates, status: RequestStatus.Loading });
 
         const profile: IProfile = {
-          background: fields.background,
-          image: fields.image,
+          background: defaultUnsplashPhotoReference(),          
           links: [],
+          photo: defaultUnsplashPhotoReference(),
           uid: appState.user.uid,
           username: fields.username
         }
@@ -60,6 +59,12 @@ export const InitialProfileSetup: React.FC = () => {
     }
   }
 
+  const handleOnKeyDown = (e: any): void => {
+    if(e.key === "Enter") {
+      save();
+    }
+  }
+
   return (
     <Modal contentID="initial-profile-setup" wrapperID="initial-profile-setup-wrapper" title="Profile Setup" toggled>      
       <div id="initial-profile-setup-content">
@@ -71,18 +76,7 @@ export const InitialProfileSetup: React.FC = () => {
                 placeholder="Enter username" 
                 value={fields.username}
                 onChange={(e: any) => setValueTo("username", e.target.value)}
-              />
-            </Input>
-            <Input label="Select A Profile Image" error={errors.image}>
-              <ImagePicker 
-                selectedImage={fields.image}
-                handleOnClick={(image: ProfileImageOption) => setValueTo("image", image)} 
-              />
-            </Input>
-            <Input label="Select A Background" error={errors.background}>
-              <ImagePicker 
-                selectedImage={fields.background}
-                handleOnClick={(background: ProfileImageOption) => setValueTo("background", background)} 
+                onKeyDown={handleOnKeyDown}
               />
             </Input>
           </FormBody>

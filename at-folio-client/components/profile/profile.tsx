@@ -4,11 +4,7 @@ import { ProfileBackground } from "../profileBackground/profileBackground";
 import { ProfileUsername } from "../profileUsername/profileUsername";
 import { SocialPlatformNetwork } from "../socialPlatformNetwork/socialPlatformNetwork";
 
-import { ProfileUtility } from "../../utilities/profileUtility";
-
 import { IProfile } from "../../../at-folio-models/profile";
-
-import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
 
 interface ProfileProps {
   profile: IProfile;
@@ -29,7 +25,7 @@ export const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   }
 
   const getNetwork = (): JSX.Element => {
-    if(profile.image !== "") {
+    if(profile.photo.id !== "") {
       return (
         <SocialPlatformNetwork 
           id="social-platform-network"
@@ -40,9 +36,9 @@ export const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   }
 
   const getBackground = (): JSX.Element => {
-    if(profile.background !== ProfileImageOption.None) {
+    if(profile.background.id !== "") {
       return (                
-        <ProfileBackground image={ProfileUtility.getImageUrl(profile.background)} />        
+        <ProfileBackground photo={profile.background} />        
       )
     }
   }

@@ -1,7 +1,6 @@
 import { ChosenNodeValues, Data, Edge, IdType, Node, Options } from "vis-network/standalone";
 
 import { LinkUtility } from "./linkUtility";
-import { ProfileUtility } from "./profileUtility";
 import { UrlUtility } from "./urlUtility";
 
 import { ILink } from "../../at-folio-models/link";
@@ -74,9 +73,9 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
     }
   },
   getPlatformData: (profile: IProfile): Data => {
-    const { image, links } = profile;
+    const { photo, links } = profile;
 
-    const profileNode: Node = SocialPlatformNetworkUtility.getProfileNode(ProfileUtility.getImageUrl(image));
+    const profileNode: Node = SocialPlatformNetworkUtility.getProfileNode(photo.urls.regular);
 
     const nodes: Node[] = SocialPlatformNetworkUtility.getPlatformNodes(links),
       edges: Edge[] = SocialPlatformNetworkUtility.getPlatformEdges(nodes);

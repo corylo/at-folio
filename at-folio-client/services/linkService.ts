@@ -4,6 +4,8 @@ import { db } from "../firebase";
 
 import { ILink, linkConverter } from "../../at-folio-models/link";
 
+import { FirestoreCollectionID } from "../../at-folio-enums/firestoreCollectionID";
+
 interface ILinkService {
   create: (uid: string, link: ILink) => Promise<string>;
   delete: (uid: string, linkID: string) => Promise<void>;
@@ -13,7 +15,7 @@ interface ILinkService {
 
 export const LinkService: ILinkService = {
   create: async (uid: string, link: ILink): Promise<string> => {    
-    const ref: CollectionReference<ILink> = collection(db, "profiles", uid, "links")
+    const ref: CollectionReference<ILink> = collection(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links)
       .withConverter<ILink>(linkConverter);
 
     const doc: DocumentReference<ILink> = await addDoc(ref, link);
@@ -21,12 +23,12 @@ export const LinkService: ILinkService = {
     return doc.id;
   },
   delete: async (uid: string, linkID: string): Promise<void> => {
-    const ref: DocumentReference = doc(db, "profiles", uid, "links", linkID);
+    const ref: DocumentReference = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links, linkID);
 
     await deleteDoc(ref);
   },
   getByUID: async (uid: string): Promise<ILink[]> => {
-    const query: Query<ILink> = collection(db, "profiles", uid, "links")
+    const query: Query<ILink> = collection(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links)
       .withConverter<ILink>(linkConverter);
 
     const snap: QuerySnapshot<ILink> = await getDocs(query);
@@ -34,7 +36,7 @@ export const LinkService: ILinkService = {
     return snap.docs.map((doc: QueryDocumentSnapshot<ILink>) => doc.data());
   },
   update: async (uid: string, link: ILink): Promise<void> => {
-    const ref: DocumentReference<ILink> = doc(db, "profiles", uid, "links", link.id)
+    const ref: DocumentReference<ILink> = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links, link.id)
       .withConverter<ILink>(linkConverter);
 
     await updateDoc(ref, link);

@@ -1,15 +1,13 @@
 import React from "react";
 
-import { ProfileImage } from "../profileImage/profileImage";
+import { ProfilePhoto } from "../profilePhoto/profilePhoto";
 import { ProfileUsername } from "../profileUsername/profileUsername";
 import { WrappableComponent } from "../wrappableComponent/wrappableComponent";
 
-import { ProfileUtility } from "../../utilities/profileUtility";
-
-import { ProfileImageOption } from "../../../at-folio-enums/profileImageOption";
+import { IUnsplashPhotoReference } from "../../../at-folio-models/unsplashPhotoReference";
 
 interface ProfileHeaderProps {
-  image: ProfileImageOption;
+  photo: IUnsplashPhotoReference;
   username: string;  
   wrapperID?: string;
 }
@@ -26,7 +24,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = (props: ProfileHeader
   return (
     <WrappableComponent wrapperID={props.wrapperID}>
       <div className="profile-header">
-        <ProfileImage image={ProfileUtility.getImageUrl(props.image)} />
+        <ProfilePhoto photo={props.photo} />
         {getUsername()}
       </div>
     </WrappableComponent>

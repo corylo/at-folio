@@ -1,0 +1,41 @@
+.unsplash-photo-picker {
+  min-height: 100px;
+  position: relative;
+  
+  .unsplash-photo-picker-options {
+    animation: fadeIn 400ms ease-in;
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));  
+    
+    .unsplash-photo-picker-option {
+      background-color: transparent;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+      padding: 0px;
+      position: relative;
+
+      &:hover,
+      &:focus,
+      &.selected {
+        .unsplash-photo {
+          transform: scale(1.1);
+        }
+      }
+
+      &.selected {
+        border-color: white;
+      }
+
+      .unsplash-photo {
+        background-position: center;
+        background-size: cover;
+        height: 100px;
+        transition: transform 0.25s;
+      }
+    }  
+  }
+}

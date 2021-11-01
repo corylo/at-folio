@@ -1,29 +1,28 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot } from "@firebase/firestore";
 
 import { ILink } from "./link";
-
-import { ProfileImageOption } from "../at-folio-enums/profileImageOption";
+import { defaultUnsplashPhotoReference, IUnsplashPhotoReference } from "./unsplashPhotoReference";
 
 export interface IProfile {
-  background: ProfileImageOption;
+  background: IUnsplashPhotoReference;
   links: ILink[];
-  image: ProfileImageOption;
+  photo: IUnsplashPhotoReference;
   uid: string;
   username: string;
 }
 
 export interface IProfileUpdate {
-  background?: ProfileImageOption;
+  background?: IUnsplashPhotoReference;
   links?: ILink[];
-  image?: ProfileImageOption;
+  photo?: IUnsplashPhotoReference;
   uid?: string;
   username?: string;
 }
 
 export const defaultProfile = (): IProfile => ({
-  background: ProfileImageOption.None,
+  background: defaultUnsplashPhotoReference(),
   links: [],
-  image: ProfileImageOption.None,
+  photo: defaultUnsplashPhotoReference(),
   uid: "",
   username: ""
 });
@@ -32,7 +31,7 @@ export const profileConverter: FirestoreDataConverter<IProfile> = {
   toFirestore(profile: IProfile): DocumentData {
     return {
       background: profile.background,
-      image: profile.image,
+      photo: profile.photo,
       username: profile.username
     }
   },
@@ -42,7 +41,7 @@ export const profileConverter: FirestoreDataConverter<IProfile> = {
     return {
       background: data.background,
       links: [],
-      image: data.image,
+      photo: data.photo,
       uid: snapshot.id,
       username: data.username
     }
