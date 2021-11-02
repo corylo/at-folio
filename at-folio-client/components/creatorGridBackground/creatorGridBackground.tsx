@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { DefaultPhotoService } from "../../services/defaultPhotoService";
 
 import { CreatorGridBackgroundUtility } from "./utilities/creatorGridBackgroundUtility";
-import { NumberUtility } from "../../utilities/numberUtility";
 import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
 
 import { defaultCreatorGridBackgroundState, ICreatorGridBackgroundState } from "./models/creatorGridBackgroundState";

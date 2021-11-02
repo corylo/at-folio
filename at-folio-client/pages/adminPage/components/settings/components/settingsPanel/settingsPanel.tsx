@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import classNames from "classnames";
 
 import { IconButton } from "../../../../../../components/button/iconButton/iconButton";
 import { SettingsSection } from "../settingsSection/settingsSection";
@@ -34,7 +35,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = (props: SettingsPanel
 
   return (
     <div id={props.id} className="settings-panel-wrapper">
-      <div className="settings-panel">
+      <div className={classNames("settings-panel", { backable: props.handleOnBack })}>
         <div className="settings-panel-header">
           <div className="settings-panel-title">
             <i className={props.icon} />
@@ -47,8 +48,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = (props: SettingsPanel
           />
         </div>
         <div className="settings-panel-sections-wrapper">
+          {getBackButton()}
           <div className="settings-panel-sections scroll-bar light">
-            {getBackButton()}
             {props.children}
           </div>
         </div>

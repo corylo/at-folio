@@ -44,7 +44,7 @@ export const BackgroundPanel: React.FC = () => {
     >
       <SettingsSection>
         <UnsplashPhotoPicker 
-          defaultType={DefaultPhotoType.Background}
+          type={DefaultPhotoType.Background}
           selectedPhotoID={profile.background.id} 
           handleOnClick={saveProfileBackground} 
         />

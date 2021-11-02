@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
-import { StatusMessage } from "../statusMessage/statusMessage";
+import { LoadingIcon } from "../../../loading/loadingIcon";
+import { StatusMessage } from "../../../statusMessage/statusMessage";
 
-import { IUnsplashPhoto } from "../../../at-folio-models/unsplashPhoto";
+import { IUnsplashPhoto } from "../../../../../at-folio-models/unsplashPhoto";
 
-import { RequestStatus } from "../../enums/requestStatus";
-import { LoadingIcon } from "../loading/loadingIcon";
+import { RequestStatus } from "../../../../enums/requestStatus";
 
 interface UnsplashPhotoPickerOptionProps {  
   photo: IUnsplashPhoto;

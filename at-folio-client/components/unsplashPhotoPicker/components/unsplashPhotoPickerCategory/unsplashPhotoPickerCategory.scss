@@ -1,0 +1,20 @@
+.unsplash-photo-picker-category-button {
+  background-color: rgba(white, 0.05);
+  border: 1px solid rgba(white, 0.25);
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  outline: none;
+  padding: 10px 15px;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(white, 0.1);
+    border-color: rgba(white, 0.4);
+  }
+
+  &.selected {
+    border-color: $themeColor;
+    color: $themeColor;
+  }
+}

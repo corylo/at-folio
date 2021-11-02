@@ -44,7 +44,7 @@ export const PhotoPanel: React.FC = () => {
     >
       <SettingsSection>
         <UnsplashPhotoPicker 
-          defaultType={DefaultPhotoType.Profile}
+          type={DefaultPhotoType.Profile}
           selectedPhotoID={profile.photo.id} 
           handleOnClick={saveProfileImage} 
         />
