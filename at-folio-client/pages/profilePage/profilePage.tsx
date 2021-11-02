@@ -10,7 +10,7 @@ import { defaultProfilePageState, IProfilePageState } from "./models/profilePage
 export const ProfilePage: React.FC = () => {
   const [state, setStateTo] = useState<IProfilePageState>(defaultProfilePageState());
 
-  useFetchProfileEffect(state, setStateTo);
+  useFetchProfileEffect(setStateTo);
 
   return (
     <Page id="profile-page" status={state.status}>

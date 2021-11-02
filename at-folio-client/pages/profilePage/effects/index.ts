@@ -10,7 +10,6 @@ import { defaultProfilePageState, IProfilePageState } from "../models/profilePag
 import { RequestStatus } from "../../../enums/requestStatus";
 
 export const useFetchProfileEffect = (
-  state: IProfilePageState, 
   setStateTo: (state: IProfilePageState) => void
 ): void => {
   const match: any = useRouteMatch();
@@ -39,5 +38,5 @@ export const useFetchProfileEffect = (
     }
 
     fetch();
-  }, [match.params]);
+  }, [match.params.username]);
 }

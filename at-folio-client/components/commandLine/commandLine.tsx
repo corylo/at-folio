@@ -104,7 +104,7 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
             autoComplete="off"
             id="command-line-input"
             className="rubik-font"
-            placeholder="Search usernames"
+            placeholder="Search"
             type="text"        
             value={state.query}
             onFocus={() => setFocusedTo(true)}
