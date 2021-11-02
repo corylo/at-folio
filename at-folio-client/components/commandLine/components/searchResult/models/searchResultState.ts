@@ -3,11 +3,13 @@ import { defaultProfile, IProfile } from "../../../../../../at-folio-models/prof
 import { RequestStatus } from "../../../../../enums/requestStatus";
 
 export interface ISearchResultState {
+  focused: boolean;
   profile: IProfile;
   status: RequestStatus;
 }
 
 export const defaultSearchResultState = (): ISearchResultState => ({
+  focused: false,
   profile: defaultProfile(),
   status: RequestStatus.Loading
 });

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import classNames from "classnames";
 
 import { Logo } from "../logo/logo";
@@ -30,9 +31,11 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
 
   const active: boolean = state.query.trim() !== "";
 
+  const history: any = useHistory();
+
   useEffect(() => {
     if(state.results.length > 0) {
-      setStateTo({ ...state, activeQuery: "", results: [] });
+      setStateTo({ ...state, activeQuery: "", focusedIndex: -1, results: [] });
     }
   }, [state.query]);
 
@@ -48,9 +51,14 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
     setStateTo({ ...state, focused });
   }
 
+  const setFocusedIndexTo = (focusedIndex: number): void => {
+    setStateTo({ ...state, focusedIndex });
+  }
+
   const startSearch = (): void => {
     setStateTo({ 
       ...state, 
+      focusedIndex: -1,
       results: [], 
       status: RequestStatus.Loading
     });
@@ -60,6 +68,7 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
     setStateTo({ 
       ...state,
       activeQuery: state.query,
+      focusedIndex: -1,
       results, 
       status: RequestStatus.Success 
     });
@@ -80,10 +89,42 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
       }
     }
   }
+
+  const handleNextIndex = (e: any): void => {
+    e.preventDefault();
+
+    if(state.focusedIndex === state.results.length - 1) {
+      setFocusedIndexTo(0);
+    } else {
+      setFocusedIndexTo(state.focusedIndex + 1);
+    }
+  }
+
+  const handlePrevIndex = (e: any): void => {    
+    e.preventDefault();
+
+    if(state.focusedIndex === 0) {
+      setFocusedIndexTo(state.results.length - 1);
+    } else {
+      setFocusedIndexTo(state.focusedIndex - 1);
+    }
+  }
   
   const handleOnKeyDown = (e: any): void => {
     if(e.key === "Enter") {
-      handleGo();
+      if(state.focusedIndex > -1) {
+        history.push(`/${state.results[state.focusedIndex].username}`);
+
+        setStateTo(defaultCommandLineState());
+      } else {
+        handleGo();
+      }
+    } else if (state.results.length > 0) {
+      if((e.shiftKey && e.key === "Tab") || e.key === "ArrowUp") {
+        handlePrevIndex(e);
+      } else if (e.key === "Tab" || e.key === "ArrowDown") {
+        handleNextIndex(e);
+      }
     }
   }
 

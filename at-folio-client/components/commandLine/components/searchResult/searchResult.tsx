@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { LoadingIcon } from "../../../loading/loadingIcon";
@@ -13,6 +13,7 @@ import { IProfile } from "../../../../../at-folio-models/profile";
 import { defaultSearchResultState, ISearchResultState } from "./models/searchResultState";
 
 import { RequestStatus } from "../../../../enums/requestStatus";
+import classNames from "classnames";
 
 interface SearchResultProps {
   index: number;
@@ -21,27 +22,27 @@ interface SearchResultProps {
 }
 
 export const SearchResult: React.FC<SearchResultProps> = (props: SearchResultProps) => {  
-  const { setStateTo: setCommandLineStateTo } = useContext(CommandLineContext);
+  const { state: commandLineState, setStateTo: setCommandLineStateTo } = useContext(CommandLineContext);
 
   const [state, setStateTo] = useState<ISearchResultState>(defaultSearchResultState());
 
-  const ref: React.MutableRefObject<HTMLAnchorElement> = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    if(ref.current && props.index === 0) {
-      ref.current.focus();
-    }
-  }, []);
+  const setFocusedTo = (focused: boolean): void => {
+    setStateTo({ ...state, focused });
+  }
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {
       const profile: IProfile = await ProfileService.getByUID(props.uid);
 
-      setStateTo({ profile, status: RequestStatus.Success });
+      setStateTo({ ...state, profile, status: RequestStatus.Success });
     }
 
     fetch();
   }, []);
+
+  useEffect(() => {
+    setFocusedTo(props.index === commandLineState.focusedIndex);
+  }, [commandLineState.focusedIndex, state.status]);
 
   const handleOnClick = (): void => {
     setCommandLineStateTo(defaultCommandLineState());
@@ -64,7 +65,7 @@ export const SearchResult: React.FC<SearchResultProps> = (props: SearchResultPro
   }
 
   return (
-    <Link ref={ref} className="search-result" to={`/${props.username}`} onClick={handleOnClick}>
+    <Link className={classNames("search-result", { focused: state.focused })} to={`/${props.username}`} onClick={handleOnClick}>
       <div className="search-result-profile">
         {getProfilePhoto()}
         <h1 className="search-result-profile-username rubik-font">{props.username}</h1>
