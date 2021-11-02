@@ -4,22 +4,19 @@ import { UnsplashUtility } from "../../../at-folio-utilities/unsplashUtility";
 
 import { IUnsplashPhoto } from "../../../at-folio-models/unsplashPhoto";
 
+import { UnsplashCollectionID } from "../../../at-folio-enums/unsplashCollectionID";
+
 interface IUnsplashService {
-  getRandom: (count?: number) => Promise<IUnsplashPhoto[]>;
+  getRandom: (collectionIds: UnsplashCollectionID[], count?: number) => Promise<IUnsplashPhoto[]>;
 }
 
 export const UnsplashService: IUnsplashService = {
-  getRandom: async (count?: number): Promise<IUnsplashPhoto[]> => {    
+  getRandom: async (collectionIds: UnsplashCollectionID[], count?: number): Promise<IUnsplashPhoto[]> => {    
     const res: any = await Unsplash.photos.getRandom({ 
-      count: count || 4, 
+      count: count || 24, 
       contentFilter: "high",
       orientation: "landscape",
-      collectionIds: [
-        "327760", // Nature
-        "q5tDUKB0fxk", // Space
-        "4285541", // Abstract
-        "461370" // City
-      ]
+      collectionIds
     });
 
     return UnsplashUtility.mapPhotos(res.response);
