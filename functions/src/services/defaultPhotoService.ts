@@ -15,40 +15,40 @@ import { FirestoreCollectionID } from "../../../at-folio-enums/firestoreCollecti
 import { UnsplashCollectionID } from "../../../at-folio-enums/unsplashCollectionID";
 
 interface IDefaultPhotoService {  
-  getAndUpdateByID: (type: DefaultPhotoType | DefaultPhotoCategory, collectionIDs: UnsplashCollectionID[], count?: number) => Promise<void>;
+  getAndUpdateByType: (type: DefaultPhotoType | DefaultPhotoCategory, collectionIDs: UnsplashCollectionID[], count?: number) => Promise<void>;
   updateAll: (context: EventContext) => Promise<void>;
-  updateByID: (id: DefaultPhotoType | DefaultPhotoCategory, photos: IUnsplashPhoto[]) => Promise<void>;
+  updateByType: (type: DefaultPhotoType | DefaultPhotoCategory, photos: IUnsplashPhoto[]) => Promise<void>;
 }
 
 export const DefaultPhotoService: IDefaultPhotoService = {
-  getAndUpdateByID: async (id: DefaultPhotoType | DefaultPhotoCategory, collectionIDs: UnsplashCollectionID[], count?: number): Promise<void> => {
+  getAndUpdateByType: async (type: DefaultPhotoType | DefaultPhotoCategory, collectionIDs: UnsplashCollectionID[], count?: number): Promise<void> => {
     try {
       const photos: IUnsplashPhoto[] = await UnsplashService.getRandom(collectionIDs, count);
       
-      await DefaultPhotoService.updateByID(id, photos);
+      await DefaultPhotoService.updateByType(type, photos);
     } catch (err) {
       logger.error(err);
     }
   },
   updateAll: async (context: EventContext): Promise<void> => {    
     const types: any[] = [
-      DefaultPhotoService.getAndUpdateByID(DefaultPhotoType.Background, UnsplashUtility.getCollectionIDs()),
-      DefaultPhotoService.getAndUpdateByID(DefaultPhotoType.Display, UnsplashUtility.getCollectionIDs()),
-      DefaultPhotoService.getAndUpdateByID(DefaultPhotoType.Profile, UnsplashUtility.getCollectionIDs())
+      DefaultPhotoService.getAndUpdateByType(DefaultPhotoType.Background, UnsplashUtility.getCollectionIDs()),
+      DefaultPhotoService.getAndUpdateByType(DefaultPhotoType.Display, UnsplashUtility.getCollectionIDs()),
+      DefaultPhotoService.getAndUpdateByType(DefaultPhotoType.Profile, UnsplashUtility.getCollectionIDs())
     ];
 
     const categories: any[] = [      
-      DefaultPhotoService.getAndUpdateByID(DefaultPhotoCategory.Abstract, [UnsplashCollectionID.Abstract]),
-      DefaultPhotoService.getAndUpdateByID(DefaultPhotoCategory.City, [UnsplashCollectionID.City]),
-      DefaultPhotoService.getAndUpdateByID(DefaultPhotoCategory.Nature, [UnsplashCollectionID.Nature]),
-      DefaultPhotoService.getAndUpdateByID(DefaultPhotoCategory.Space, [UnsplashCollectionID.Space])
+      DefaultPhotoService.getAndUpdateByType(DefaultPhotoCategory.Abstract, [UnsplashCollectionID.Abstract]),
+      DefaultPhotoService.getAndUpdateByType(DefaultPhotoCategory.City, [UnsplashCollectionID.City]),
+      DefaultPhotoService.getAndUpdateByType(DefaultPhotoCategory.Nature, [UnsplashCollectionID.Nature]),
+      DefaultPhotoService.getAndUpdateByType(DefaultPhotoCategory.Space, [UnsplashCollectionID.Space])
     ]
     
     await Promise.all([...types, ...categories]);
   },  
-  updateByID: async (id: DefaultPhotoType | DefaultPhotoCategory, photos: IUnsplashPhoto[]): Promise<void> => {        
+  updateByType: async (type: DefaultPhotoType | DefaultPhotoCategory, photos: IUnsplashPhoto[]): Promise<void> => {        
     await admin.collection(FirestoreCollectionID.DefaultPhotos)
-      .doc(id)
+      .doc(type)
       .withConverter<IUnsplashPhotoGroup>(unsplashPhotoGroupConverter)
       .set({ photos, type: null });
   }

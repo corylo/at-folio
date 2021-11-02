@@ -17,6 +17,7 @@ interface ISocialPlatformNetworkUtility {
   getPlatformEdges: (nodes: Node[]) => Edge[];
   getPlatformNodes: (links: ILink[]) => Node[];
   getProfileNode: (image: string) => Node;
+  getSLDByPlatform: (platform: SocialPlatform) => string;
   handleOnNodeBlur: (params: any, container: HTMLElement) => void;
   handleOnNodeClick: (params: any, links: ILink[]) => void;
   handleOnNodeHover: (params: any, container: HTMLElement) => void;
@@ -157,6 +158,38 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
         }
       }
     };
+  },
+  getSLDByPlatform: (platform: SocialPlatform): string => {
+    switch(platform) {
+      case SocialPlatform.Discord:
+        return "discord.com";
+
+      case SocialPlatform.Facebook:
+        return "facebook.com";
+
+      case SocialPlatform.GitHub:
+        return "github.com";
+
+      case SocialPlatform.Instagram:
+        return "instagram.com";
+
+      case SocialPlatform.Reddit:
+        return "reddit.com";
+
+      case SocialPlatform.TikTok:
+        return "tiktok.com";
+
+      case SocialPlatform.Twitch:
+        return "twitch.tv";
+
+      case SocialPlatform.Twitter:
+        return "twitter.com";
+
+      case SocialPlatform.YouTube:
+        return "youtube.com";
+      default:
+        throw new Error(`Unknown platform: ${platform}`);
+    }
   },
   handleOnNodeBlur: (params: any, container: HTMLElement): void => {
     if(params.node !== 1) {

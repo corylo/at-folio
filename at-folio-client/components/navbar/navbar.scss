@@ -5,6 +5,7 @@
   height: 60px;
   justify-content: center;
   padding: 10px;
+  pointer-events: none;
   position: fixed;
   top: 0px;
   width: calc(100% - 20px);
@@ -12,6 +13,7 @@
 
   .logo {
     animation: fadeInDown 400ms ease-in;
+    pointer-events: all;
   }
 
   .sign-in-link {
@@ -24,6 +26,7 @@
     justify-content: center;
     margin: 20px;
     padding: 10px;
+    pointer-events: all;
     position: absolute;
     right: 0px;
     top: 0px;

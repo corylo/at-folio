@@ -2,7 +2,7 @@ import { UrlUtility } from "../utilities/urlUtility";
 
 interface IUrlValidator {
   validate: (url: string) => boolean;
-  validateSLD: (sld: string, url: string) => boolean;
+  validateSLD: (url: string, sld: string) => boolean;
 }
 
 export const UrlValidator: IUrlValidator = {
@@ -17,7 +17,10 @@ export const UrlValidator: IUrlValidator = {
       return false;
     }
   },  
-  validateSLD: (sld: string, url: string): boolean => {
-    return UrlUtility.removeUnnecessaryParts(url).indexOf(sld) === 0;
+  validateSLD: (url: string, sld: string): boolean => {
+    return UrlUtility
+      .removeUnnecessaryParts(url)
+      .toLowerCase()
+      .indexOf(sld) === 0;
   }
 }
