@@ -34,8 +34,6 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
       setStatusTo(RequestStatus.Loading);
 
       await AuthService.signOut();
-
-      setStatusTo(RequestStatus.Success);
     } catch (err) {
       console.error(err);
       

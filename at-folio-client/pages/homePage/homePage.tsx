@@ -15,7 +15,7 @@ export const HomePage: React.FC = () => {
     if(appState.userStatus === UserStatus.SignedOut) {
       return (        
         <div id="brand-statement">
-          <h1 className="rubik-font">A link in bio service that <span className="highlight">looks good</span>.</h1>
+          <h1 className="rubik-font">A link in bio service that <span className="highlight">has style</span>.</h1>
         </div>
       )
     } 

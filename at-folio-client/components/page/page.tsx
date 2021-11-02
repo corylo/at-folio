@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router";
 
 import { LoadingSpinner } from "../loading/loadingSpinner";
+import { MainMenu } from "../mainMenu/mainMenu";
+import { Navbar } from "../navbar/navbar";
 
 import { AppContext } from "../app/appWrapper";
 
@@ -36,6 +38,8 @@ export const Page: React.FC<PageProps> = (props: PageProps) => {
 
   return (
     <div id={props.id} className="page">
+      <Navbar />
+      <MainMenu />
       {getContent()}
     </div>
   )
