@@ -9,7 +9,7 @@ import { ITileDimensions } from "../models/tileDimensions";
 
 interface ICreatorGridBackgroundUtility {
   getGridStyles: (state: ICreatorGridBackgroundState) => React.CSSProperties;
-  getRandomPosition: (height: number, width: number) => IPosition;
+  getRandomPosition: (currentPosition: IPosition, gridSize: ISize, windowSize: ISize) => IPosition;
   getTileDimensions: () => ITileDimensions;
 }
 
@@ -24,11 +24,46 @@ export const CreatorGridBackgroundUtility: ICreatorGridBackgroundUtility = {
       width: `calc(${state.columns * size.width}${unit} + ${state.columns - 1}em)`
     }
   },
-  getRandomPosition: (height: number, width: number): IPosition => {
-    const x: number = NumberUtility.random(0, width) * -1,
-      y: number = NumberUtility.random(0, height) * -1;
+  getRandomPosition: (currentPosition: IPosition, gridSize: ISize, windowSize: ISize): IPosition => {
+    const minPosition: IPosition = {
+      x: (gridSize.width - windowSize.width) * -1,
+      y: (gridSize.height - windowSize.height) * -1
+    }
 
-    return { x, y };
+    const maxPosition: IPosition = {
+      x: 15,
+      y: 15
+    }
+
+    const minIncrement: IPosition = {
+      x: windowSize.width / 5,
+      y: windowSize.height / 5
+    }
+
+    const maxIncrement: IPosition = {
+      x: minIncrement.x * 2,
+      y: minIncrement.y * 2
+    }
+
+    const increment: IPosition = {
+      x: NumberUtility.random(minIncrement.x, maxIncrement. x),
+      y: NumberUtility.random(minIncrement.y, maxIncrement.y)
+    }
+
+    const xSign: number = currentPosition.x + increment.x >= maxPosition.x ? -1 : NumberUtility.randomSign(),
+      ySign: number = currentPosition.y + increment.y >= maxPosition.y ? -1 : NumberUtility.randomSign();
+
+    const nextPosition: IPosition = {
+      x: currentPosition.x + (increment.x * xSign),
+      y: currentPosition.y + (increment.y * ySign)
+    }
+
+    const finalizedPosition: IPosition = {
+      x: Math.min(Math.max(nextPosition.x, minPosition.x), maxPosition.x),
+      y: Math.min(Math.max(nextPosition.y, minPosition.y), maxPosition.y)
+    }
+
+    return finalizedPosition;
   },
   getTileDimensions: (): ITileDimensions => {
     const size: ISize = {

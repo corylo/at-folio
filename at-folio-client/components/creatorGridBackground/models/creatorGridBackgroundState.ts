@@ -10,7 +10,7 @@ export interface ICreatorGridBackgroundState {
   dimensions: ITileDimensions;
   interval: number;
   photos: IUnsplashPhoto[];
-  position: IPosition;
+  position: IPosition;  
   status: RequestStatus;
   window: ISize;
 }

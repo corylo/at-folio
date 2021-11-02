@@ -3,10 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { DefaultPhotoService } from "../../services/defaultPhotoService";
 
 import { CreatorGridBackgroundUtility } from "./utilities/creatorGridBackgroundUtility";
+import { NumberUtility } from "../../utilities/numberUtility";
 import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
 
 import { defaultCreatorGridBackgroundState, ICreatorGridBackgroundState } from "./models/creatorGridBackgroundState";
 import { IPosition } from "../../models/position";
+import { ISize } from "../../models/size";
 import { IUnsplashPhoto } from "../../../at-folio-models/unsplashPhoto";
 
 import { DefaultPhotoType } from "../../../at-folio-enums/defaultPhotoType";
@@ -26,10 +28,21 @@ export const CreatorGridBackground: React.FC = () => {
     setState({ ...state, interval });
   }
 
-  const setRandomPosition = (height: number, width: number): void => {    
-    const position: IPosition = CreatorGridBackgroundUtility.getRandomPosition(height - window.innerHeight, width - window.innerWidth);
-
+  const setPositionTo = (position: IPosition): void => {    
     setState({ ...state, position });
+  }
+
+  const getRandomPosition = (): IPosition => {
+    const { clientHeight: height, clientWidth: width } = ref.current;
+
+    const gridSize: ISize = { height, width };
+
+    const windowSize: ISize = { 
+      height: window.innerHeight, 
+      width: window.innerWidth 
+    };
+
+    return CreatorGridBackgroundUtility.getRandomPosition(state.position, gridSize, windowSize);
   }
 
   useEffect(() => {
@@ -37,7 +50,12 @@ export const CreatorGridBackground: React.FC = () => {
       try {
         const photos: IUnsplashPhoto[] = await DefaultPhotoService.getByType(DefaultPhotoType.Background);
 
-        setState({ ...state, photos, status: RequestStatus.Success });
+        setState({ 
+          ...state, 
+          photos, 
+          position: getRandomPosition(), 
+          status: RequestStatus.Success 
+        });
       } catch (err) {
         console.error(err);
       }
@@ -46,16 +64,26 @@ export const CreatorGridBackground: React.FC = () => {
     fetch();
   }, []);
 
+  useEffect(() => {
+    if(ref.current && state.status === RequestStatus.Success) {
+      setPositionTo(getRandomPosition());
+    }
+  }, [state.status]);
+
   useEffect(() => {    
     if(ref.current && state.status === RequestStatus.Success) {
-      const { clientHeight: height, clientWidth: width } = ref.current;
-
-      setRandomPosition(height, width);
-
-      const interval: NodeJS.Timeout = setInterval(() => {
-        setRandomPosition(height, width);
+      const timeout: NodeJS.Timeout = setTimeout(() => {
+        setPositionTo(getRandomPosition());
       }, state.interval + 2000);
 
+      return () => {
+        clearTimeout(timeout);
+      }
+    }
+  }, [state.interval, state.position, state.status]);
+
+  useEffect(() => {    
+    if(ref.current && state.status === RequestStatus.Success) {
       const handleOnResize = (): void => {
         setState({
           ...state,
@@ -68,8 +96,6 @@ export const CreatorGridBackground: React.FC = () => {
   
       return () => {
         window.removeEventListener("resize", handleOnResize);
-
-        clearInterval(interval);
       }
     }
   }, [state.status, state.interval, state.window]);
@@ -87,52 +113,52 @@ export const CreatorGridBackground: React.FC = () => {
   }, [state.status, state.window]);
 
   const getTiles = (): JSX.Element[] => {
-    const platforms: SocialPlatform[] = SocialPlatformNetworkUtility.getPlatforms(),
-      backgrounds: IUnsplashPhoto[] = state.photos.slice(0, 9);
+    if(state.status === RequestStatus.Success) {
+      const platforms: SocialPlatform[] = SocialPlatformNetworkUtility.getPlatforms(),
+        backgrounds: IUnsplashPhoto[] = state.photos.slice(0, 9);
 
-    let tiles: JSX.Element[] = [];
+      let tiles: JSX.Element[] = [];
 
-    const { size, unit } = state.dimensions;
+      const { size, unit } = state.dimensions;
 
-    for(let i: number = 0; i < backgrounds.length; i++) {
-      const styles: React.CSSProperties = {
-        height: `${size.height}${unit}`,
-        width: `${size.width}${unit}`
+      for(let i: number = 0; i < backgrounds.length; i++) {
+        const styles: React.CSSProperties = {
+          height: `${size.height}${unit}`,
+          width: `${size.width}${unit}`
+        }
+
+        tiles.push(
+          <div key={`background-${i}`} className="creator-tile background" style={styles}>
+            <div 
+              className="creator-tile-image" 
+              style={{ backgroundImage: `url(${backgrounds[i].urls.regular})` }}
+            />
+          </div>
+        );
+
+        tiles.push(
+          <div key={`platform-${i}`} className="creator-tile platform" style={styles}>
+            <div 
+              className="creator-tile-image" 
+              style={{ backgroundImage: `url(${SocialPlatformNetworkUtility.getPlatformImageUrl(platforms[i])})` }} 
+            />
+          </div>
+        )
       }
 
-      tiles.push(
-        <div key={`background-${i}`} className="creator-tile background" style={styles}>
-          <div 
-            className="creator-tile-image" 
-            style={{ backgroundImage: `url(${backgrounds[i].urls.regular})` }}
-          />
-        </div>
-      );
-
-      tiles.push(
-        <div key={`platform-${i}`} className="creator-tile platform" style={styles}>
-          <div 
-            className="creator-tile-image" 
-            style={{ backgroundImage: `url(${SocialPlatformNetworkUtility.getPlatformImageUrl(platforms[i])})` }} 
-          />
-        </div>
-      )
+      return tiles;
     }
 
-    return tiles;
+    return [];
   }
 
   const styles: React.CSSProperties = CreatorGridBackgroundUtility.getGridStyles(state);
 
-  if(state.status === RequestStatus.Success) {
-    return (
-      <div className="creator-grid-background">
-        <div ref={ref} className="creator-grid-tiles" style={styles}>
-          {getTiles()}
-        </div>
+  return (
+    <div className="creator-grid-background">
+      <div ref={ref} className="creator-grid-tiles" style={styles}>
+        {getTiles()}
       </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }
