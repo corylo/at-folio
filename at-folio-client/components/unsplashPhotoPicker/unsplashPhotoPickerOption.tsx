@@ -19,6 +19,8 @@ export const UnsplashPhotoPickerOption: React.FC<UnsplashPhotoPickerOptionProps>
 
   const [status, setStatusTo] = useState<RequestStatus>(RequestStatus.Idle);
 
+  console.log(photo)
+
   useEffect(() => {
     if(status === RequestStatus.Success) {
       const timeout: NodeJS.Timeout = setTimeout(() => {
@@ -55,6 +57,34 @@ export const UnsplashPhotoPickerOption: React.FC<UnsplashPhotoPickerOptionProps>
     }
   }
 
+  const getUnsplashStatement = (): JSX.Element => {
+    const creator: JSX.Element = (
+      <a 
+        className="creator-link" 
+        href={`${photo.creator.link}?utm_source=@folio&utm_medium=referral`} 
+        target="_blank"
+      >
+        {photo.creator.name} 
+      </a>
+    );
+
+    const unsplash: JSX.Element = (
+      <a 
+        className="unsplash-link" 
+        href={`https://unsplash.com/?utm_source=@folio&utm_medium=referral`} 
+        target="_blank"
+      >
+        <i className="fa-brands fa-unsplash" />
+      </a>
+    );
+
+    return (
+      <div className="unsplash-photo-creator">
+        <h1 className="rubik-font">{creator}{unsplash}</h1>
+      </div>
+    )
+  }
+
   return (
     <button 
       className={classNames("unsplash-photo-picker-option", { selected })} 
@@ -62,6 +92,7 @@ export const UnsplashPhotoPickerOption: React.FC<UnsplashPhotoPickerOptionProps>
       onClick={handleOnClick}
     >
       <div className="unsplash-photo" style={{ backgroundImage: `url(${photo.urls.thumb})` }} />
+      {getUnsplashStatement()}
       {getLoadingIcon()}
       <StatusMessage
         activeStatuses={[RequestStatus.Success]} 
