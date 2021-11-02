@@ -65,6 +65,7 @@
 
         &.creator-link {
           font-size: 0.8em;
+          line-height: 20px;
           width: calc(100% - 20px);
 
           &:hover,
@@ -74,6 +75,7 @@
         }
 
         &.unsplash-link {
+          line-height: 20px;
           text-align: center;
           width: 20px;
         }
