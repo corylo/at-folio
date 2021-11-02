@@ -1,0 +1,48 @@
+.search-result {
+  align-items: center;
+  border-radius: 6px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  outline: none;
+  padding: 10px 15px;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(white, 0.1);
+    
+    .search-result-go-icon {
+      color: white;
+    }
+  }
+
+  .search-result-profile {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+
+    .search-result-profile-photo {
+      align-items: center;
+      background-color: rgba(white, 0.25);
+      border-radius: 100px;
+      display: flex;
+      height: 40px;
+      justify-content: center;
+      width: 40px;
+
+      .loading-icon {
+        font-size: 1em;
+      }
+    }
+
+    .search-result-profile-username {
+      color: white;
+      font-size: 1.25em;
+    }
+  }
+    
+  .search-result-go-icon {
+    color: rgba(white, 0.25);
+  }
+}
