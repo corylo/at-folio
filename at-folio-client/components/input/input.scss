@@ -67,5 +67,6 @@
 input {
   &::placeholder {
     color: rgba(white, 0.5);
+    text-shadow: none;
   }
 }
