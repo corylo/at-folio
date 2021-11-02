@@ -6,7 +6,7 @@
   color: white;
   flex-grow: 1;
   outline: none;
-  min-width: 100px;
+  min-width: 140px;
   padding: 10px 15px;
 
   &:hover,
@@ -18,5 +18,11 @@
   &.selected {
     border-color: $themeColor;
     color: $themeColor;
+  }
+}
+
+@media (max-width: 600px) {
+  .unsplash-photo-picker-category-button {
+    min-width: 80px;
   }
 }
