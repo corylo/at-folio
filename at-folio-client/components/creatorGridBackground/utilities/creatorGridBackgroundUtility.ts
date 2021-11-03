@@ -66,20 +66,26 @@ export const CreatorGridBackgroundUtility: ICreatorGridBackgroundUtility = {
     return finalizedPosition;
   },
   getTileDimensions: (): ITileDimensions => {
+    // w: 1000, h: 2000 = 0.5 - portrait
+    // w: 2000, h: 1000 = 2 - landscape
+
+    const ratio: number = window.innerWidth / window.innerHeight;
+
     const size: ISize = {
       height: 30,
       width: 45
     }
 
-    let unit: string = "vw";
-
-    if(window.innerWidth < 800) {
-      unit = "vh";
-    }
-    
-    return {
-      size,
-      unit
+    if(ratio <= 1) { // Portrait
+      return {
+        size,
+        unit: "vh"
+      }
+    } else { // Landscape
+      return {
+        size,
+        unit: "vw"
+      }
     }
   }
 }

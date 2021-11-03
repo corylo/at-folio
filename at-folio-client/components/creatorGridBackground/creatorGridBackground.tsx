@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import _debounce from "lodash.debounce";
 
 import { DefaultPhotoService } from "../../services/defaultPhotoService";
 
@@ -87,14 +88,17 @@ export const CreatorGridBackground: React.FC = () => {
         setState({
           ...state,
           dimensions: CreatorGridBackgroundUtility.getTileDimensions(),
+          position: getRandomPosition(),
           window: { height: window.innerHeight, width: window.innerWidth },          
         });
       }
+
+      const debouncedResize = _debounce(handleOnResize, 250);
   
-      window.addEventListener("resize", handleOnResize);
+      window.addEventListener("resize", debouncedResize);
   
       return () => {
-        window.removeEventListener("resize", handleOnResize);
+        window.removeEventListener("resize", debouncedResize);
       }
     }
   }, [state.status, state.interval, state.window]);
