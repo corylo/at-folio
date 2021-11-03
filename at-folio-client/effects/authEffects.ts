@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import { useHistory, useLocation } from "react-router";
 import { User } from "@firebase/auth";
 
 import { auth } from "../firebase";
@@ -15,9 +14,6 @@ import { UserStatus } from "../enums/userStatus";
 
 export const useOnAuthStateChangedEffect = (): void => {
   const { appState, setAppStateTo } = useContext(AppContext);
-
-  const location: any = useLocation(),
-    history: any = useHistory();
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (user: User) => {
@@ -42,14 +38,4 @@ export const useOnAuthStateChangedEffect = (): void => {
 
     return () => unsub();
   }, []);
-
-  useEffect(() => {
-    if(
-      appState.userStatus === UserStatus.SignedIn && 
-      appState.profile.uid === "" &&
-      location.pathname !== "/me"
-    ) {
-      history.push("/me");
-    }
-  }, [appState.userStatus]);
 }
