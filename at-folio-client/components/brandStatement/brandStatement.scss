@@ -1,0 +1,19 @@
+.brand-statement {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+  z-index: 2;
+
+  h1 {
+    animation: fadeIn 400ms ease-in;
+    color: white;
+    font-size: 2em;
+    padding: 20px;
+
+    .highlight {
+      color: $themeColor;
+    }
+  }
+}

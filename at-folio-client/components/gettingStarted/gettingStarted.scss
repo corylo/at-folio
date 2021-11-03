@@ -1,0 +1,28 @@
+.getting-started-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  .getting-started {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 20px;
+    pointer-events: all;
+    position: relative;
+    z-index: 2;
+
+    .getting-started-step {
+      color: white;
+      font-size: 2em;
+
+      .highlight {
+        color: $themeColor;
+      }
+    }
+
+    .get-started-link {
+      width: 200px;
+    }
+  }
+}

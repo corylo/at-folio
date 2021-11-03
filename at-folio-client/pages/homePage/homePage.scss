@@ -1,23 +1,15 @@
 #home-page {
-  #brand-statement {
-    align-items: center;
-    display: flex;
+  .brand-statement,
+  .getting-started-wrapper {
     height: 100vh;
-    justify-content: center;
-    position: relative;
-    width: 100vw;
-    z-index: 2;
+  }
+}
 
-    h1 {
-      animation: fadeIn 400ms ease-in;
-      color: white;
-      font-size: 2em;
-      padding: 20px;
-      text-align: center;
-
-      .highlight {
-        color: $themeColor;
-      }
+@media (max-height: 600px) {
+  #home-page {
+    .getting-started-wrapper {
+      height: auto;
+      margin-top: 80px;
     }
   }
 }

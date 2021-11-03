@@ -34,6 +34,7 @@ export const AppWrapper: React.FC = () => {
   const value: IAppContext = { 
     appState, 
     profile: appState.profile,
+    userStatus: appState.userStatus,
     setAppStateTo, 
     setAppTogglesTo,
     setProfileTo

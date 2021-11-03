@@ -5,10 +5,12 @@
 @import "./pages/pages.scss";
 
 @import "./components/app/app.scss";
+@import "./components/brandStatement/brandStatement.scss";
 @import "./components/button/button.scss";
 @import "./components/commandLine/commandLine.scss";
 @import "./components/creatorGridBackground/creatorGridBackground.scss";
 @import "./components/form/form.scss";
+@import "./components/gettingStarted/gettingStarted.scss";
 @import "./components/input/input.scss";
 @import "./components/loadableImage/loadableImage.scss";
 @import "./components/loading/loading.scss";
@@ -36,6 +38,20 @@ body {
   min-height: 100vh;
   padding: 0px;
   width: 100%;
+  
+  &::-webkit-scrollbar-track {
+    background-color: gray(30);
+  }
+
+  &::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: gray(60);
+    border-radius: 10px;
+  }
 }
 
 h1,
