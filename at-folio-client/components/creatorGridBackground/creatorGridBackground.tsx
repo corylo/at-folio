@@ -49,13 +49,15 @@ export const CreatorGridBackground: React.FC = () => {
     const fetch = async (): Promise<void> => {
       try {
         const photos: IUnsplashPhoto[] = await DefaultPhotoService.getByType(DefaultPhotoType.Background);
-
-        setState({ 
-          ...state, 
-          photos, 
-          position: getRandomPosition(), 
-          status: RequestStatus.Success 
-        });
+        
+        if(ref.current) {
+          setState({ 
+            ...state, 
+            photos, 
+            position: getRandomPosition(), 
+            status: RequestStatus.Success 
+          });
+        }
       } catch (err) {
         console.error(err);
       }
