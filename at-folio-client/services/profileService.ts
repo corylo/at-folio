@@ -3,12 +3,13 @@ import { collection, doc, getDoc, getDocs, query, updateDoc, where, writeBatch, 
 import { db } from "../firebase";
 
 import { IProfile, IProfileUpdate, profileConverter } from "../../at-folio-models/profile";
+import { defaultProfileAdmin, IProfileAdmin, profileAdminConverter } from "../../at-folio-models/profileAdmin";
 import { IUsername, usernameConverter } from "../../at-folio-models/username";
 
 import { FirestoreCollectionID } from "../../at-folio-enums/firestoreCollectionID";
 
 interface IProfileService {
-  create: (profile: IProfile) => Promise<void>;
+  create: (profile: IProfileUpdate) => Promise<void>;
   getByUID: (uid: string) => Promise<IProfile>;
   getByUsername: (username: string) => Promise<IProfile>;
   update: (uid: string, update: IProfileUpdate) => Promise<void>;
@@ -22,6 +23,11 @@ export const ProfileService: IProfileService = {
       .withConverter<IProfile>(profileConverter);
 
     batch.set(profileRef, profile);
+
+    const profileAdminRef: DocumentReference<IProfileAdmin> = doc(db, FirestoreCollectionID.Profiles, profile.uid, FirestoreCollectionID.Admin, FirestoreCollectionID.Admin)
+      .withConverter<IProfileAdmin>(profileAdminConverter);
+
+    batch.set(profileAdminRef, defaultProfileAdmin());
 
     const usernameRef: DocumentReference<IUsername> = doc(db, FirestoreCollectionID.Usernames, profile.username)
       .withConverter(usernameConverter);

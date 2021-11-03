@@ -15,7 +15,7 @@ import { InitialSetupValidator } from "./validators/initialSetupValidator";
 import { FormUtility } from "../../../../utilities/formUtility";
 
 import { defaultInitialSetupState, IInitialSetupState } from "./models/initialSetupState";
-import { IProfile } from "../../../../../at-folio-models/profile";
+import { IProfileUpdate } from "../../../../../at-folio-models/profile";
 import { defaultUnsplashPhotoReference } from "../../../../../at-folio-models/unsplashPhotoReference";
 
 import { RequestStatus } from "../../../../enums/requestStatus";
@@ -38,9 +38,8 @@ export const InitialProfileSetup: React.FC = () => {
       try {
         setState({ ...updates, status: RequestStatus.Loading });
 
-        const profile: IProfile = {
-          background: defaultUnsplashPhotoReference(),          
-          links: [],
+        const profile: IProfileUpdate = {
+          background: defaultUnsplashPhotoReference(),                    
           photo: defaultUnsplashPhotoReference(),
           uid: appState.user.uid,
           username: fields.username
