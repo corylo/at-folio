@@ -18,7 +18,7 @@ export const UrlUtility: IUrlUtility = {
     return `https://${UrlUtility.removeHttpProtocol(url)}`;
   },
   finalize: (url: string, sld: string): string => {
-    return UrlUtility.formatSLD(UrlUtility.addHttpsProtocol(UrlUtility.removeUnnecessaryParts(url)), sld);
+    return UrlUtility.formatSLD(UrlUtility.addHttpsProtocol(UrlUtility.removeUnnecessaryParts(url.trim())), sld);
   },
   formatSLD: (url: string, sld: string): string => {
     return StringUtility.replaceCaseInsensitive(url, sld, sld);

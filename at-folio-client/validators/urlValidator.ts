@@ -7,7 +7,7 @@ interface IUrlValidator {
 
 export const UrlValidator: IUrlValidator = {
   validate: (url: string): boolean => {
-    const validatableUrl: string = UrlUtility.removeUnnecessaryParts(url);
+    const validatableUrl: string = UrlUtility.removeUnnecessaryParts(url.trim());
 
     try {
       new URL(`https://${validatableUrl}`);
@@ -19,7 +19,7 @@ export const UrlValidator: IUrlValidator = {
   },  
   validateSLD: (url: string, sld: string): boolean => {
     return UrlUtility
-      .removeUnnecessaryParts(url)
+      .removeUnnecessaryParts(url.trim())
       .toLowerCase()
       .indexOf(sld) === 0;
   }
