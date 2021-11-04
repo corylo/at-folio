@@ -2,7 +2,7 @@ import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc, CollectionRefer
 
 import { db } from "../firebase";
 
-import { ILink, linkConverter } from "../../at-folio-models/link";
+import { ILink, ILinkUpdate, linkConverter } from "../../at-folio-models/link";
 
 import { FirestoreCollectionID } from "../../at-folio-enums/firestoreCollectionID";
 
@@ -10,7 +10,7 @@ interface ILinkService {
   create: (uid: string, link: ILink) => Promise<string>;
   delete: (uid: string, linkID: string) => Promise<void>;
   getByUID: (uid: string) => Promise<ILink[]>;
-  update: (uid: string, link: ILink) => Promise<void>;
+  update: (uid: string, id: string, update: ILinkUpdate) => Promise<void>;
 }
 
 export const LinkService: ILinkService = {
@@ -35,10 +35,10 @@ export const LinkService: ILinkService = {
 
     return snap.docs.map((doc: QueryDocumentSnapshot<ILink>) => doc.data());
   },
-  update: async (uid: string, link: ILink): Promise<void> => {
-    const ref: DocumentReference<ILink> = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links, link.id)
+  update: async (uid: string, id: string, update: ILinkUpdate): Promise<void> => {
+    const ref: DocumentReference<ILink> = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links, id)
       .withConverter<ILink>(linkConverter);
 
-    await updateDoc(ref, link);
+    await updateDoc(ref, update);
   }
 }

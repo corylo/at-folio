@@ -25,7 +25,7 @@ export const UpdateLinkForm: React.FC<UpdateLinkFormProps> = (props: UpdateLinkF
 
   const updateLink = async (link: ILink): Promise<void> => {
     try {
-      await LinkService.update(profile.uid, link);
+      await LinkService.update(profile.uid, link.id, { platform: link.platform, url: link.url });
 
       setProfileTo({ links: LinkUtility.updateLink(link, profile.links) });
 

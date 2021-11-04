@@ -8,6 +8,11 @@ export interface ILink {
   url: string;
 }
 
+export interface ILinkUpdate {
+  platform?: SocialPlatform;
+  url?: string;
+}
+
 export const linkConverter: FirestoreDataConverter<ILink> = {
   toFirestore(link: ILink): DocumentData {
     return {
