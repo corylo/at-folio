@@ -25,9 +25,8 @@ export const ProfileAdminService: IProfileAdminService = {
     return null;
   },
   update: async (uid: string, update: IProfileAdminUpdate): Promise<void> => {
-    const ref: DocumentReference<IProfileAdmin> = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Admin, FirestoreCollectionID.Admin)
-      .withConverter<IProfileAdmin>(profileAdminConverter);
+    const ref: DocumentReference = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Admin, FirestoreCollectionID.Admin);
 
-    await updateDoc(ref, update);
+    await updateDoc(ref, { ...update });
   }
 }
