@@ -21,10 +21,6 @@ export const ProfileTutorialComponent: React.FC = () => {
 
   const [state, setStateTo] = useState<IProfileTutorialState>(defaultProfileTutorialState());
 
-  const setStepTo = (step: number): void => {
-    setStateTo({ ...state, step });
-  }
-
   const setWindowTo = (window: ISize): void => {
     setStateTo({ ...state, window });
   }
@@ -60,18 +56,22 @@ export const ProfileTutorialComponent: React.FC = () => {
     return position;
   }
 
+  const handleOnStepChange = (step: number): void => {
+    const elementID: string = ProfileTutorialUtility.getElementIDByStep(step),
+      element: HTMLElement | null  = document.getElementById(elementID);
+
+    if(element) {
+      const rect: DOMRect = element.getBoundingClientRect();
+
+      setStateTo({ ...state, position: getPosition(rect), step });
+    }
+  }
+
   useEffect(() => {
     if(state.window.height > 0) {
-      const elementID: string = ProfileTutorialUtility.getElementIDByStep(state.step),
-        element: HTMLElement | null  = document.getElementById(elementID);
-
-      if(element) {
-        const rect: DOMRect = element.getBoundingClientRect();
-
-        setStateTo({ ...state, position: getPosition(rect) });
-      }
+      handleOnStepChange(state.step);
     }
-  }, [state.step, state.window]);
+  }, [state.window]);
 
   const handleOnDone = async (): Promise<void> => {
     if(!profile.admin.tutorialComplete) {
@@ -119,13 +119,13 @@ export const ProfileTutorialComponent: React.FC = () => {
               className="step-nav-button"
               disabled={state.step === 1}
               icon="fa-regular fa-arrow-left" 
-              handleOnClick={() => setStepTo(Math.max(state.step - 1, 1))} 
+              handleOnClick={() => handleOnStepChange(Math.max(state.step - 1, 1))} 
             />
             <IconButton 
               className="step-nav-button"
               disabled={state.step === state.steps}
               icon="fa-regular fa-arrow-right" 
-              handleOnClick={() => setStepTo(Math.min(state.step + 1, 2))} 
+              handleOnClick={() => handleOnStepChange(Math.min(state.step + 1, 2))} 
             />
           </div>
           <button 
