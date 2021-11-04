@@ -36,9 +36,8 @@ export const LinkService: ILinkService = {
     return snap.docs.map((doc: QueryDocumentSnapshot<ILink>) => doc.data());
   },
   update: async (uid: string, id: string, update: ILinkUpdate): Promise<void> => {
-    const ref: DocumentReference<ILink> = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links, id)
-      .withConverter<ILink>(linkConverter);
+    const ref: DocumentReference = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links, id);
 
-    await updateDoc(ref, update);
+    await updateDoc(ref, { ...update });
   }
 }

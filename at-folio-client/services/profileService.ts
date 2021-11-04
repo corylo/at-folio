@@ -61,9 +61,8 @@ export const ProfileService: IProfileService = {
     return null;
   },
   update: async (uid: string, update: IProfileUpdate): Promise<void> => {
-    const ref: DocumentReference<IProfile> = doc(db, FirestoreCollectionID.Profiles, uid)
-      .withConverter<IProfile>(profileConverter);
+    const ref: DocumentReference = doc(db, FirestoreCollectionID.Profiles, uid);
 
-    await updateDoc(ref, update);
+    await updateDoc(ref, { ...update });
   }
 }

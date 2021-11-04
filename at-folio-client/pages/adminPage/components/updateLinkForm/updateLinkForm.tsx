@@ -24,25 +24,17 @@ export const UpdateLinkForm: React.FC<UpdateLinkFormProps> = (props: UpdateLinkF
   const [mode, setModeTo] = useState<FormMode>(FormMode.Idle);
 
   const updateLink = async (link: ILink): Promise<void> => {
-    try {
-      await LinkService.update(profile.uid, link.id, { platform: link.platform, url: link.url });
+    await LinkService.update(profile.uid, link.id, { platform: link.platform, url: link.url });
 
-      setProfileTo({ links: LinkUtility.updateLink(link, profile.links) });
+    setProfileTo({ links: LinkUtility.updateLink(link, profile.links) });
 
-      setModeTo(FormMode.Idle);
-    } catch (err) {
-      console.error(err);
-    }
+    setModeTo(FormMode.Idle);
   }
 
   const deleteLink = async (): Promise<void> => {
-    try {
-      await LinkService.delete(profile.uid, props.link.id);
+    await LinkService.delete(profile.uid, props.link.id);
 
-      setProfileTo({ links: LinkUtility.removeLink(props.link.id, profile.links) });
-    } catch (err) {
-      console.error(err);
-    }
+    setProfileTo({ links: LinkUtility.removeLink(props.link.id, profile.links) });
   }
 
   const getActions = (): IFormAction[] => {

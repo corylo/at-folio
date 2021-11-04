@@ -15,13 +15,9 @@ export const AddLinkForm: React.FC = () => {
   const { profile, setProfileTo } = useContext(AppContext);
 
   const addLink = async (link: ILink): Promise<void> => {
-    try {
-      const id: string = await LinkService.create(profile.uid, link);
+    const id: string = await LinkService.create(profile.uid, link);
 
-      setProfileTo({ links: [...profile.links, { ...link, id }] });
-    } catch (err) {
-      console.error(err);
-    }
+    setProfileTo({ links: [...profile.links, { ...link, id }] });
   }
 
   const getActions = (): IFormAction[] => {
