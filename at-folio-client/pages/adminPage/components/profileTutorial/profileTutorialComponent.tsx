@@ -49,7 +49,7 @@ export const ProfileTutorialComponent: React.FC = () => {
       y: rect.bottom + 10
     }
 
-    if(state.window.width < 400) {
+    if(state.window.width <= 600) {
       position.x = 10;
     }
 

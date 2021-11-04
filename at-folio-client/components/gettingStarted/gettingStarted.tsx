@@ -8,10 +8,10 @@ export const GettingStarted: React.FC = () => {
     <div className="getting-started-wrapper">
       <div className="getting-started">
         <GettingStartedStep>
-          1. Select a <span className="highlight">pic</span>.
-        </GettingStartedStep>
+          1. Choose a <span className="highlight">username</span>.
+        </GettingStartedStep>        
         <GettingStartedStep>
-          2. Select a <span className="highlight">background</span>.
+          2. Select your <span className="highlight">pics</span>.
         </GettingStartedStep>
         <GettingStartedStep>
           3. Add your <span className="highlight">links</span>.
