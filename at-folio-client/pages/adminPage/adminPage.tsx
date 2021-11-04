@@ -1,31 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import { CreatorGridBackground } from "../../components/creatorGridBackground/creatorGridBackground";
 import { InitialProfileSetup } from "./components/initialProfileSetup/initialProfileSetup";
 import { Page } from "../../components/page/page";
 import { Profile } from "../../components/profile/profile";
+import { ProfileTutorial } from "./components/profileTutorial/profileTutorial";
 import { SettingsWrapper } from "./components/settings/settingsWrapper";
 
+import { AdminPageContext } from "./adminPageWrapper";
 import { AppContext } from "../../components/app/appWrapper";
 
-import { useFetchLinksEffect } from "./effects";
-
-import { defaultAdminPageState, IAdminPageState } from "./models/adminPageState";
-
-import { RequestStatus } from "../../enums/requestStatus";
+import { useFetchLinksEffect, useToggleTutorialEffect } from "./effects";
 
 export const AdminPage: React.FC = () => {  
-  const { appState } = useContext(AppContext);
+  const { profile } = useContext(AppContext),
+    { state } = useContext(AdminPageContext);
 
-  const { profile } = appState;
+  useFetchLinksEffect();
 
-  const [state, setStateTo] = useState<IAdminPageState>(defaultAdminPageState());
-
-  const setStatusTo = (status: RequestStatus): void => {
-    setStateTo({ ...state, status });
-  }
-
-  useFetchLinksEffect(state, setStatusTo);
+  useToggleTutorialEffect();
 
   const getContent = (): JSX.Element => {
     if(profile.username === "") {
@@ -37,7 +30,10 @@ export const AdminPage: React.FC = () => {
       );
     } else {
       return (
-        <SettingsWrapper />
+        <React.Fragment>
+          <SettingsWrapper />
+          <ProfileTutorial />
+        </React.Fragment>
       );
     }
   }

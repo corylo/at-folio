@@ -10,11 +10,12 @@
   z-index: 2;
 
   #settings-toolbar-inner-wrapper {
+    align-items: center;
     display: flex;
+    gap: 10px;
     width: 500px;
 
     #settings-toolbar {
-      animation: fadeInDown 400ms ease-in;
       backdrop-filter: blur(5px);
       background-color: rgba(white, 0.1);
       border-radius: 6px;
@@ -40,6 +41,17 @@
           line-height: 40px;
           width: 40px;
         }
+      }
+    }
+
+    #settings-toolbar-tutorial-toggle {
+      pointer-events: all;
+
+      i {
+        font-size: 1em;
+        height: 30px;
+        line-height: 30px;
+        width: 30px;
       }
     }
   }

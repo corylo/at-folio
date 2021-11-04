@@ -1,0 +1,108 @@
+#profile-tutorial {
+  animation: fadeInDown 250ms ease-in;
+  background-color: $themeColor;
+  border-radius: 6px;
+  box-shadow: $shadow3;
+  position: fixed;
+  width: 300px;
+  z-index: 10;
+
+  &:after {
+    background-color: $themeColor;
+    content: "";
+    height: 20px;
+    left: 10px;
+    position: absolute;
+    top: 3px;
+    transform: translateY(-50%) rotate(45deg);
+    width: 20px;
+    z-index: 1;
+  }
+
+  #profile-tutorial-content {
+    padding: 10px;
+    position: relative;
+    z-index: 2;
+
+    #profile-tutorial-step-title,
+    #profile-tutorial-steps-label {
+      color: white;
+    }
+
+    #profile-tutorial-header {
+      display: flex;
+      justify-content: space-between;
+
+      #profile-tutorial-step-title,
+      #profile-tutorial-steps-label {
+        font-size: 1.25em;
+      }
+    }
+
+    #profile-tutorial-step-description {
+      color: gray(30);
+      margin-top: 5px;
+    }
+
+    #profile-tutorial-steps-nav {
+      align-items: flex-end;
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+
+      .step-nav-button {
+        background-color: rgba(white, 0.1);
+        flex-grow: 1;
+
+        &:not(:disabled):hover,
+        &:not(:disabled):focus {
+          background-color: rgba(white, 0.2);
+
+          i {
+            color: white;
+          }
+        }
+
+        &:disabled {
+          opacity: 0.5;
+        }
+
+        i {
+          height: 30px;
+          line-height: 30px;
+          width: 30px;
+        }
+      }
+    }
+
+    #profile-tutorial-done-button {
+      background-color: rgba(white, 0.1);
+      font-size: 1em;
+      margin-top: 10px;
+      padding: 10px 15px;
+      
+      &:not(:disabled):hover,
+      &:not(:disabled):focus {
+        background-color: rgba(white, 0.2);
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  #profile-tutorial {
+    width: calc(100% - 20px);
+    
+    &.step-1 {
+      &:after {
+        left: 20px;
+      }
+    }
+
+    &.step-2 {
+      &:after {
+        left: 80px;
+      }
+    }
+  }
+}

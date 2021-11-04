@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 
-import { AdminPage, HomePage, ProfilePage, SignInPage, SignUpPage } from "../../pages/pages";
+import { AdminPageWrapper, HomePage, ProfilePage, SignInPage, SignUpPage } from "../../pages/pages";
 
 import { useOnAuthStateChangedEffect } from "../../effects/authEffects";
 
@@ -21,7 +21,7 @@ export const App: React.FC = () => {
           <SignUpPage />
         </Route>
         <Route exact path="/me">
-          <AdminPage />
+          <AdminPageWrapper />
         </Route>
         <Route exact path="/:username">
           <ProfilePage />

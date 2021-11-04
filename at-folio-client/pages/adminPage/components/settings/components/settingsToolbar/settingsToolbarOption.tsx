@@ -9,6 +9,7 @@ import { SettingsPanelOption } from "../../enums/settingsPanelOption";
 
 interface SettingsToolbarOptionProps {
   icon: string;
+  id: string;
   option: SettingsPanelOption;
   suboptions?: SettingsPanelOption[];
 }
@@ -26,6 +27,7 @@ export const SettingsToolbarOption: React.FC<SettingsToolbarOptionProps> = (prop
     <IconButton 
       className={classNames("settings-toolbar-option", { selected })}
       icon={props.icon}
+      id={props.id}
       handleOnClick={handleOnClick} 
     />
   );

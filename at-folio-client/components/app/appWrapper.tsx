@@ -4,6 +4,7 @@ import { App } from "./app";
 
 import { IAppContext } from "../../models/appContext";
 import { defaultAppState, IAppState, IAppTogglesUpdate } from "../../models/appState";
+import { IProfileAdminUpdate } from "../../../at-folio-models/profileAdmin";
 import { IProfileUpdate } from "../../../at-folio-models/profile";
 
 export const AppContext = createContext<IAppContext>(null);
@@ -31,12 +32,26 @@ export const AppWrapper: React.FC = () => {
     });
   }
 
+  const setProfileAdminTo = (admin: IProfileAdminUpdate): void => {
+    setAppStateTo({ 
+      ...appState, 
+      profile: { 
+        ...appState.profile,
+        admin: {
+          ...appState.profile.admin,
+          ...admin
+        }
+      }
+    });
+  }
+
   const value: IAppContext = { 
     appState, 
     profile: appState.profile,
     userStatus: appState.userStatus,
     setAppStateTo, 
     setAppTogglesTo,
+    setProfileAdminTo,
     setProfileTo
   };
 

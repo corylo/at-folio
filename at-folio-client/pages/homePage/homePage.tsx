@@ -11,10 +11,13 @@ import { RequestStatus } from "../../enums/requestStatus";
 import { UserStatus } from "../../enums/userStatus";
 
 export const HomePage: React.FC = () => { 
-  const { userStatus } = useContext(AppContext);
+  const { profile, userStatus } = useContext(AppContext);
 
   const getContent = (): JSX.Element => {
-    if(userStatus === UserStatus.SignedIn) {
+    if(
+      userStatus === UserStatus.SignedIn && 
+      (profile.username === "" || profile.background.id === "" || profile.photo.id === "")
+    ) {
       return (
         <GettingStarted />
       )

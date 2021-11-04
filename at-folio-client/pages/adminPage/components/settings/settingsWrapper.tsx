@@ -11,13 +11,8 @@ export const SettingsContext = createContext<ISettingsContext>(null);
 export const SettingsWrapper: React.FC = () => {
   const [option, setOptionTo] = useState<SettingsPanelOption>(SettingsPanelOption.None);
 
-  const value: ISettingsContext = { 
-    option, 
-    setOptionTo
-  };
-
   return (
-    <SettingsContext.Provider value={value}>
+    <SettingsContext.Provider value={{ option, setOptionTo }}>
       <Settings />
     </SettingsContext.Provider>
   )

@@ -37,7 +37,7 @@ export const ProfileService: IProfileService = {
     await batch.commit();
   },
   getByUID: async (uid: string): Promise<IProfile> => {
-    const ref: DocumentReference<IProfile> = doc(db, "profiles", uid)
+    const ref: DocumentReference<IProfile> = doc(db, FirestoreCollectionID.Profiles, uid)
       .withConverter<IProfile>(profileConverter);
 
     const snap: DocumentSnapshot<IProfile> = await getDoc(ref);

@@ -19,17 +19,17 @@ import { RequestStatus } from "../../enums/requestStatus";
 export const CreatorGridBackground: React.FC = () => {
   const ref: React.MutableRefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
-  const [state, setState] = useState<ICreatorGridBackgroundState>(defaultCreatorGridBackgroundState(
+  const [state, setStateTo] = useState<ICreatorGridBackgroundState>(defaultCreatorGridBackgroundState(
     CreatorGridBackgroundUtility.getTileDimensions(),
     5000,    
   ));
 
   const setIntervalTo = (interval: number): void => {
-    setState({ ...state, interval });
+    setStateTo({ ...state, interval });
   }
 
   const setPositionTo = (position: IPosition): void => {    
-    setState({ ...state, position });
+    setStateTo({ ...state, position });
   }
 
   const getRandomPosition = (): IPosition => {
@@ -51,7 +51,7 @@ export const CreatorGridBackground: React.FC = () => {
         const photos: IUnsplashPhoto[] = await DefaultPhotoService.getByType(DefaultPhotoType.Background);
         
         if(ref.current) {
-          setState({ 
+          setStateTo({ 
             ...state, 
             photos, 
             position: getRandomPosition(), 
@@ -87,7 +87,7 @@ export const CreatorGridBackground: React.FC = () => {
   useEffect(() => {    
     if(ref.current && state.status === RequestStatus.Success) {
       const handleOnResize = (): void => {
-        setState({
+        setStateTo({
           ...state,
           dimensions: CreatorGridBackgroundUtility.getTileDimensions(),
           position: getRandomPosition(),

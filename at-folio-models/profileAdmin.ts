@@ -5,6 +5,10 @@ export interface IProfileAdmin {
   tutorialComplete: boolean;
 }
 
+export interface IProfileAdminUpdate {
+  tutorialComplete?: boolean;
+}
+
 export const defaultProfileAdmin = (): IProfileAdmin => ({
   id: "",
   tutorialComplete: false

@@ -1,11 +1,11 @@
-import { AdminPage } from "./adminPage/adminPage";
+import { AdminPageWrapper } from "./adminPage/adminPageWrapper";
 import { HomePage } from "./homePage/homePage";
 import { ProfilePage } from "./profilePage/profilePage";
 import { SignInPage } from "./signInPage/signInPage";
 import { SignUpPage } from "./signUpPage/signUpPage";
 
 export {
-  AdminPage,
+  AdminPageWrapper,
   HomePage,
   ProfilePage,
   SignInPage,
