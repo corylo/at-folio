@@ -108,34 +108,39 @@ export const ProfileTutorialComponent: React.FC = () => {
         className={`step-${state.step}`}
         style={{ left: `${state.position.x}px`, top: `${state.position.y}px` }}
       >
-        <div id="profile-tutorial-content">
-          <div id="profile-tutorial-header">
-            <h1 id="profile-tutorial-step-title" className="rubik-font">{getTitle()}</h1>
-            <h1 id="profile-tutorial-steps-label" className="rubik-font">{state.step} / {state.steps}</h1>
+        <div id="profile-tutorial-content-wrapper">
+          <div id="profile-tutorial-icon">
+            <i className="fa-regular fa-circle-info" />
           </div>
-          <h1 id="profile-tutorial-step-description" className="rubik-font">{getDescription()}</h1>
-          <div id="profile-tutorial-steps-nav">
-            <IconButton 
-              className="step-nav-button"
-              disabled={state.step === 1}
-              icon="fa-regular fa-arrow-left" 
-              handleOnClick={() => handleOnStepChange(Math.max(state.step - 1, 1))} 
-            />
-            <IconButton 
-              className="step-nav-button"
-              disabled={state.step === state.steps}
-              icon="fa-regular fa-arrow-right" 
-              handleOnClick={() => handleOnStepChange(Math.min(state.step + 1, 2))} 
-            />
+          <div id="profile-tutorial-content">
+            <div id="profile-tutorial-header">
+              <h1 id="profile-tutorial-step-title" className="rubik-font">{getTitle()}</h1>
+              <h1 id="profile-tutorial-steps-label" className="rubik-font">{state.step} / {state.steps}</h1>
+            </div>
+            <h1 id="profile-tutorial-step-description" className="rubik-font">{getDescription()}</h1>
+            <div id="profile-tutorial-steps-nav">
+              <IconButton 
+                className="step-nav-button"
+                disabled={state.step === 1}
+                icon="fa-regular fa-arrow-left" 
+                handleOnClick={() => handleOnStepChange(Math.max(state.step - 1, 1))} 
+              />
+              <IconButton 
+                className="step-nav-button"
+                disabled={state.step === state.steps}
+                icon="fa-regular fa-arrow-right" 
+                handleOnClick={() => handleOnStepChange(Math.min(state.step + 1, 2))} 
+              />
+            </div>
+            <button 
+              id="profile-tutorial-done-button"
+              type="button" 
+              className="button rubik-font" 
+              onClick={handleOnDone}
+            >
+              Done
+            </button>
           </div>
-          <button 
-            id="profile-tutorial-done-button"
-            type="button" 
-            className="button rubik-font" 
-            onClick={handleOnDone}
-          >
-            Done
-          </button>
         </div>
       </div>,
       document.body

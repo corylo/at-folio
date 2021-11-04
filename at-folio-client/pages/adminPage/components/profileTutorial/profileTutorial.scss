@@ -4,7 +4,7 @@
   border-radius: 6px;
   box-shadow: $shadow3;
   position: fixed;
-  width: 300px;
+  width: 340px;
   z-index: 10;
 
   &:after {
@@ -19,71 +19,90 @@
     z-index: 1;
   }
 
-  #profile-tutorial-content {
+  #profile-tutorial-content-wrapper {
+    display: flex;
+    gap: 10px;
     padding: 10px;
     position: relative;
     z-index: 2;
 
-    #profile-tutorial-step-title,
-    #profile-tutorial-steps-label {
-      color: white;
+    #profile-tutorial-icon {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+
+      i {        
+        color: white;
+      }
     }
 
-    #profile-tutorial-header {
-      display: flex;
-      justify-content: space-between;
+    #profile-tutorial-content {
+      background-color: rgba(white, 0.1);
+      border-radius: 6px;
+      flex-grow: 1;
+      padding: 10px;
 
       #profile-tutorial-step-title,
       #profile-tutorial-steps-label {
-        font-size: 1.25em;
+        color: white;
       }
-    }
 
-    #profile-tutorial-step-description {
-      color: gray(30);
-      margin-top: 5px;
-    }
+      #profile-tutorial-header {
+        display: flex;
+        justify-content: space-between;
 
-    #profile-tutorial-steps-nav {
-      align-items: flex-end;
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
+        #profile-tutorial-step-title,
+        #profile-tutorial-steps-label {
+          font-size: 1.25em;
+        }
+      }
 
-      .step-nav-button {
+      #profile-tutorial-step-description {
+        color: gray(30);
+        margin-top: 5px;
+      }
+
+      #profile-tutorial-steps-nav {
+        align-items: flex-end;
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+
+        .step-nav-button {
+          background-color: rgba(white, 0.1);
+          flex-grow: 1;
+
+          &:not(:disabled):hover,
+          &:not(:disabled):focus {
+            background-color: rgba(white, 0.2);
+
+            i {
+              color: white;
+            }
+          }
+
+          &:disabled {
+            opacity: 0.5;
+          }
+
+          i {
+            height: 30px;
+            line-height: 30px;
+            width: 30px;
+          }
+        }
+      }
+
+      #profile-tutorial-done-button {
         background-color: rgba(white, 0.1);
-        flex-grow: 1;
-
+        font-size: 1em;
+        margin-top: 10px;
+        padding: 10px 15px;
+        
         &:not(:disabled):hover,
         &:not(:disabled):focus {
           background-color: rgba(white, 0.2);
-
-          i {
-            color: white;
-          }
         }
-
-        &:disabled {
-          opacity: 0.5;
-        }
-
-        i {
-          height: 30px;
-          line-height: 30px;
-          width: 30px;
-        }
-      }
-    }
-
-    #profile-tutorial-done-button {
-      background-color: rgba(white, 0.1);
-      font-size: 1em;
-      margin-top: 10px;
-      padding: 10px 15px;
-      
-      &:not(:disabled):hover,
-      &:not(:disabled):focus {
-        background-color: rgba(white, 0.2);
       }
     }
   }
