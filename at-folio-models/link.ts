@@ -1,17 +1,15 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot } from "@firebase/firestore";
 
-import { SocialPlatform } from "../at-folio-enums/socialPlatform";
-
 export interface ILink {
   id: string;
   label: string;
-  platform: SocialPlatform;
+  platform: string;
   url: string;
 }
 
 export interface ILinkUpdate {
   label?: string;
-  platform?: SocialPlatform;
+  platform?: string;
   url?: string;
 }
 

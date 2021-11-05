@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classNames from "classnames";
 
 import { Form } from "../../../../components/form/form";
@@ -7,6 +7,8 @@ import { FormBody } from "../../../../components/form/formBody";
 import { IconButton } from "../../../../components/button/iconButton/iconButton";
 import { Input } from "../../../../components/input/input";
 import { SocialPlatformPicker } from "../../../../components/socialPlatformPicker/socialPlatformPicker";
+
+import { AppContext } from "../../../../components/app/appWrapper";
 
 import { LinkFormValidator } from "./validators/linkFormValidator";
 
@@ -21,7 +23,6 @@ import { defaultLinkFormState, ILinkFormState } from "./models/linkFormState";
 import { FormError } from "../../../../enums/formError";
 import { FormMode } from "../../../../enums/formMode";
 import { RequestStatus } from "../../../../enums/requestStatus";
-import { SocialPlatform } from "../../../../../at-folio-enums/socialPlatform";
 
 interface LinkFormProps {
   id?: string;
@@ -32,6 +33,8 @@ interface LinkFormProps {
 }
 
 export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {  
+  const { platforms } = useContext(AppContext);
+
   const [state, setState] = useState<ILinkFormState>(defaultLinkFormState(props.link));
 
   const { errors, fields } = state;
@@ -43,7 +46,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
   }
 
   useEffect(() => {
-    if(fields.platform === SocialPlatform.None) {
+    if(fields.platform === "") {
       setValueTo("url", "");
     }
   }, [fields.platform]);
@@ -63,7 +66,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
   }, [props.link]);
 
   const handleOnSave = async (): Promise<void> => {
-    const updates: ILinkFormState = LinkFormValidator.validate(state);
+    const updates: ILinkFormState = LinkFormValidator.validate(state, platforms);
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
@@ -72,7 +75,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
         const link: ILink = { 
           label: fields.label,
           platform: fields.platform, 
-          url: UrlUtility.finalize(fields.url, SocialPlatformUtility.getSLDByPlatform(fields.platform)),
+          url: UrlUtility.finalize(fields.url, SocialPlatformUtility.getUrlByPlatform(fields.platform, platforms)),
           id: props.link ? props.link.id : ""
         }
 
@@ -112,7 +115,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
   }
 
   const getRemainingFields = (): JSX.Element => {
-    if(fields.platform !== SocialPlatform.None) {
+    if(fields.platform !== "") {
       const getLabelInput = (): JSX.Element => {
         if(!disabled || props.link.label) {
           return (
@@ -186,8 +189,8 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
         <Input label="Platform" error={errors.platform}>
           <SocialPlatformPicker 
             disabled={disabled}
-            selectedPlatform={fields.platform} 
-            handleOnChange={(platform: SocialPlatform) => setValueTo("platform", platform)} 
+            selectedPlatform={fields.platform}
+            handleOnChange={(platform: string) => setValueTo("platform", platform)} 
           />
         </Input>
         {getRemainingFields()}

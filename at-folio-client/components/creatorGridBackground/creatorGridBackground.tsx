@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import _debounce from "lodash.debounce";
 
 import { DefaultPhotoService } from "../../services/defaultPhotoService";
@@ -11,18 +11,20 @@ import { IPosition } from "../../models/position";
 import { ISize } from "../../models/size";
 import { IUnsplashPhoto } from "../../../at-folio-models/unsplashPhoto";
 
-import { DefaultPhotoType } from "../../../at-folio-enums/defaultPhotoType";
-import { SocialPlatform } from "../../../at-folio-enums/socialPlatform";
+import { AppContext } from "../app/appWrapper";
 
+import { DefaultPhotoType } from "../../../at-folio-enums/defaultPhotoType";
 import { RequestStatus } from "../../enums/requestStatus";
 
 export const CreatorGridBackground: React.FC = () => {
-  const ref: React.MutableRefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const { platforms } = useContext(AppContext);
 
   const [state, setStateTo] = useState<ICreatorGridBackgroundState>(defaultCreatorGridBackgroundState(
     CreatorGridBackgroundUtility.getTileDimensions(),
     5000,    
   ));
+
+  const ref: React.MutableRefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
   const setIntervalTo = (interval: number): void => {
     setStateTo({ ...state, interval });
@@ -119,8 +121,7 @@ export const CreatorGridBackground: React.FC = () => {
 
   const getTiles = (): JSX.Element[] => {
     if(state.status === RequestStatus.Success) {
-      const platforms: SocialPlatform[] = SocialPlatformUtility.getPlatforms(),
-        backgrounds: IUnsplashPhoto[] = state.photos.slice(0, 9);
+      const backgrounds: IUnsplashPhoto[] = state.photos.slice(0, 9);
 
       let tiles: JSX.Element[] = [];
 
@@ -145,7 +146,7 @@ export const CreatorGridBackground: React.FC = () => {
           <div key={`platform-${i}`} className="creator-tile platform" style={styles}>
             <div 
               className="creator-tile-image" 
-              style={{ backgroundImage: `url(${SocialPlatformUtility.getPlatformImageUrl(platforms[i])})` }} 
+              style={{ backgroundImage: `url(${SocialPlatformUtility.getPlatformImageUrl(platforms[Math.min(i, platforms.length - 1)].name)})` }} 
             />
           </div>
         )

@@ -15,7 +15,7 @@ interface IDefaultPhotoService {
 
 export const DefaultPhotoService: IDefaultPhotoService = {
   getByType: async (type: DefaultPhotoType | DefaultPhotoCategory): Promise<IUnsplashPhoto[]> => {
-    const ref: DocumentReference<IUnsplashPhotoGroup> = doc(db, FirestoreCollectionID.DefaultPhotos, type)
+    const ref: DocumentReference<IUnsplashPhotoGroup> = doc(db, FirestoreCollectionID.DefaultPhotos, type.toLowerCase())
       .withConverter<IUnsplashPhotoGroup>(unsplashPhotoGroupConverter);
 
     const snap: DocumentSnapshot<IUnsplashPhotoGroup> = await getDoc(ref);

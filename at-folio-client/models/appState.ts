@@ -1,6 +1,7 @@
 import { User } from "@firebase/auth";
 
 import { defaultProfile, IProfile } from "../../at-folio-models/profile";
+import { ISocialPlatform } from "../../at-folio-models/socialPlatform";
 
 import { UserStatus } from "../enums/userStatus";
 
@@ -17,6 +18,7 @@ export const defaultAppToggles = (): IAppToggles => ({
 });
 
 export interface IAppState {
+  platforms: ISocialPlatform[];
   profile: IProfile
   toggles: IAppToggles;
   user: User;
@@ -24,6 +26,7 @@ export interface IAppState {
 }
 
 export const defaultAppState = (): IAppState => ({
+  platforms: [],
   profile: defaultProfile(),
   toggles: defaultAppToggles(),
   user: null,

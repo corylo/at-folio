@@ -3,7 +3,6 @@ import { ILink } from "../../../../../../at-folio-models/link";
 
 import { FormError } from "../../../../../enums/formError";
 import { RequestStatus } from "../../../../../enums/requestStatus";
-import { SocialPlatform } from "../../../../../../at-folio-enums/socialPlatform";
 
 export interface ILinkFormState extends IFormState {
   errors: {
@@ -13,7 +12,7 @@ export interface ILinkFormState extends IFormState {
   };
   fields: {
     label: string;
-    platform: SocialPlatform;
+    platform: string;
     url: string;
   };
 }
@@ -27,7 +26,7 @@ export const defaultLinkFormState = (link?: ILink): ILinkFormState => ({
   },
   fields: {
     label: link ? link.label : "",
-    platform: link ? link.platform : SocialPlatform.None,
+    platform: link ? link.platform : "",
     url: link ? link.url : ""
   },
   status: RequestStatus.Idle

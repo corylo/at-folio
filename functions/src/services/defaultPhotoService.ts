@@ -48,7 +48,7 @@ export const DefaultPhotoService: IDefaultPhotoService = {
   },  
   updateByType: async (type: DefaultPhotoType | DefaultPhotoCategory, photos: IUnsplashPhoto[]): Promise<void> => {        
     await admin.collection(FirestoreCollectionID.DefaultPhotos)
-      .doc(type)
+      .doc(type.toLowerCase())
       .withConverter<IUnsplashPhotoGroup>(unsplashPhotoGroupConverter)
       .set({ photos, type: null });
   }

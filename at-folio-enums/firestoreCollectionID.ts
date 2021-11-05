@@ -3,5 +3,6 @@ export enum FirestoreCollectionID {
   DefaultPhotos = "default_photos",
   Links = "links",  
   Profiles = "profiles",
+  SocialPlatforms = "social_platforms",
   Usernames = "usernames"
 }

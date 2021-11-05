@@ -5,17 +5,17 @@ import { LodashUtility } from "../../../../../utilities/lodashUtility";
 import { SocialPlatformUtility } from "../../../../../utilities/socialPlatformUtility";
 
 import { ILinkFormState } from "../models/linkFormState";
+import { ISocialPlatform } from "../../../../../../at-folio-models/socialPlatform";
 
 import { FormError } from "../../../../../enums/formError";
-import { SocialPlatform } from "../../../../../../at-folio-enums/socialPlatform";
 
 interface ILinkFormValidator {
-  validate: (state: ILinkFormState) => ILinkFormState;
-  validateUrl: (platform: SocialPlatform, url: string) => boolean;
+  validate: (state: ILinkFormState, platforms: ISocialPlatform[]) => ILinkFormState;
+  validateUrl: (platform: string, url: string, platforms: ISocialPlatform[]) => boolean;
 }
 
 export const LinkFormValidator: ILinkFormValidator = {
-  validate: (state: ILinkFormState): ILinkFormState => {
+  validate: (state: ILinkFormState, platforms: ISocialPlatform[]): ILinkFormState => {
     const copy: ILinkFormState = LodashUtility.clone(state);
 
     const { errors, fields } = copy;
@@ -28,7 +28,7 @@ export const LinkFormValidator: ILinkFormValidator = {
 
     if(!FormValidator.isNotEmpty(fields.url)) {
       errors.url = FormError.MissingValue;
-    } else if (!LinkFormValidator.validateUrl(fields.platform, fields.url)) {
+    } else if (!LinkFormValidator.validateUrl(fields.platform, fields.url, platforms)) {
       errors.url = FormError.InvalidValue;
     } else {
       errors.url = FormError.None;
@@ -36,9 +36,9 @@ export const LinkFormValidator: ILinkFormValidator = {
 
     return copy;
   },
-  validateUrl: (platform: SocialPlatform, url: string): boolean => {
+  validateUrl: (platform: string, url: string, platforms: ISocialPlatform[]): boolean => {
     if(UrlValidator.validate(url)) {
-      return UrlValidator.validateSLD(url, SocialPlatformUtility.getSLDByPlatform(platform));
+      return UrlValidator.validateSLD(url, SocialPlatformUtility.getUrlByPlatform(platform, platforms));
     }
 
     return false;
