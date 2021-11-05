@@ -18,10 +18,10 @@ interface PageProps {
 }
 
 export const Page: React.FC<PageProps> = (props: PageProps) => {
-  const { appState } = useContext(AppContext);
+  const { userStatus } = useContext(AppContext);
 
   const getContent = (): JSX.Element => {
-    if(appState.userStatus === UserStatus.Loading || props.status === RequestStatus.Loading) {
+    if(userStatus === UserStatus.Loading || props.status === RequestStatus.Loading) {
       return (
         <LoadingSpinner wrapperID="page-loading-spinner" />
       )
@@ -30,7 +30,7 @@ export const Page: React.FC<PageProps> = (props: PageProps) => {
     return props.children;
   }
 
-  if(props.signInRequired && appState.userStatus === UserStatus.SignedOut) {
+  if(props.signInRequired && userStatus === UserStatus.SignedOut) {
     return (
       <Redirect to="/" />
     )

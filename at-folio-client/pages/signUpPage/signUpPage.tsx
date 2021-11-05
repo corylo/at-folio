@@ -12,9 +12,9 @@ import { UserStatus } from "../../enums/userStatus";
 
 
 export const SignUpPage: React.FC = () => {
-  const { appState } = useContext(AppContext);
+  const { userStatus } = useContext(AppContext);
 
-  if(appState.userStatus === UserStatus.SignedIn) {
+  if(userStatus === UserStatus.SignedIn) {
     return (
       <Redirect to="/" />
     )

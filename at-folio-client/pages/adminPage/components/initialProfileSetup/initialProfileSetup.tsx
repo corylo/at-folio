@@ -21,7 +21,7 @@ import { defaultUnsplashPhotoReference } from "../../../../../at-folio-models/un
 import { RequestStatus } from "../../../../enums/requestStatus";
 
 export const InitialProfileSetup: React.FC = () => {
-  const { appState, setProfileTo } = useContext(AppContext);
+  const { user, setProfileTo } = useContext(AppContext);
 
   const [state, setState] = useState<IInitialSetupState>(defaultInitialSetupState());
 
@@ -41,7 +41,7 @@ export const InitialProfileSetup: React.FC = () => {
         const profile: IProfileUpdate = {
           background: defaultUnsplashPhotoReference(),                    
           photo: defaultUnsplashPhotoReference(),
-          uid: appState.user.uid,
+          uid: user.uid,
           username: fields.username
         }
 

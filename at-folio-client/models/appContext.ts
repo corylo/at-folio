@@ -1,3 +1,5 @@
+import { User } from "@firebase/auth";
+
 import { IAppState, IAppTogglesUpdate } from "./appState";
 import { IProfileAdminUpdate } from "../../at-folio-models/profileAdmin";
 import { IProfile, IProfileUpdate } from "../../at-folio-models/profile";
@@ -9,6 +11,7 @@ export interface IAppContext {
   appState: IAppState;
   platforms: ISocialPlatform[];
   profile: IProfile;
+  user: User;
   userStatus: UserStatus;
   setAppStateTo: (state: IAppState) => void;
   setAppTogglesTo: (toggles: IAppTogglesUpdate) => void;

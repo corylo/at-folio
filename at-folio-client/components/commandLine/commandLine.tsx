@@ -23,9 +23,7 @@ interface CommandLineProps {
 }
 
 export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps) => {
-  const { appState, setAppTogglesTo } = useContext(AppContext);
-
-  const { profile } = appState;
+  const { profile, setAppTogglesTo } = useContext(AppContext);
 
   const [state, setStateTo] = useState<ICommandLineState>(defaultCommandLineState());
 

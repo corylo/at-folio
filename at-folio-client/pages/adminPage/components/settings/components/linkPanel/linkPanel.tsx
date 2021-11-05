@@ -10,9 +10,7 @@ import { AppContext } from "../../../../../../components/app/appWrapper";
 import { ILink } from "../../../../../../../at-folio-models/link";
 
 export const LinkPanel: React.FC = () => {
-  const { appState } = useContext(AppContext);
-
-  const { profile } = appState;
+  const { profile } = useContext(AppContext);
 
   const getLinksSection = (): JSX.Element => {
     if(profile.links.length > 0) {

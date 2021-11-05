@@ -6,8 +6,6 @@ import { UrlUtility } from "../../../utilities/urlUtility";
 import { ILink } from "../../../../at-folio-models/link";
 import { IProfile } from "../../../../at-folio-models/profile";
 
-import { SocialPlatform } from "../../../../at-folio-enums/socialPlatform";
-
 interface ISocialPlatformNetworkUtility {
   getOptions: () => Options;
   getPlatformData: (profile: IProfile) => Data;

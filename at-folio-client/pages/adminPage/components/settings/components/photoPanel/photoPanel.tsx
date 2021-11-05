@@ -18,10 +18,8 @@ import { DefaultPhotoType } from "../../../../../../../at-folio-enums/defaultPho
 import { SettingsPanelOption } from "../../enums/settingsPanelOption";
 
 export const PhotoPanel: React.FC = () => {
-  const { appState, setProfileTo } = useContext(AppContext),
+  const { profile, setProfileTo } = useContext(AppContext),
     { setOptionTo } = useContext(SettingsContext);
-
-  const { profile } = appState;
 
   const saveProfileImage = async (selectedPhoto: IUnsplashPhoto): Promise<void> => {
     const photo: IUnsplashPhotoReference = UnsplashUtility.mapPhotoReference(selectedPhoto);

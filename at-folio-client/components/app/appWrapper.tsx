@@ -49,6 +49,7 @@ export const AppWrapper: React.FC = () => {
     appState, 
     platforms: appState.platforms,
     profile: appState.profile,
+    user: appState.user,
     userStatus: appState.userStatus,
     setAppStateTo, 
     setAppTogglesTo,

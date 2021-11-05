@@ -14,18 +14,18 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
-  const { appState } = useContext(AppContext);
+  const { userStatus } = useContext(AppContext);
 
   const match: any = useRouteMatch(),
     location: any = useLocation();
 
-  if(appState.userStatus !== UserStatus.Loading) {
+  if(userStatus !== UserStatus.Loading) {
     const getContent = (): JSX.Element => {
-      if(appState.userStatus === UserStatus.SignedIn) {
+      if(userStatus === UserStatus.SignedIn) {
         return (
           <CommandLine />
         )
-      } else if (appState.userStatus === UserStatus.SignedOut) {
+      } else if (userStatus === UserStatus.SignedOut) {
         const getSignInLink = (): JSX.Element => {        
           if(location.pathname !== "/sign-in" && match.path !== "/:username") {
             return (
