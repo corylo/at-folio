@@ -2,7 +2,7 @@ import { FormValidator } from "../../../../../validators/formValidator";
 import { UrlValidator } from "../../../../../validators/urlValidator";
 
 import { LodashUtility } from "../../../../../utilities/lodashUtility";
-import { SocialPlatformNetworkUtility } from "../../../../../utilities/socialPlatformNetworkUtility";
+import { SocialPlatformUtility } from "../../../../../utilities/socialPlatformUtility";
 
 import { ILinkFormState } from "../models/linkFormState";
 
@@ -38,7 +38,7 @@ export const LinkFormValidator: ILinkFormValidator = {
   },
   validateUrl: (platform: SocialPlatform, url: string): boolean => {
     if(UrlValidator.validate(url)) {
-      return UrlValidator.validateSLD(url, SocialPlatformNetworkUtility.getSLDByPlatform(platform));
+      return UrlValidator.validateSLD(url, SocialPlatformUtility.getSLDByPlatform(platform));
     }
 
     return false;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Data, Network, Options } from "vis-network/standalone";
 
-import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
+import { SocialPlatformNetworkUtility } from "./utilities/socialPlatformNetworkUtility";
 
 import { IProfile } from "../../../at-folio-models/profile";
 

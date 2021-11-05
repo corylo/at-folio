@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
+import { SocialPlatformUtility } from "../../utilities/socialPlatformUtility";
 
 import { SocialPlatform } from "../../../at-folio-enums/socialPlatform";
 
@@ -12,7 +12,7 @@ interface SocialPlatformPickerProps {
 
 export const SocialPlatformPicker: React.FC<SocialPlatformPickerProps> = (props: SocialPlatformPickerProps) => {
   const getOptions = (): JSX.Element[] => {
-    return SocialPlatformNetworkUtility.getPlatforms().map((platform: SocialPlatform) => (
+    return SocialPlatformUtility.getPlatforms().map((platform: SocialPlatform) => (
       <option key={platform} value={platform}>{platform}</option>
     ));
   }
@@ -20,7 +20,7 @@ export const SocialPlatformPicker: React.FC<SocialPlatformPickerProps> = (props:
   const getSelectedOption = (): JSX.Element => {
     if(props.selectedPlatform !== SocialPlatform.None) {
       const styles: React.CSSProperties = {
-        backgroundImage: `url(${SocialPlatformNetworkUtility.getPlatformImageUrl(props.selectedPlatform)})`
+        backgroundImage: `url(${SocialPlatformUtility.getPlatformImageUrl(props.selectedPlatform)})`
       };
 
       return (

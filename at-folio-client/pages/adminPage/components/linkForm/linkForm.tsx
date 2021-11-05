@@ -11,7 +11,7 @@ import { SocialPlatformPicker } from "../../../../components/socialPlatformPicke
 import { LinkFormValidator } from "./validators/linkFormValidator";
 
 import { FormUtility } from "../../../../utilities/formUtility";
-import { SocialPlatformNetworkUtility } from "../../../../utilities/socialPlatformNetworkUtility";
+import { SocialPlatformUtility } from "../../../../utilities/socialPlatformUtility";
 import { UrlUtility } from "../../../../utilities/urlUtility";
 
 import { IFormAction } from "../../../../models/formAction";
@@ -72,7 +72,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
         const link: ILink = { 
           label: fields.label,
           platform: fields.platform, 
-          url: UrlUtility.finalize(fields.url, SocialPlatformNetworkUtility.getSLDByPlatform(fields.platform)),
+          url: UrlUtility.finalize(fields.url, SocialPlatformUtility.getSLDByPlatform(fields.platform)),
           id: props.link ? props.link.id : ""
         }
 

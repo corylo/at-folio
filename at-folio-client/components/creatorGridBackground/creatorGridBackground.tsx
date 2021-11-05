@@ -4,7 +4,7 @@ import _debounce from "lodash.debounce";
 import { DefaultPhotoService } from "../../services/defaultPhotoService";
 
 import { CreatorGridBackgroundUtility } from "./utilities/creatorGridBackgroundUtility";
-import { SocialPlatformNetworkUtility } from "../../utilities/socialPlatformNetworkUtility";
+import { SocialPlatformUtility } from "../../utilities/socialPlatformUtility";
 
 import { defaultCreatorGridBackgroundState, ICreatorGridBackgroundState } from "./models/creatorGridBackgroundState";
 import { IPosition } from "../../models/position";
@@ -119,7 +119,7 @@ export const CreatorGridBackground: React.FC = () => {
 
   const getTiles = (): JSX.Element[] => {
     if(state.status === RequestStatus.Success) {
-      const platforms: SocialPlatform[] = SocialPlatformNetworkUtility.getPlatforms(),
+      const platforms: SocialPlatform[] = SocialPlatformUtility.getPlatforms(),
         backgrounds: IUnsplashPhoto[] = state.photos.slice(0, 9);
 
       let tiles: JSX.Element[] = [];
@@ -145,7 +145,7 @@ export const CreatorGridBackground: React.FC = () => {
           <div key={`platform-${i}`} className="creator-tile platform" style={styles}>
             <div 
               className="creator-tile-image" 
-              style={{ backgroundImage: `url(${SocialPlatformNetworkUtility.getPlatformImageUrl(platforms[i])})` }} 
+              style={{ backgroundImage: `url(${SocialPlatformUtility.getPlatformImageUrl(platforms[i])})` }} 
             />
           </div>
         )
