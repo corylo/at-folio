@@ -4,11 +4,13 @@ import { SocialPlatform } from "../at-folio-enums/socialPlatform";
 
 export interface ILink {
   id: string;
+  label: string;
   platform: SocialPlatform;
   url: string;
 }
 
 export interface ILinkUpdate {
+  label?: string;
   platform?: SocialPlatform;
   url?: string;
 }
@@ -16,6 +18,7 @@ export interface ILinkUpdate {
 export const linkConverter: FirestoreDataConverter<ILink> = {
   toFirestore(link: ILink): DocumentData {
     return {
+      label: link.label,
       platform: link.platform,
       url: link.url
     }
@@ -25,6 +28,7 @@ export const linkConverter: FirestoreDataConverter<ILink> = {
 
     return {
       id: snapshot.id,
+      label: data.label,
       platform: data.platform,
       url: data.url
     }

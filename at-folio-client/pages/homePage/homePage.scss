@@ -1,15 +1,5 @@
 #home-page {
-  .brand-statement,
-  .getting-started-wrapper {
+  .brand-statement {
     height: 100vh;
-  }
-}
-
-@media (max-height: 600px) {
-  #home-page {
-    .getting-started-wrapper {
-      height: auto;
-      margin-top: 80px;
-    }
   }
 }

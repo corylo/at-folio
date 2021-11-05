@@ -1,6 +1,7 @@
 .getting-started-wrapper {
   align-items: center;
   display: flex;
+  height: 100vh;
   justify-content: center;
 
   .getting-started {
@@ -21,8 +22,26 @@
       }
     }
 
-    .get-started-link {
+    .link,
+    .button {
       width: 200px;
     }
+  }
+}
+
+@media (max-width: 600px) {
+  .getting-started-wrapper {
+    .getting-started {
+      .getting-started-step {
+        font-size: 1.5em;
+      }
+    }
+  }
+}
+
+@media (max-height: 600px) {
+  .getting-started-wrapper {
+    height: auto;
+    margin-top: 80px;
   }
 }

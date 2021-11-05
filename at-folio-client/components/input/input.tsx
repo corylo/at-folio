@@ -8,6 +8,8 @@ import { FormError } from "../../enums/formError";
 interface InputProps {
   children: any;
   className?: string;
+  maxLength?: number;
+  value?: string;
   error?: FormError;
   errorMessage?: string;
   label?: string;
@@ -18,8 +20,14 @@ export const Input: React.FC<InputProps> = (props: InputProps) => {
     if(props.error || props.label) {
       const getLabel = (): JSX.Element => {
         if(props.label) {
+          const getMaxLength = (): string | null => {
+            if(props.maxLength && props.value) {
+              return ` (${props.value.length} / ${props.maxLength})`;
+            }
+          }
+
           return (
-            <h1 className="input-label rubik-font">{props.label}</h1>      
+            <h1 className="input-label rubik-font">{props.label}{getMaxLength()}</h1>      
           )
         }
       }

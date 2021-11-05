@@ -69,9 +69,10 @@ export const InitialProfileSetup: React.FC = () => {
       <div id="initial-profile-setup-content">
         <Form id="initial-profile-setup-form">
           <FormBody errorMessage={state.errorMessage} status={state.status}>
-            <Input label="Username" error={errors.username}>
+            <Input label="Username" value={fields.username} maxLength={30} error={errors.username}>
               <input 
-                type="text" 
+                type="text"                 
+                maxLength={30}
                 placeholder="Enter username" 
                 value={fields.username}
                 onChange={(e: any) => setValueTo("username", e.target.value)}

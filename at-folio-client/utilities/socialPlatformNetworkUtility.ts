@@ -126,6 +126,7 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
       id: link.id,
       image: `img/icons/${link.platform.toLowerCase()}.svg`,
       imagePadding: 20,      
+      label: link.label || null,
       shape: "circularImage",
       size: 60,
       title: UrlUtility.removeHttpProtocol(link.url),

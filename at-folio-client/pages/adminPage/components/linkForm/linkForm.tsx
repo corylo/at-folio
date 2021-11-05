@@ -15,8 +15,8 @@ import { SocialPlatformNetworkUtility } from "../../../../utilities/socialPlatfo
 import { UrlUtility } from "../../../../utilities/urlUtility";
 
 import { IFormAction } from "../../../../models/formAction";
-import { defaultLinkFormState, ILinkFormState } from "./models/linkFormState";
 import { ILink } from "../../../../../at-folio-models/link";
+import { defaultLinkFormState, ILinkFormState } from "./models/linkFormState";
 
 import { FormError } from "../../../../enums/formError";
 import { FormMode } from "../../../../enums/formMode";
@@ -53,6 +53,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
       setState({ 
         ...state, 
         fields: { 
+          label: props.link.label,
           platform: props.link.platform, 
           url: props.link.url 
         },
@@ -69,6 +70,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
         setState({ ...updates, status: RequestStatus.Loading });
 
         const link: ILink = { 
+          label: fields.label,
           platform: fields.platform, 
           url: UrlUtility.finalize(fields.url, SocialPlatformNetworkUtility.getSLDByPlatform(fields.platform)),
           id: props.link ? props.link.id : ""
@@ -109,25 +111,46 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
     }
   }
 
-  const getUrlField = (): JSX.Element => {
+  const getRemainingFields = (): JSX.Element => {
     if(fields.platform !== SocialPlatform.None) {
+      const getLabelInput = (): JSX.Element => {
+        if(!disabled || props.link.label) {
+          return (
+            <Input label="Label (Optional)" value={fields.label} maxLength={30} error={errors.label}>
+              <input 
+                type="text" 
+                disabled={disabled}
+                maxLength={30}
+                placeholder="Enter label" 
+                value={fields.label}
+                onChange={(e: any) => setValueTo("label", e.target.value)}
+                onKeyDown={handleOnKeyDown}
+              />
+            </Input>
+          )
+        }
+      }
+
       const getUrlErrorMessage = (): string => {
         if(errors.url === FormError.InvalidValue) {
           return `Please enter a valid ${fields.platform} url.`;
         }
       }
 
-      return (        
-        <Input label="Url" error={errors.url} errorMessage={getUrlErrorMessage()}>
-          <input 
-            type="text" 
-            disabled={disabled}
-            placeholder="Enter url" 
-            value={fields.url}
-            onChange={(e: any) => setValueTo("url", e.target.value)}
-            onKeyDown={handleOnKeyDown}
-          />
-        </Input>
+      return (      
+        <React.Fragment>
+          <Input label="Url" error={errors.url} errorMessage={getUrlErrorMessage()}>
+            <input 
+              type="text" 
+              disabled={disabled}
+              placeholder="Enter url" 
+              value={fields.url}
+              onChange={(e: any) => setValueTo("url", e.target.value)}
+              onKeyDown={handleOnKeyDown}
+            />
+          </Input>
+          {getLabelInput()}
+        </React.Fragment>  
       )
     }
   }
@@ -167,7 +190,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
             handleOnChange={(platform: SocialPlatform) => setValueTo("platform", platform)} 
           />
         </Input>
-        {getUrlField()}
+        {getRemainingFields()}
       </FormBody>
       <FormActions status={state.status}>
         {getActions()}
