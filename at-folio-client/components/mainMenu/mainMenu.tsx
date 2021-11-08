@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { IconButton } from "../button/iconButton/iconButton";
 import { Logo } from "../logo/logo";
@@ -16,15 +15,15 @@ import { defaultMainMenuState, IMainMenuState } from "./models/mainMenuState";
 
 import { RequestStatus } from "../../enums/requestStatus";
 
-interface MainMenuProps {
-  
-}
-
-export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
+export const MainMenu: React.FC = () => {
   const { appState, setAppTogglesTo } = useContext(AppContext);
 
   const { profile, toggles } = appState;
 
+  const detoggle = () => {
+    setAppTogglesTo({ mainMenu: false });
+  }
+  
   const [state, setState] = useState<IMainMenuState>(defaultMainMenuState());
 
   const setStatusTo = (status: RequestStatus): void => {
@@ -43,10 +42,6 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
     }
   }
 
-  const detoggle = () => {
-    setAppTogglesTo({ mainMenu: false });
-  }
-  
   return (
     <Modal 
       contentID="main-menu" 

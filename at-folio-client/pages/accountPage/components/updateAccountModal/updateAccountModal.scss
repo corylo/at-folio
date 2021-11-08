@@ -1,0 +1,24 @@
+.update-account-modal-wrapper {
+  .modal {    
+    background-color: gray(30);
+    border-radius: 6px;
+    box-shadow: $shadow3;
+    min-height: 30px;
+
+    .update-account-modal-header {
+      align-items: center;
+      display: flex;
+      padding: 10px;
+
+      .update-account-modal-title {
+        color: white;
+        flex-grow: 1;
+        font-size: 1.25em;
+      }
+    }
+
+    .update-account-modal-content {
+      padding: 10px;
+    }
+  }
+}

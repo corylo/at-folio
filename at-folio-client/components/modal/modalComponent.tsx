@@ -11,6 +11,7 @@ interface ModalComponentProps {
   contentID?: string;
   status?: RequestStatus;
   title?: string;
+  wrapperClass?: string;
   wrapperID?: string;
   handleOnBackgroundClick?: () => void;
 }
@@ -35,6 +36,7 @@ export const ModalComponent: React.FC<ModalComponentProps> = (props: ModalCompon
   const classes: string = classNames(
     "modal-wrapper", 
     "scroll-bar", 
+    props.wrapperClass,
     props.status ? props.status.toLowerCase() : null  
   );
 

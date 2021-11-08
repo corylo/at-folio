@@ -1,4 +1,4 @@
-import { applyActionCode, checkActionCode, confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateEmail, verifyPasswordResetCode, User, UserCredential } from "@firebase/auth";
+import { applyActionCode, checkActionCode, confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateEmail, verifyPasswordResetCode, UserCredential } from "@firebase/auth";
 
 import { auth } from "../firebase";
 
@@ -7,6 +7,7 @@ interface IAuthService {
   checkActionCode: (code: string) => Promise<void>;
   confirmPasswordReset: (code: string, password: string) => Promise<void>;
   createUser: (email: string, password: string) => Promise<void>;
+  sendEmailVerification: () => Promise<void>;
   sendResetEmail: (email: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
@@ -28,6 +29,9 @@ export const AuthService: IAuthService = {
     const credentials: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
 
     await sendEmailVerification(credentials.user);
+  },
+  sendEmailVerification: async (): Promise<void> => {
+    await sendEmailVerification(auth.currentUser);
   },
   sendResetEmail: async (email: string): Promise<void> => {
     await sendPasswordResetEmail(auth, email);

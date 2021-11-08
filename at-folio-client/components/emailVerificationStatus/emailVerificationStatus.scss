@@ -1,0 +1,51 @@
+.email-verification-status-wrapper {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+
+  .email-verification-status {
+    align-items: center;
+    background-color: rgba(white, 0.05);
+    border: 1px solid rgba(white, 0.1);
+    border-radius: 6px;
+    display: inline-flex;
+    gap: 10px;
+    padding: 5px;
+
+    h1, i {             
+      color: white;
+    }
+    
+    h1 {
+      font-size: 0.8em;
+      height: 12px;
+      line-height: 12px;
+      text-transform: uppercase;
+    }
+  }
+
+  .send-button-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+
+    .send-button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 0.8em;
+      outline: none;
+      padding: 0px;
+
+      &:not(:disabled):hover,
+      &:not(:disabled):focus {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    .loading-icon {
+      font-size: 0.8em;
+    }
+  }
+}
