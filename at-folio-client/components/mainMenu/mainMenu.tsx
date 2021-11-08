@@ -67,6 +67,9 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
             <Link to="/me" className="link rubik-font" onClick={() => setAppTogglesTo({ mainMenu: false })}>
               Profile
             </Link>
+            <Link to="/account" className="link rubik-font" onClick={() => setAppTogglesTo({ mainMenu: false })}>
+              Account
+            </Link>
           </div>
           <div className="main-menu-body-section">
             <button type="button" className="button rubik-font" onClick={signOut}>
