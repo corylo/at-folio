@@ -5,3 +5,13 @@
     height: 100vh;
   }
 }
+
+@media(max-width: 600px) {  
+  #home-page {
+    .brand-statement {
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  }
+}
