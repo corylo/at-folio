@@ -85,7 +85,7 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
               handleOnClick={detoggle}
             />
             <MainMenuOption 
-              description="See what my page looks like to viewers"
+              description="See what your page looks like to viewers"
               icon="fa-regular fa-link"
               label="My Link"
               to={`/${profile.username}`}

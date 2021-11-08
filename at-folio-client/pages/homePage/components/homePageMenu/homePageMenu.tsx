@@ -25,7 +25,7 @@ export const HomePageMenu: React.FC = () => {
             to="/account"
           />
           <HomePageMenuOption 
-            description="See what my page looks like to viewers"
+            description="See what your page looks like to viewers"
             icon="fa-regular fa-link"
             label="My Link"
             to={`/${profile.username}`}

@@ -48,7 +48,6 @@ export const ProfilePanel: React.FC = () => {
           <input 
             disabled
             type="text" 
-            placeholder="Enter username" 
             value={url}
             onChange={() => {}}
           />
