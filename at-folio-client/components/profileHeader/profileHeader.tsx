@@ -1,6 +1,5 @@
 import React from "react";
 
-import { ProfilePhoto } from "../profilePhoto/profilePhoto";
 import { ProfileUsername } from "../profileUsername/profileUsername";
 import { WrappableComponent } from "../wrappableComponent/wrappableComponent";
 
@@ -24,7 +23,6 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = (props: ProfileHeader
   return (
     <WrappableComponent wrapperID={props.wrapperID}>
       <div className="profile-header">
-        <ProfilePhoto photo={props.photo} />
         {getUsername()}
       </div>
     </WrappableComponent>

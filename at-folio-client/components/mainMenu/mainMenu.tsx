@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 
 import { IconButton } from "../button/iconButton/iconButton";
 import { Logo } from "../logo/logo";
+import { MainMenuOption } from "./mainMenuOption";
 import { Modal } from "../modal/modal";
 import { ProfileHeader } from "../profileHeader/profileHeader";
+import { ProfilePhoto } from "../profilePhoto/profilePhoto";
 
 import { AppContext } from "../app/appWrapper";
 
@@ -40,13 +42,17 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
       setStatusTo(RequestStatus.Error);
     }
   }
+
+  const detoggle = () => {
+    setAppTogglesTo({ mainMenu: false });
+  }
   
   return (
     <Modal 
       contentID="main-menu" 
       status={state.status} 
       toggled={toggles.mainMenu}
-      handleOnBackgroundClick={() => setAppTogglesTo({ mainMenu: false })}
+      handleOnBackgroundClick={detoggle}
     >
       <Logo wrapperID="main-menu-logo" />
       <div id="main-menu-content">
@@ -59,17 +65,32 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
           <IconButton 
             className="close-button"
             icon="fa-regular fa-xmark" 
-            handleOnClick={() => setAppTogglesTo({ mainMenu: false })} 
+            handleOnClick={detoggle} 
           />
         </div>  
         <div id="main-menu-body">
           <div className="main-menu-body-section">
-            <Link to="/me" className="link rubik-font" onClick={() => setAppTogglesTo({ mainMenu: false })}>
-              Profile
-            </Link>
-            <Link to="/account" className="link rubik-font" onClick={() => setAppTogglesTo({ mainMenu: false })}>
-              Account
-            </Link>
+            <MainMenuOption 
+              description="Update your photo, background, and links"
+              icon={<ProfilePhoto photo={profile.photo} />}
+              label="Profile"
+              to="/me" 
+              handleOnClick={detoggle}
+            />
+            <MainMenuOption 
+              description="Update your email and password"
+              icon="fa-regular fa-user"
+              label="Account"
+              to="/account"
+              handleOnClick={detoggle}
+            />
+            <MainMenuOption 
+              description="See what my page looks like to viewers"
+              icon="fa-regular fa-link"
+              label="My Link"
+              to={`/${profile.username}`}
+              handleOnClick={detoggle}
+            />
           </div>
           <div className="main-menu-body-section">
             <button type="button" className="button rubik-font" onClick={signOut}>
