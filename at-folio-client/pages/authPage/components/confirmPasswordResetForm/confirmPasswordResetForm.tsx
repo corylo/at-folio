@@ -18,7 +18,7 @@ import { defaultConfirmPasswordResetFormState, IConfirmPasswordResetFormState } 
 import { RequestStatus } from "../../../../enums/requestStatus";
 
 export const ConfirmPasswordResetForm: React.FC = () => {
-  const [state, setState] = useState<IConfirmPasswordResetFormState>(defaultConfirmPasswordResetFormState());
+  const [state, setStateTo] = useState<IConfirmPasswordResetFormState>(defaultConfirmPasswordResetFormState());
 
   const { errors, fields } = state;
 
@@ -27,7 +27,7 @@ export const ConfirmPasswordResetForm: React.FC = () => {
   const params: URLSearchParams = new URLSearchParams(search);
 
   const setFieldTo = (key: string, value: string): void => {
-    setState({ ...state, fields: { ...fields, [key]: value } });
+    setStateTo({ ...state, fields: { ...fields, [key]: value } });
   }
 
   const resetPassword = async (): Promise<void> => {
@@ -35,20 +35,20 @@ export const ConfirmPasswordResetForm: React.FC = () => {
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
-        setState({ ...updates, status: RequestStatus.Loading });
+        setStateTo({ ...updates, status: RequestStatus.Loading });
 
         const code: string | null = params.get("oobCode");
 
         await AuthService.confirmPasswordReset(code, fields.password);
 
-        setState({ ...state, status: RequestStatus.Success });
+        setStateTo({ ...state, status: RequestStatus.Success });
       } catch (err) {
         console.error(err);
         
-        setState({ ...updates, status: RequestStatus.Error, errorMessage: FirebaseErrorUtility.getAuthErrorMessage(err.code) });
+        setStateTo({ ...updates, status: RequestStatus.Error, errorMessage: FirebaseErrorUtility.getAuthErrorMessage(err.code) });
       }
     } else {      
-      setState(updates);
+      setStateTo(updates);
     }
   }
 
@@ -83,10 +83,7 @@ export const ConfirmPasswordResetForm: React.FC = () => {
     }
 
     return (
-      <Link 
-        to="/sign-in"
-        className="link rubik-font" 
-      >
+      <Link to="/sign-in" className="link rubik-font">
         Sign In
       </Link>
     )

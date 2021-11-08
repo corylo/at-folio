@@ -3,12 +3,20 @@ import { IUnsplashPhoto } from "../at-folio-models/unsplashPhoto";
 import { IUnsplashPhotoReference } from "../at-folio-models/unsplashPhotoReference";
 
 interface IUnsplashUtility {
+  dedupe: (photos: IUnsplashPhoto[]) => IUnsplashPhoto[];
   getCollectionIDs: () => UnsplashCollectionID[];
   mapPhotoReference: (photo: IUnsplashPhoto) => IUnsplashPhotoReference;
   mapPhotos: (photos: any[]) => IUnsplashPhoto[];
 }
 
 export const UnsplashUtility: IUnsplashUtility = {
+  dedupe: (photos: IUnsplashPhoto[]): IUnsplashPhoto[] => {
+    return photos.filter((photo: IUnsplashPhoto) => {
+      const matches: IUnsplashPhoto[] = photos.filter((p: IUnsplashPhoto) => p.id === photo.id);
+
+      return matches.length === 1;
+    });
+  },
   getCollectionIDs: (): UnsplashCollectionID[] => {
     return [
       UnsplashCollectionID.Abstract,

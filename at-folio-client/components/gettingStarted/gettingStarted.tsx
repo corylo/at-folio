@@ -6,7 +6,7 @@ interface GettingStartedProps {
 
 export const GettingStarted: React.FC<GettingStartedProps> = (props: GettingStartedProps) => {  
   return (
-    <div className="getting-started-wrapper">
+    <div className="getting-started-wrapper scroll-bar">
       <div className="getting-started">
         {props.children}
       </div>

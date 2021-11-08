@@ -32,7 +32,7 @@ export const AdminPage: React.FC = () => {
       );
     } else {
       const getGettingStarted = (): JSX.Element => {
-        if(profile.background.id === "" && profile.background.id === "") {
+        if(profile.photo.id === "" && profile.background.id === "") {
           return (            
             <GettingStarted>          
               <GettingStartedStep>

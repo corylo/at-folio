@@ -1,6 +1,9 @@
 @import "./components/homePageMenu/homePageMenu.scss";
 
 #home-page {
+  height: 100vh;
+  overflow: hidden;
+
   .brand-statement {
     height: 100vh;
   }

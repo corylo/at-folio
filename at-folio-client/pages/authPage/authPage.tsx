@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { AuthPageBackground } from "../../components/authPageBackground/authPageBackground";
+import { AuthPageMessage } from "./components/authPageMessage/authPageMessage";
 import { ConfirmPasswordResetForm } from "./components/confirmPasswordResetForm/confirmPasswordResetForm";
 import { Page } from "../../components/page/page";
+import { VerifyEmailForm } from "./components/verifyEmailForm/verifyEmailForm";
 
 import { AppContext } from "../../components/app/appWrapper";
 
@@ -15,6 +17,7 @@ import { defaultAuthPageState, IAuthPageState } from "./models/authPageState";
 
 import { FirebaseAuthMode } from "../../enums/firebaseAuthMode";
 import { RequestStatus } from "../../enums/requestStatus";
+import { UserStatus } from "../../enums/userStatus";
 
 export const AuthPage: React.FC = () => {
   const { userStatus } = useContext(AppContext);
@@ -58,6 +61,22 @@ export const AuthPage: React.FC = () => {
       }
 
       verify();
+    } else if (state.mode === FirebaseAuthMode.VerifyEmail) {
+      const check = async (): Promise<void> => {
+        try {
+          const code: string | null = params.get("oobCode");
+
+          await AuthService.checkActionCode(code);
+
+          setStatusTo(RequestStatus.Success);
+        } catch (err) {
+          console.error(err);
+          
+          setStatusTo(RequestStatus.Error);
+        }
+      }
+
+      check();
     }
   }, [state.mode]);
 
@@ -68,6 +87,10 @@ export const AuthPage: React.FC = () => {
           return (
             <ConfirmPasswordResetForm />
           )
+        case FirebaseAuthMode.VerifyEmail:
+          return (
+            <VerifyEmailForm />
+          )
       }
     }
   }
@@ -77,18 +100,31 @@ export const AuthPage: React.FC = () => {
       switch(state.mode) {
         case FirebaseAuthMode.ResetPassword:
           return (
-            <div className="auth-page-error-message-wrapper">
-              <div className="auth-page-error-message">
-                <h1 className="rubik-font">Your reset password link has expired. Please try again.</h1>
-                <Link 
-                  to="/reset"
-                  className="link rubik-font" 
-                >
-                  Try Again
-                </Link>
-              </div>
-            </div>
+            <AuthPageMessage
+              actionLabel="Try Again"
+              actionTo="/reset"
+              text="This reset password link is no longer valid. Please try again."
+            />
           )
+          
+        case FirebaseAuthMode.VerifyEmail:
+          if(userStatus === UserStatus.SignedOut) {
+            return (
+              <AuthPageMessage
+                actionLabel="Sign In"
+                actionTo="/sign-in"
+                text="This email verification link is no longer valid."
+              />
+            )
+          } else if (userStatus === UserStatus.SignedIn) {
+            return (
+              <AuthPageMessage
+                actionLabel="Go to my account"
+                actionTo="/account"
+                text="This email verification link has expired."
+              />
+            )
+          }
       }
     }
   }

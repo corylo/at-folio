@@ -1,0 +1,58 @@
+
+.auth-page-message-wrapper {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  overflow: auto;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+
+  .auth-page-message {
+    animation: fadeInDown 400ms ease-in;
+    width: 500px;
+    
+    .auth-page-message-content {
+      h1 {
+        color: white;
+        font-size: 1.5em;
+      }
+
+      .link {
+        margin-top: 10px;
+        width: 200px;
+      }
+    }
+  }
+}
+
+@media (max-height: 600px) {
+  .auth-page-message-wrapper {
+    align-items: flex-start;
+
+    .auth-page-message {
+      margin-top: 120px;
+      
+      .auth-page-message-content {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .auth-page-message-wrapper {
+    .auth-page-message {
+      width: 100%;
+
+      .auth-page-message-content {
+        padding: 10px;
+
+        .link {
+          width: auto;
+        }
+      }
+    }
+  }
+}
