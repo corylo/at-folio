@@ -30,6 +30,12 @@
     .form-actions {
       margin-top: 1em;
       width: 100%;
+
+      .button {
+        .loading-icon {
+          font-size: 1em;
+        }
+      }
     }
   }
 }

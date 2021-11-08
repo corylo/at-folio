@@ -1,9 +1,9 @@
 #sign-in-form {
   width: 100%;
 
-  .sign-in-label {
+  .sign-in-label,
+  .reset-password-label {
     color: white;
-    margin-top: 1em;
 
     a {
       color: $themeColor;
@@ -14,5 +14,9 @@
         text-decoration: underline;
       }
     }
+  }
+
+  .sign-in-label {
+    margin-top: 1em;
   }
 }

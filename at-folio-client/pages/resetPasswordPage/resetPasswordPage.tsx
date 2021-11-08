@@ -3,14 +3,14 @@ import { Redirect } from "react-router";
 
 import { AuthPageBackground } from "../../components/authPageBackground/authPageBackground";
 import { Page } from "../../components/page/page";
-import { SignInForm } from "../../components/signInForm/signInForm";
+import { ResetPasswordForm } from "./components/resetPasswordForm/resetPasswordForm";
 
 import { AppContext } from "../../components/app/appWrapper";
 
 import { RequestStatus } from "../../enums/requestStatus";
 import { UserStatus } from "../../enums/userStatus";
 
-export const SignInPage: React.FC = () => {
+export const ResetPasswordPage: React.FC = () => {
   const { userStatus } = useContext(AppContext);
 
   if(userStatus === UserStatus.SignedIn) {
@@ -20,8 +20,8 @@ export const SignInPage: React.FC = () => {
   }
 
   return (
-    <Page id="sign-in-page" status={RequestStatus.Success}>
-      <SignInForm wrapperID="sign-in-form-wrapper" />
+    <Page id="reset-password-page" status={RequestStatus.Success}>      
+      <ResetPasswordForm wrapperID="reset-password-form-wrapper" />
       <AuthPageBackground />
     </Page>
   )

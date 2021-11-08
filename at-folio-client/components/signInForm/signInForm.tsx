@@ -76,7 +76,10 @@ export const SignInForm: React.FC<SignInFormProps> = (props: SignInFormProps) =>
               onChange={(e: any) => setValueTo("password", e.target.value)}
               onKeyDown={handleOnKeyDown}
             />
-          </Input>
+          </Input>    
+          <h1 className="reset-password-label rubik-font">
+            <Link to="/reset" className="sign-up-link">Forgot your password?</Link>
+          </h1>
         </FormBody>
         <FormActions 
           actions={[{ label: "Sign In", id: "Sign In", handleOnClick: signIn }]} 
