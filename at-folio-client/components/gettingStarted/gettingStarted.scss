@@ -5,29 +5,56 @@
   justify-content: center;
   overflow: auto;
   position: relative;
+  width: 100%;
   z-index: 2;
 
   .getting-started {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 20px;
+    animation: fadeInDown 400ms ease-in;
+    backdrop-filter: blur(5px);
+    background-color: rgba(white, 0.1);
+    border-radius: 6px;
     pointer-events: all;
     position: relative;
+    width: 500px;
     z-index: 2;
 
-    .getting-started-step {
-      color: white;
-      font-size: 2em;
+    .getting-started-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 10px;
 
-      .highlight {
-        color: $themeColor;
+      .getting-started-step {
+        align-items: center;
+        border-radius: 6px;
+        display: flex;
+        gap: 1em;
+        padding: 10px;
+
+        .highlight {
+          color: $themeColor;
+        }
+
+        .getting-started-step-index {
+          background-color: rgba(white, 0.1);
+          border-radius: 100px;
+          color: white;
+          flex-shrink: 0;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          width: 40px;
+        }
+
+        .getting-started-step-label {        
+          color: white;
+        }
+
+        .getting-started-step-description {
+          color: gray(200);
+          font-size: 0.8em;
+        }
       }
-    }
-
-    .link,
-    .button {
-      width: 200px;
     }
   }
 }
@@ -35,9 +62,7 @@
 @media (max-width: 600px) {
   .getting-started-wrapper {
     .getting-started {
-      .getting-started-step {
-        font-size: 1.5em;
-      }
+      width: calc(100% - 20px);
     }
   }
 }
@@ -46,7 +71,8 @@
   .getting-started-wrapper {
     align-items: flex-start;
     
-    .getting-started {
+    .getting-started { 
+      margin-bottom: 20px;
       margin-top: 80px;
     }
   }

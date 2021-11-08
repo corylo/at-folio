@@ -21,14 +21,14 @@ export const HomePage: React.FC = () => {
       if(profile.username === "" || profile.background.id === "" || profile.photo.id === "") {
         return (
           <GettingStarted>          
-            <GettingStartedStep>
-              1. Choose a <span className="highlight">username</span>.
+            <GettingStartedStep index={1} description="Any name your heart desires (well, almost)">
+              Pick a username
             </GettingStartedStep>        
-            <GettingStartedStep>
-              2. Select your <span className="highlight">pics</span>.
+            <GettingStartedStep index={2} description="Choose a profile photo and background">
+              Choose your photos
             </GettingStartedStep>
-            <GettingStartedStep>
-              3. Add your <span className="highlight">links</span>.
+            <GettingStartedStep index={3} description="You can add up to 10 links">
+              Add your links
             </GettingStartedStep>
             <Link 
               to="/me"

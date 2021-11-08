@@ -8,7 +8,9 @@ export const GettingStarted: React.FC<GettingStartedProps> = (props: GettingStar
   return (
     <div className="getting-started-wrapper scroll-bar">
       <div className="getting-started">
-        {props.children}
+        <div className="getting-started-steps">
+          {props.children}
+        </div>
       </div>
     </div>
   );

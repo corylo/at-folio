@@ -33,22 +33,22 @@ export const AdminPage: React.FC = () => {
     } else {
       const getGettingStarted = (): JSX.Element => {
         if(profile.photo.id === "" && profile.background.id === "") {
-          return (            
+          return (  
             <GettingStarted>          
-              <GettingStartedStep>
-                1. Select your <span className="highlight">photo</span>.
+              <GettingStartedStep index={1} description="Your links wont show up until you select a photo">
+                Choose your profile photo
               </GettingStartedStep>        
-              <GettingStartedStep>
-                2. Select your <span className="highlight">background</span>.
+              <GettingStartedStep index={2} description="You can always change this later">
+                Choose your background
               </GettingStartedStep>
-              <GettingStartedStep>
-                3. Add your <span className="highlight">links</span>.
+              <GettingStartedStep index={3} description="You can add up to 10 links">
+                Add your links
               </GettingStartedStep>
               <button 
                 className="button rubik-font" 
                 onClick={() => setStateTo({ ...state, tutorialToggled: true })}
               >
-                Tutorial
+                View tutorial
               </button>
             </GettingStarted>
           )

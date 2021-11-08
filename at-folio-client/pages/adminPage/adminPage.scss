@@ -9,3 +9,13 @@
     z-index: 3;
   }
 }
+
+@media (max-height: 600px) {
+  #admin-page {
+    .getting-started-wrapper {
+      .getting-started {
+        margin-top: 150px;
+      }
+    }
+  }
+}

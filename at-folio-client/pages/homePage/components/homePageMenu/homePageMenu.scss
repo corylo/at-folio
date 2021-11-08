@@ -14,13 +14,12 @@
     background-color: rgba(white, 0.1);
     border-radius: 6px;
     box-shadow: $shadow1;
-    margin-bottom: 20px;
     width: 500px;
 
     #home-page-menu-options {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 5px;
       padding: 10px;
 
       .home-page-menu-option {
@@ -77,6 +76,10 @@
     align-items: flex-start;
     height: auto;
     margin-top: 80px;
+
+    #home-page-menu {      
+      margin-bottom: 20px;
+    }
   }
 }
 
