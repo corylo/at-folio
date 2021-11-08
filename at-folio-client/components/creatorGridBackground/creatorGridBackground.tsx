@@ -15,6 +15,7 @@ import { AppContext } from "../app/appWrapper";
 
 import { DefaultPhotoType } from "../../../at-folio-enums/defaultPhotoType";
 import { RequestStatus } from "../../enums/requestStatus";
+import { LoadableImage } from "../loadableImage/loadableImage";
 
 export const CreatorGridBackground: React.FC = () => {
   const { platforms } = useContext(AppContext);
@@ -135,9 +136,10 @@ export const CreatorGridBackground: React.FC = () => {
 
         tiles.push(
           <div key={`background-${i}`} className="creator-tile background" style={styles}>
-            <div 
-              className="creator-tile-image" 
-              style={{ backgroundImage: `url(${backgrounds[i].urls.regular})` }}
+            <LoadableImage
+              className="creator-tile-image"
+              previewSource={backgrounds[i].urls.thumb}
+              source={backgrounds[i].urls.regular}
             />
           </div>
         );
