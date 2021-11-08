@@ -1,15 +1,20 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential } from "@firebase/auth";
+import { confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential, verifyPasswordResetCode } from "@firebase/auth";
 
 import { auth } from "../firebase";
 
 interface IAuthService {
+  confirmPasswordReset: (code: string, password: string) => Promise<void>;
   createUser: (email: string, password: string) => Promise<void>;
   sendResetEmail: (email: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  verifyPasswordResetCode: (code: string) => Promise<void>;
 }
 
 export const AuthService: IAuthService = {
+  confirmPasswordReset: async (code: string, password: string): Promise<void> => {
+    await confirmPasswordReset(auth, code, password);
+  },
   createUser: async (email: string, password: string): Promise<void> => {
     const credentials: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -23,5 +28,8 @@ export const AuthService: IAuthService = {
   },
   signOut: async (): Promise<void> => {
     await auth.signOut();
+  },
+  verifyPasswordResetCode: async (code: string): Promise<void> => {
+    await verifyPasswordResetCode(auth, code);
   }
 }

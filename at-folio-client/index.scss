@@ -5,6 +5,7 @@
 @import "./pages/pages.scss";
 
 @import "./components/app/app.scss";
+@import "./components/authForm/authForm.scss";
 @import "./components/authPageBackground/authPageBackground.scss";
 @import "./components/brandStatement/brandStatement.scss";
 @import "./components/button/button.scss";
@@ -25,8 +26,6 @@
 @import "./components/profileHeader/profileHeader.scss";
 @import "./components/profilePhoto/profilePhoto.scss";
 @import "./components/profileUsername/profileUsername.scss";
-@import "./components/signInForm/signInForm.scss";
-@import "./components/signUpForm/signUpForm.scss";
 @import "./components/socialPlatformNetwork/socialPlatformNetwork.scss";
 @import "./components/socialPlatformPicker/socialPlatformPicker.scss";
 @import "./components/statusMessage/statusMessage.scss";

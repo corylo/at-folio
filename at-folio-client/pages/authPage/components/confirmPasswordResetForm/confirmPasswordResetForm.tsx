@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { AuthForm } from "../../../../components/authForm/authForm";
 import { FormActions } from "../../../../components/form/formActions";
@@ -7,32 +8,38 @@ import { Input } from "../../../../components/input/input";
 
 import { AuthService } from "../../../../services/authService";
 
-import { ResetPasswordFormValidator } from "./validators/resetPasswordFormValidator";
+import { ConfirmPasswordResetFormValidator } from "./validators/confirmPasswordResetFormValidator";
 
 import { FirebaseErrorUtility } from "../../../../utilities/firebaseErrorUtility";
 import { FormUtility } from "../../../../utilities/formUtility";
 
-import { defaultResetPasswordFormState, IResetPasswordFormState } from "./models/resetPasswordFormState";
+import { defaultConfirmPasswordResetFormState, IConfirmPasswordResetFormState } from "./models/confirmPasswordResetFormState";
 
 import { RequestStatus } from "../../../../enums/requestStatus";
 
-export const ResetPasswordForm: React.FC = () => {
-  const [state, setState] = useState<IResetPasswordFormState>(defaultResetPasswordFormState());
+export const ConfirmPasswordResetForm: React.FC = () => {
+  const [state, setState] = useState<IConfirmPasswordResetFormState>(defaultConfirmPasswordResetFormState());
 
   const { errors, fields } = state;
 
-  const setValueTo = (key: string, value: string): void => {
+  const { search } = useLocation();
+
+  const params: URLSearchParams = new URLSearchParams(search);
+
+  const setFieldTo = (key: string, value: string): void => {
     setState({ ...state, fields: { ...fields, [key]: value } });
   }
 
-  const sendEmail = async (): Promise<void> => {
-    const updates: IResetPasswordFormState = ResetPasswordFormValidator.validate(state);
+  const resetPassword = async (): Promise<void> => {
+    const updates: IConfirmPasswordResetFormState = ConfirmPasswordResetFormValidator.validate(state);
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
         setState({ ...updates, status: RequestStatus.Loading });
 
-        await AuthService.sendResetEmail(fields.email);
+        const code: string | null = params.get("oobCode");
+
+        await AuthService.confirmPasswordReset(code, fields.password);
 
         setState({ ...state, status: RequestStatus.Success });
       } catch (err) {
@@ -47,7 +54,7 @@ export const ResetPasswordForm: React.FC = () => {
 
   const handleOnKeyDown = (e: any): void => {
     if(e.key === "Enter") {
-      sendEmail();
+      resetPassword();
     }
   }
 
@@ -56,18 +63,19 @@ export const ResetPasswordForm: React.FC = () => {
       return "Reset Password";
     }
 
-    return "Reset email sent to";
+    return "Password reset!";
   }
 
   const getBodyContent = (): JSX.Element => {
     if(state.status !== RequestStatus.Success) {
       return (
-        <Input className="reset-password-input" label="Email" error={errors.email}>
+        <Input label="Password" error={errors.password}>
           <input 
-            type="text" 
-            placeholder="Enter email" 
-            value={fields.email}
-            onChange={(e: any) => setValueTo("email", e.target.value)}
+            type="password" 
+            placeholder="Enter password" 
+            value={fields.password}
+            disabled={state.status === RequestStatus.Loading}
+            onChange={(e: any) => setFieldTo("password", e.target.value)}
             onKeyDown={handleOnKeyDown}
           />
         </Input>
@@ -75,7 +83,12 @@ export const ResetPasswordForm: React.FC = () => {
     }
 
     return (
-      <h1 className="auth-form-label-field rubik-font">{fields.email}</h1>
+      <Link 
+        to="/sign-in"
+        className="link rubik-font" 
+      >
+        Sign In
+      </Link>
     )
   }
 
@@ -83,7 +96,7 @@ export const ResetPasswordForm: React.FC = () => {
     if(state.status !== RequestStatus.Success) {
       return (
         <FormActions 
-          actions={[{ label: "Send", id: "Send", handleOnClick: sendEmail }]} 
+          actions={[{ label: "Reset", id: "Reset", handleOnClick: resetPassword }]} 
           status={state.status} 
         />        
       )
@@ -91,11 +104,13 @@ export const ResetPasswordForm: React.FC = () => {
   }
 
   return (
-    <AuthForm title={getTitle()}>              
-      <FormBody errorMessage={state.errorMessage} status={state.status}>
-        {getBodyContent()}
-      </FormBody>
-      {getActions()}
-    </AuthForm>
+    <div className="auth">
+      <AuthForm title={getTitle()}>
+        <FormBody errorMessage={state.errorMessage} status={state.status}>
+          {getBodyContent()}
+        </FormBody>
+        {getActions()}
+      </AuthForm>
+    </div>
   );
 }

@@ -1,10 +1,10 @@
-import { FormValidator } from "../../../validators/formValidator";
+import { FormValidator } from "../../../../../validators/formValidator";
 
-import { LodashUtility } from "../../../utilities/lodashUtility";
+import { LodashUtility } from "../../../../../utilities/lodashUtility";
 
 import { ISignUpFormState } from "../models/signUpFormState";
 
-import { FormError } from "../../../enums/formError";
+import { FormError } from "../../../../../enums/formError";
 
 interface ISignUpFormValidator {
   validate: (state: ISignUpFormState) => ISignUpFormState;

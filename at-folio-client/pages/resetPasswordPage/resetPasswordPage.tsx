@@ -21,7 +21,7 @@ export const ResetPasswordPage: React.FC = () => {
 
   return (
     <Page id="reset-password-page" status={RequestStatus.Success}>      
-      <ResetPasswordForm wrapperID="reset-password-form-wrapper" />
+      <ResetPasswordForm />
       <AuthPageBackground />
     </Page>
   )

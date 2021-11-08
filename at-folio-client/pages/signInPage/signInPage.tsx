@@ -3,7 +3,7 @@ import { Redirect } from "react-router";
 
 import { AuthPageBackground } from "../../components/authPageBackground/authPageBackground";
 import { Page } from "../../components/page/page";
-import { SignInForm } from "../../components/signInForm/signInForm";
+import { SignInForm } from "./components/signInForm/signInForm";
 
 import { AppContext } from "../../components/app/appWrapper";
 
@@ -21,7 +21,7 @@ export const SignInPage: React.FC = () => {
 
   return (
     <Page id="sign-in-page" status={RequestStatus.Success}>
-      <SignInForm wrapperID="sign-in-form-wrapper" />
+      <SignInForm />
       <AuthPageBackground />
     </Page>
   )

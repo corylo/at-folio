@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { AuthForm } from "../../../../components/authForm/authForm";
 import { FormActions } from "../../../../components/form/formActions";
@@ -7,17 +8,17 @@ import { Input } from "../../../../components/input/input";
 
 import { AuthService } from "../../../../services/authService";
 
-import { ResetPasswordFormValidator } from "./validators/resetPasswordFormValidator";
+import { SignInFormValidator } from "./validators/signInFormValidator";
 
 import { FirebaseErrorUtility } from "../../../../utilities/firebaseErrorUtility";
 import { FormUtility } from "../../../../utilities/formUtility";
 
-import { defaultResetPasswordFormState, IResetPasswordFormState } from "./models/resetPasswordFormState";
+import { defaultSignInFormState, ISignInFormState } from "./models/signInFormState";
 
 import { RequestStatus } from "../../../../enums/requestStatus";
 
-export const ResetPasswordForm: React.FC = () => {
-  const [state, setState] = useState<IResetPasswordFormState>(defaultResetPasswordFormState());
+export const SignInForm: React.FC = () => {
+  const [state, setState] = useState<ISignInFormState>(defaultSignInFormState());
 
   const { errors, fields } = state;
 
@@ -25,16 +26,14 @@ export const ResetPasswordForm: React.FC = () => {
     setState({ ...state, fields: { ...fields, [key]: value } });
   }
 
-  const sendEmail = async (): Promise<void> => {
-    const updates: IResetPasswordFormState = ResetPasswordFormValidator.validate(state);
+  const signIn = async (): Promise<void> => {
+    const updates: ISignInFormState = SignInFormValidator.validate(state);
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
         setState({ ...updates, status: RequestStatus.Loading });
 
-        await AuthService.sendResetEmail(fields.email);
-
-        setState({ ...state, status: RequestStatus.Success });
+        await AuthService.signIn(fields.email, fields.password);
       } catch (err) {
         console.error(err);
         
@@ -47,22 +46,14 @@ export const ResetPasswordForm: React.FC = () => {
 
   const handleOnKeyDown = (e: any): void => {
     if(e.key === "Enter") {
-      sendEmail();
+      signIn();
     }
   }
 
-  const getTitle = (): string => {    
-    if(state.status !== RequestStatus.Success) {
-      return "Reset Password";
-    }
-
-    return "Reset email sent to";
-  }
-
-  const getBodyContent = (): JSX.Element => {
-    if(state.status !== RequestStatus.Success) {
-      return (
-        <Input className="reset-password-input" label="Email" error={errors.email}>
+  return (
+    <AuthForm id="sign-in-form" title="Sign In">
+      <FormBody errorMessage={state.errorMessage} status={state.status}>
+        <Input className="sign-in-input" label="Email" error={errors.email}>
           <input 
             type="text" 
             placeholder="Enter email" 
@@ -71,31 +62,26 @@ export const ResetPasswordForm: React.FC = () => {
             onKeyDown={handleOnKeyDown}
           />
         </Input>
-      )
-    }
-
-    return (
-      <h1 className="auth-form-label-field rubik-font">{fields.email}</h1>
-    )
-  }
-
-  const getActions = (): JSX.Element => {
-    if(state.status !== RequestStatus.Success) {
-      return (
-        <FormActions 
-          actions={[{ label: "Send", id: "Send", handleOnClick: sendEmail }]} 
-          status={state.status} 
-        />        
-      )
-    }
-  }
-
-  return (
-    <AuthForm title={getTitle()}>              
-      <FormBody errorMessage={state.errorMessage} status={state.status}>
-        {getBodyContent()}
+        <Input className="sign-in-input" label="Password" error={errors.password}>
+          <input 
+            type="password" 
+            placeholder="Enter password" 
+            value={fields.password}
+            onChange={(e: any) => setValueTo("password", e.target.value)}
+            onKeyDown={handleOnKeyDown}
+          />
+        </Input>  
       </FormBody>
-      {getActions()}
+      <FormActions 
+        actions={[{ label: "Sign In", id: "Sign In", handleOnClick: signIn }]} 
+        status={state.status} 
+      />          
+      <h1 className="auth-form-label-link rubik-font">
+        Need an account? <Link to="/sign-up" className="sign-up-link">Sign Up</Link>
+      </h1>  
+      <h1 className="auth-form-label-link rubik-font">
+        <Link to="/reset" className="sign-up-link">Forgot your password?</Link>
+      </h1>
     </AuthForm>
   );
 }

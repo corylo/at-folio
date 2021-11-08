@@ -12,6 +12,8 @@ export const FirebaseErrorUtility: IFirebaseErrorUtility = {
         return "Invalid email / password";
       case FirebaseErrorCode.TooManyRequests:
         return "Account has been temporarily disabled. Please reset your password or try again later.";
+      case FirebaseErrorCode.InvalidActionCode:
+        return "Your link may have expired. Please refresh and try again."
       default:
         return "";
     }

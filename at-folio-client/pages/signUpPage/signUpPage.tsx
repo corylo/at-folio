@@ -3,7 +3,7 @@ import { Redirect } from "react-router";
 
 import { AuthPageBackground } from "../../components/authPageBackground/authPageBackground";
 import { Page } from "../../components/page/page";
-import { SignUpForm } from "../../components/signUpForm/signUpForm";
+import { SignUpForm } from "./components/signUpForm/signUpForm";
 
 import { AppContext } from "../../components/app/appWrapper";
 
@@ -21,7 +21,7 @@ export const SignUpPage: React.FC = () => {
 
   return (  
     <Page id="sign-up-page">
-      <SignUpForm wrapperID="sign-up-form-wrapper" />
+      <SignUpForm />
       <AuthPageBackground />
     </Page>
   );
