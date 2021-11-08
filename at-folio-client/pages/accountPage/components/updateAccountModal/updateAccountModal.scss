@@ -1,10 +1,5 @@
 .update-account-modal-wrapper {
   .modal {    
-    background-color: gray(30);
-    border-radius: 6px;
-    box-shadow: $shadow3;
-    min-height: 30px;
-
     .update-account-modal-header {
       align-items: center;
       display: flex;
@@ -18,6 +13,10 @@
     }
 
     .update-account-modal-content {
+      background-color: gray(30);
+      border-radius: 6px;
+      box-shadow: $shadow3;
+      min-height: 30px;
       padding: 10px;
     }
   }

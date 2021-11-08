@@ -2,6 +2,16 @@ import { useEffect } from "react";
 
 import { DomUtility } from "../utilities/domUtility";
 
+export const useDisableScrollEffect = () => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+};
+
 export const useOnElementBlurEffect = (
   focused: boolean, 
   elementIDs: string[], 

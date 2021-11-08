@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
 
+import { useDisableScrollEffect } from "../../effects/domEffects";
+
 import { LoadingSpinner } from "../loading/loadingSpinner";
 
 import { RequestStatus } from "../../enums/requestStatus";
@@ -17,6 +19,8 @@ interface ModalComponentProps {
 }
 
 export const ModalComponent: React.FC<ModalComponentProps> = (props: ModalComponentProps) => {
+  useDisableScrollEffect();
+
   const getTitle = (): JSX.Element => {
     if(props.title) {
       return (
