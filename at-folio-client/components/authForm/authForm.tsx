@@ -10,7 +10,7 @@ interface AuthFormProps {
 
 export const AuthForm: React.FC<AuthFormProps> = (props: AuthFormProps) => {  
   return (
-    <div id={props.id} className="auth-form-wrapper">
+    <div id={props.id} className="auth-form-wrapper scroll-bar">
       <Form className="auth-form" title={props.title}>
         {props.children}
       </Form>
