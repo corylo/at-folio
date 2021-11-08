@@ -1,11 +1,14 @@
 .profile-background {
-  background-position: center;
-  background-size: cover;
   height: 100vh;
   left: 0px;
-  opacity: 0.5;
   position: fixed;
   top: 0px;
   width: 100vw;
   z-index: 1;
+
+  .loadable-image {
+    background-position: center;
+    background-size: cover;
+    opacity: 0.5;
+  }
 }

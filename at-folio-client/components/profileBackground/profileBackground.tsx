@@ -1,7 +1,8 @@
 import React from "react";
 
-import { IUnsplashPhotoReference } from "../../../at-folio-models/unsplashPhotoReference";
 import { LoadableImage } from "../loadableImage/loadableImage";
+
+import { IUnsplashPhotoReference } from "../../../at-folio-models/unsplashPhotoReference";
 
 interface ProfileBackgroundProps {
   photo: IUnsplashPhotoReference;
@@ -12,7 +13,8 @@ export const ProfileBackground: React.FC<ProfileBackgroundProps> = (props: Profi
     <LoadableImage
       className="profile-background"
       previewSource={props.photo.urls.thumb}
-      source={props.photo.urls.full}
+      showLoadingIcon
+      source={props.photo.urls.regular}
     />
   );
 }

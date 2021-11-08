@@ -1,18 +1,23 @@
 .profile-photo {
-  background-position: center;
-  background-size: cover;
   border-radius: 1000px;
-  height: 40px;
-  width: 40px;
+
+  .loadable-image,
+  i {
+    border-radius: 1000px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .loadable-image {
+    background-position: center;
+    background-size: cover;
+  }
 
   i {
     background-color: rgba(black, 0.15);
-    border-radius: 1000px;
     color: white;
-    height: 40px;
     line-height: 40px;
     text-align: center;
-    width: 40px;
   }
 }
 

@@ -1,8 +1,21 @@
-.loadable-image {
-  transition: filter 0.25s, transform 0.25s;
-  
+.loadable-image-wrapper {    
   &.preview {
-    filter: blur(8px);
-    transform: scale(1.1);
+    .loadable-image {
+      filter: blur(8px);
+      transform: scale(1.1);
+    }
+  }
+
+  .loadable-image {
+    height: 100%;
+    transition: filter 0.25s, transform 0.25s;
+    width: 100%;
+  }
+
+  .loading-icon {
+    bottom: 20px;
+    left: 20px;
+    position: absolute;
+    z-index: 2;
   }
 }
