@@ -9,7 +9,7 @@ export const HomePageMenu: React.FC = () => {
   const { profile } = useContext(AppContext);
 
   return (
-    <div id="home-page-menu-wrapper">
+    <div id="home-page-menu-wrapper" className="scroll-bar">
       <div id="home-page-menu">
         <div id="home-page-menu-options">
           <HomePageMenuOption 
