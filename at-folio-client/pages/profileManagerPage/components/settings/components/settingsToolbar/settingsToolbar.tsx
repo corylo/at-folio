@@ -3,12 +3,12 @@ import React, { useContext } from "react";
 import { IconButton } from "../../../../../../components/button/iconButton/iconButton";
 import { SettingsToolbarOption } from "./settingsToolbarOption";
 
-import { AdminPageContext } from "../../../../adminPageWrapper";
+import { ProfileManagerPageContext } from "../../../../profileManagerPageWrapper";
 
 import { SettingsPanelOption } from "../../enums/settingsPanelOption";
 
 export const SettingsToolbar: React.FC = () => {  
-  const { state, setStateTo } = useContext(AdminPageContext);
+  const { state, setStateTo } = useContext(ProfileManagerPageContext);
 
   const getTutorialToggle = (): JSX.Element => {
     if(!state.tutorialToggled) {

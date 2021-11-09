@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import _debounce from "lodash.debounce";
 
-import { AdminPageContext } from "../../adminPageWrapper";
 import { AppContext } from "../../../../components/app/appWrapper";
+import { ProfileManagerPageContext } from "../../profileManagerPageWrapper";
 
 import { ProfileAdminService } from "../../../../services/profileAdminService";
 
@@ -17,7 +17,7 @@ import { ISize } from "../../../../models/size";
 
 export const ProfileTutorialComponent: React.FC = () => {  
   const { profile, setProfileAdminTo } = useContext(AppContext),
-    { state: adminPageState, setStateTo: setAdminPageStateTo } = useContext(AdminPageContext);
+    { state: profileManagerPageState, setStateTo: setProfileManagerPageStateTo } = useContext(ProfileManagerPageContext);
 
   const [state, setStateTo] = useState<IProfileTutorialState>(defaultProfileTutorialState());
 
@@ -79,7 +79,7 @@ export const ProfileTutorialComponent: React.FC = () => {
 
       setProfileAdminTo({ tutorialComplete: true });
     } else {
-      setAdminPageStateTo({ ...adminPageState, tutorialToggled: false });
+      setProfileManagerPageStateTo({ ...profileManagerPageState, tutorialToggled: false });
     }
   }
 

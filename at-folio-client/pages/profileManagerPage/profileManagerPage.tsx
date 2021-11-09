@@ -9,14 +9,14 @@ import { Profile } from "../../components/profile/profile";
 import { ProfileTutorial } from "./components/profileTutorial/profileTutorial";
 import { SettingsWrapper } from "./components/settings/settingsWrapper";
 
-import { AdminPageContext } from "./adminPageWrapper";
 import { AppContext } from "../../components/app/appWrapper";
+import { ProfileManagerPageContext } from "./profileManagerPageWrapper";
 
 import { useFetchLinksEffect, useToggleTutorialEffect } from "./effects";
 
-export const AdminPage: React.FC = () => {  
+export const ProfileManagerPage: React.FC = () => {  
   const { profile } = useContext(AppContext),
-    { state, setStateTo } = useContext(AdminPageContext);
+    { state, setStateTo } = useContext(ProfileManagerPageContext);
 
   useFetchLinksEffect();
 
@@ -66,7 +66,7 @@ export const AdminPage: React.FC = () => {
   }
 
   return (
-    <Page id="admin-page" status={state.status} signInRequired>
+    <Page id="profile-manager-page" status={state.status} signInRequired>
       <Profile profile={profile} />
       {getContent()}
     </Page>

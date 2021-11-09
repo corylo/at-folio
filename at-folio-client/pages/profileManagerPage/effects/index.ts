@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 
-import { AdminPageContext } from "../adminPageWrapper";
 import { AppContext } from "../../../components/app/appWrapper";
+import { ProfileManagerPageContext } from "../profileManagerPageWrapper";
 
 import { LinkService } from "../../../services/linkService";
 
@@ -12,7 +12,7 @@ import { UserStatus } from "../../../enums/userStatus";
 
 export const useFetchLinksEffect = (): void => {
   const { profile, userStatus, setProfileTo } = useContext(AppContext),
-    { state, setStateTo } = useContext(AdminPageContext);
+    { state, setStateTo } = useContext(ProfileManagerPageContext);
 
   const setStatusTo = (status: RequestStatus): void => {
     setStateTo({ ...state, status });
@@ -45,7 +45,7 @@ export const useFetchLinksEffect = (): void => {
 
 export const useToggleTutorialEffect = (): void => {
   const { profile } = useContext(AppContext),
-    { state, setStateTo } = useContext(AdminPageContext);
+    { state, setStateTo } = useContext(ProfileManagerPageContext);
 
   useEffect(() => {
     if(profile.username !== "" && !profile.admin.tutorialComplete) {

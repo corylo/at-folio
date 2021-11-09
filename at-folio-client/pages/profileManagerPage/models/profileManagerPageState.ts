@@ -1,11 +1,11 @@
 import { RequestStatus } from "../../../enums/requestStatus";
 
-export interface IAdminPageState {
+export interface IProfileManagerPageState {
   status: RequestStatus;
   tutorialToggled: boolean;
 }
 
-export const defaultAdminPageState = (): IAdminPageState => ({
+export const defaultProfileManagerPageState = (): IProfileManagerPageState => ({
   status: RequestStatus.Idle,
   tutorialToggled: false
 });

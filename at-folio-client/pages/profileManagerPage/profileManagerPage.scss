@@ -4,14 +4,14 @@
 @import "./components/settings/settings.scss";
 @import "./components/updateLinkForm/updateLinkForm.scss";
 
-#admin-page {
+#profile-manager-page {
   #settings-panel-wrapper {
     z-index: 3;
   }
 }
 
 @media (max-height: 600px) {
-  #admin-page {
+  #profile-manager-page {
     .getting-started-wrapper {
       .getting-started {
         margin-top: 150px;

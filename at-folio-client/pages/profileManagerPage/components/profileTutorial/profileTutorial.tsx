@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 
 import { ProfileTutorialComponent } from "./profileTutorialComponent";
 
-import { AdminPageContext } from "../../adminPageWrapper";
+import { ProfileManagerPageContext } from "../../profileManagerPageWrapper";
 
 export const ProfileTutorial: React.FC = () => {  
-  const { state } = useContext(AdminPageContext);
+  const { state } = useContext(ProfileManagerPageContext);
   
   if(state.tutorialToggled) {
     return (
