@@ -1,0 +1,23 @@
+.admin-page-section {
+  backdrop-filter: blur(5px);
+  background-color: rgba(gray(30), 0.89);
+  border-radius: 6px;
+  box-shadow: $shadow1;
+  padding: 10px;
+
+  .admin-page-section-title {
+    color: white;
+  }
+
+  .admin-page-section-content {
+    margin-top: 10px;
+
+    .admin-page-section-loading-icon {
+      align-items: center;
+      display: flex;
+      height: 30px;
+      justify-content: center;
+      position: relative;
+    }
+  }
+}

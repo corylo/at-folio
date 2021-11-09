@@ -35,14 +35,14 @@ interface LinkFormProps {
 export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {  
   const { platforms } = useContext(AppContext);
 
-  const [state, setState] = useState<ILinkFormState>(defaultLinkFormState(props.link));
+  const [state, setStateTo] = useState<ILinkFormState>(defaultLinkFormState(props.link));
 
   const { errors, fields } = state;
 
   const disabled: boolean = props.mode !== FormMode.Create && props.mode !== FormMode.Update;
 
   const setValueTo = (key: string, value: string): void => {
-    setState({ ...state, fields: { ...fields, [key]: value } });
+    setStateTo({ ...state, fields: { ...fields, [key]: value } });
   }
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
 
   useEffect(() => {
     if(props.link) {
-      setState({ 
+      setStateTo({ 
         ...state, 
         fields: { 
           label: props.link.label,
@@ -70,7 +70,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
-        setState({ ...updates, status: RequestStatus.Loading });
+        setStateTo({ ...updates, status: RequestStatus.Loading });
 
         const link: ILink = { 
           label: fields.label,
@@ -82,28 +82,28 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
         if(props.mode === FormMode.Create) {
           await FormUtility.getActionByID("Confirm Add", props.actions).handleOnClick(link);
 
-          setState(defaultLinkFormState());
+          setStateTo(defaultLinkFormState());
         } else if (props.mode === FormMode.Update) {
           await FormUtility.getActionByID("Confirm Update", props.actions).handleOnClick(link);
         }
       } catch (err) {
         console.error(err);
         
-        setState({ ...updates, status: RequestStatus.Error });
+        setStateTo({ ...updates, status: RequestStatus.Error });
       }
     } else {      
-      setState(updates);
+      setStateTo(updates);
     }
   }
 
   const handleOnDelete = async (): Promise<void> => {    
-    setState({ ...state, status: RequestStatus.Loading });
+    setStateTo({ ...state, status: RequestStatus.Loading });
 
     await FormUtility.getActionByID("Confirm Delete", props.actions).handleOnClick();
   }
 
   const handleOnCancel = (): void => {
-    setState(defaultLinkFormState(props.link));
+    setStateTo(defaultLinkFormState(props.link));
 
     FormUtility.getActionByID(props.mode === FormMode.Update ? "Cancel Update" : "Cancel Delete", props.actions).handleOnClick();
   }

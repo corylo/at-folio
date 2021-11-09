@@ -1,4 +1,5 @@
-import { doc, getDoc, DocumentReference, DocumentSnapshot } from "@firebase/firestore";
+import { doc, getDoc, updateDoc, DocumentReference, DocumentSnapshot } from "@firebase/firestore";
+import _orderby from "lodash.orderby";
 
 import { db } from "../firebase";
 
@@ -9,6 +10,7 @@ import { FirestoreCollectionID } from "../../at-folio-enums/firestoreCollectionI
 
 interface ISocialPlatformService {
   get: () => Promise<ISocialPlatform[]>;
+  update: (platforms: ISocialPlatform[]) => Promise<void>;
 }
 
 export const SocialPlatformService: ISocialPlatformService = {
@@ -21,9 +23,14 @@ export const SocialPlatformService: ISocialPlatformService = {
     if(snap.exists()) {
       const data: ISocialPlatforms = snap.data();
       
-      return data.platforms;
+      return _orderby(data.platforms, "name");
     }
 
     return [];
+  },
+  update: async (platforms: ISocialPlatform[]): Promise<void> => {
+    const ref: DocumentReference = doc(db, FirestoreCollectionID.SocialPlatforms, FirestoreCollectionID.SocialPlatforms);
+
+    await updateDoc(ref, { platforms });
   }
 }

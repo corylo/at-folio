@@ -1,5 +1,6 @@
-import { Atfolio } from "../../at-folio-models/atfolio";
 import { ISocialPlatform } from "../../at-folio-models/socialPlatform";
+
+import { Atfolio } from "../../at-folio-enums/atfolio";
 
 interface ISocialPlatformUtility {
   getPlatformImageUrl: (platform: string) => string;
