@@ -21,3 +21,11 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  #admin-page {
+    #admin-page-content {
+      width: calc(100% - 20px);
+    }
+  }
+}
