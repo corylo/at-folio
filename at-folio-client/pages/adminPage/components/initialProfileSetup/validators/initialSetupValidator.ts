@@ -18,6 +18,8 @@ export const InitialSetupValidator: IInitialSetupValidator = {
 
     if(!FormValidator.isNotEmpty(fields.username)) {
       errors.username = FormError.MissingValue;
+    } else if(fields.username.length < 3) {
+      errors.username = FormError.TooShort;
     } else {
       errors.username = FormError.None;
     }

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Form } from "../../../../components/form/form";
 import { FormActions } from "../../../../components/form/formActions";
@@ -18,6 +18,7 @@ import { defaultInitialSetupState, IInitialSetupState } from "./models/initialSe
 import { IProfileUpdate } from "../../../../../at-folio-models/profile";
 import { defaultUnsplashPhotoReference } from "../../../../../at-folio-models/unsplashPhotoReference";
 
+import { FirebaseErrorCode } from "../../../../enums/firebaseErrorCode";
 import { RequestStatus } from "../../../../enums/requestStatus";
 
 export const InitialProfileSetup: React.FC = () => {
@@ -27,8 +28,18 @@ export const InitialProfileSetup: React.FC = () => {
 
   const { errors, fields } = state;
 
+  useEffect(() => {
+    if(!FormUtility.determineIfValid(state)) {
+      setStateTo(InitialSetupValidator.validate(state));
+    }
+  }, [fields.username]);
+
   const setValueTo = (key: string, value: string): void => {
     setStateTo({ ...state, fields: { ...fields, [key]: value } });
+  }
+
+  const formatUsername = (value: string): string => {
+    return value.replace(/[^a-zA-Z0-9-_]$/, "")
   }
 
   const save = async (): Promise<void> => {
@@ -50,8 +61,12 @@ export const InitialProfileSetup: React.FC = () => {
         setProfileTo(profile);
       } catch (err) {
         console.error(err);
-        
-        setStateTo({ ...updates, status: RequestStatus.Error });
+
+        if(err.code === FirebaseErrorCode.PermissionDenied) {
+          setStateTo({ ...updates, status: RequestStatus.Error, errorMessage: "Username not available." });
+        } else {        
+          setStateTo({ ...updates, status: RequestStatus.Error });
+        }
       }
     } else {      
       setStateTo(updates);
@@ -69,13 +84,18 @@ export const InitialProfileSetup: React.FC = () => {
       <div id="initial-profile-setup-content">
         <Form id="initial-profile-setup-form">
           <FormBody errorMessage={state.errorMessage} status={state.status}>
-            <Input label="Username" value={fields.username} maxLength={30} error={errors.username}>
+            <Input 
+              label="Username" 
+              value={fields.username} 
+              maxLength={24} 
+              error={errors.username}
+            >
               <input 
                 type="text"                 
-                maxLength={30}
+                maxLength={24}
                 placeholder="Enter username" 
                 value={fields.username}
-                onChange={(e: any) => setValueTo("username", e.target.value)}
+                onChange={(e: any) => setValueTo("username", formatUsername(e.target.value))}
                 onKeyDown={handleOnKeyDown}
               />
             </Input>

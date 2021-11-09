@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { AuthForm } from "../../../../components/authForm/authForm";
@@ -18,12 +18,18 @@ import { defaultSignInFormState, ISignInFormState } from "./models/signInFormSta
 import { RequestStatus } from "../../../../enums/requestStatus";
 
 export const SignInForm: React.FC = () => {
-  const [state, setState] = useState<ISignInFormState>(defaultSignInFormState());
+  const [state, setStateTo] = useState<ISignInFormState>(defaultSignInFormState());
 
   const { errors, fields } = state;
 
+  useEffect(() => {
+    if(!FormUtility.determineIfValid(state)) {
+      setStateTo(SignInFormValidator.validate(state));
+    }
+  }, [fields.email, fields.password]);
+
   const setValueTo = (key: string, value: string): void => {
-    setState({ ...state, fields: { ...fields, [key]: value } });
+    setStateTo({ ...state, fields: { ...fields, [key]: value } });
   }
 
   const signIn = async (): Promise<void> => {
@@ -31,16 +37,16 @@ export const SignInForm: React.FC = () => {
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
-        setState({ ...updates, status: RequestStatus.Loading });
+        setStateTo({ ...updates, status: RequestStatus.Loading });
 
         await AuthService.signIn(fields.email, fields.password);
       } catch (err) {
         console.error(err);
         
-        setState({ ...updates, status: RequestStatus.Error, errorMessage: FirebaseErrorUtility.getAuthErrorMessage(err.code) });
+        setStateTo({ ...updates, status: RequestStatus.Error, errorMessage: FirebaseErrorUtility.getAuthErrorMessage(err.code) });
       }
     } else {      
-      setState(updates);
+      setStateTo(updates);
     }
   }
 

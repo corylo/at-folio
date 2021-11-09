@@ -1,7 +1,7 @@
+import { IFormAction } from "../models/formAction";
 import { IFormState } from "../models/formState";
 
 import { FormError } from "../enums/formError";
-import { IFormAction } from "../models/formAction";
 
 interface IFormUtility {
   determineIfValid: (state: IFormState) => boolean;
@@ -35,6 +35,9 @@ export const FormUtility: IFormUtility = {
         
       case FormError.NotMatching:
         return "Doesn't Match";
+        
+      case FormError.TooShort:
+        return "Too short";
       default:
         return "";
     }

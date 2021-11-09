@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { AuthForm } from "../../../../components/authForm/authForm";
@@ -17,16 +17,22 @@ import { defaultSignUpFormState, ISignUpFormState } from "./models/signUpFormSta
 import { RequestStatus } from "../../../../enums/requestStatus";
 
 export const SignUpForm: React.FC = () => {
-  const [state, setState] = useState<ISignUpFormState>(defaultSignUpFormState());
+  const [state, setStateTo] = useState<ISignUpFormState>(defaultSignUpFormState());
 
   const { errors, fields } = state;
 
+  useEffect(() => {
+    if(!FormUtility.determineIfValid(state)) {
+      setStateTo(SignUpFormValidator.validate(state));
+    }
+  }, [fields.email, fields.password]);
+
   const setFieldTo = (key: string, value: string): void => {
-    setState({ ...state, fields: { ...fields, [key]: value } });
+    setStateTo({ ...state, fields: { ...fields, [key]: value } });
   }
 
   const setStatusTo = (status: RequestStatus): void => {
-    setState({ ...state, status });
+    setStateTo({ ...state, status });
   }
 
   const createAccount = async (): Promise<void> => {
@@ -34,7 +40,7 @@ export const SignUpForm: React.FC = () => {
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
-        setState({ ...updates, status: RequestStatus.Loading });
+        setStateTo({ ...updates, status: RequestStatus.Loading });
 
         await AuthService.createUser(fields.email, fields.password);
       } catch (err) {
@@ -43,7 +49,7 @@ export const SignUpForm: React.FC = () => {
         setStatusTo(RequestStatus.Error);
       }
     } else {      
-      setState(updates);
+      setStateTo(updates);
     }
   }
 
