@@ -64,7 +64,7 @@ export const SearchResults: React.FC<SearchResultsProps> = (props: SearchResults
       return (
         <div id="command-line-search-statement">
           <i className="fa-regular fa-magnifying-glass" />
-          <h1 className="rubik-font">Whoops! Try another username.</h1>
+          <h1 className="rubik-font">No users found</h1>
         </div>
       )
     }
