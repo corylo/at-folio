@@ -18,48 +18,57 @@
     width: 500px;
 
     #home-page-menu-options {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
       padding: 10px;
 
-      .home-page-menu-option {
-        align-items: center;
-        border-radius: 6px;
-        cursor: pointer;
+      .home-page-menu-options-section {
         display: flex;
-        gap: 1em;
-        outline: none;
-        padding: 10px;
-        text-decoration: none;
+        flex-direction: column;
+        gap: 10px;
 
-        &:hover,
-        &:focus {
-          background-color: rgba(white, 0.1);
+        &:nth-child(n + 2) {
+          border-top: 1px solid rgba(white, 0.1);
+          margin-top: 10px;
+          padding-top: 10px;
         }
 
-        .home-page-menu-option-icon {
-          background-color: rgba(white, 0.1);
-          border-radius: 100px;
-          color: white;
-          flex-shrink: 0;
-          height: 40px;
-          line-height: 40px;
-          text-align: center;
-          width: 40px;
-        }
+        .home-page-menu-option {
+          align-items: center;
+          border-radius: 6px;
+          cursor: pointer;
+          display: flex;
+          gap: 1em;
+          outline: none;
+          padding: 10px;
+          text-decoration: none;
 
-        .home-page-menu-option-content {
-          flex-grow: 1;
-          text-align: left;
-
-          .home-page-menu-option-label {
-            color: white;
+          &:hover,
+          &:focus {
+            background-color: rgba(white, 0.1);
           }
 
-          .home-page-menu-option-description {
-            color: gray(200);
-            font-size: 0.8em;
+          .home-page-menu-option-icon {
+            background-color: rgba(white, 0.1);
+            border-radius: 100px;
+            color: white;
+            flex-shrink: 0;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            width: 40px;
+          }
+
+          .home-page-menu-option-content {
+            flex-grow: 1;
+            text-align: left;
+
+            .home-page-menu-option-label {
+              color: white;
+            }
+
+            .home-page-menu-option-description {
+              color: gray(200);
+              font-size: 0.8em;
+            }
           }
         }
       }
