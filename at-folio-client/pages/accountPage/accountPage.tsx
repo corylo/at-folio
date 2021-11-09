@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
+import { DeleteAccountModal } from "./components/deleteAccountModal/deleteAccountModal";
 import { EmailVerificationStatus } from "../../components/emailVerificationStatus/emailVerificationStatus";
 import { IconButton } from "../../components/button/iconButton/iconButton";
 import { Input } from "../../components/input/input";
@@ -69,6 +70,7 @@ export const AccountPage: React.FC = () => {
           </div>
           <UpdateEmailModal />
           <UpdatePasswordModal />
+          <DeleteAccountModal />
         </React.Fragment>
       )
     }

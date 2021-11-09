@@ -1,0 +1,13 @@
+#delete-account-modal {
+  .update-account-label {
+    margin-bottom: 10px;
+  }
+
+  #delete-account-form {
+    .form-actions {
+      .button {
+        background-color: $red;
+      }
+    }
+  }
+}
