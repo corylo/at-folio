@@ -1,6 +1,7 @@
 import { ChosenNodeValues, Data, Edge, IdType, Node, Options } from "vis-network/standalone";
 
 import { LinkUtility } from "../../../utilities/linkUtility";
+import { SocialPlatformUtility } from "../../../utilities/socialPlatformUtility";
 import { UrlUtility } from "../../../utilities/urlUtility";
 
 import { ILink } from "../../../../at-folio-models/link";
@@ -78,7 +79,7 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
         color: "white"
       },
       id: link.id,
-      image: `img/icons/${link.platform.toLowerCase()}.svg`,
+      image: SocialPlatformUtility.getPlatformImageUrl(link.platform),
       imagePadding: 20,      
       label: link.label || null,
       shape: "circularImage",
