@@ -1,17 +1,19 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useRouteMatch } from "react-router";
+
+import { ProfilePageContext } from "../profilePageWrapper";
 
 import { LinkService } from "../../../services/linkService";
 import { ProfileService } from "../../../services/profileService";
 
 import { IProfile } from "../../../../at-folio-models/profile";
-import { defaultProfilePageState, IProfilePageState } from "../models/profilePageState";
+import { defaultProfilePageState } from "../models/profilePageState";
 
 import { RequestStatus } from "../../../enums/requestStatus";
 
-export const useFetchProfileEffect = (
-  setStateTo: (state: IProfilePageState) => void
-): void => {
+export const useFetchProfileEffect = (): void => {
+  const { state, setStateTo } = useContext(ProfilePageContext);
+
   const match: any = useRouteMatch();
 
   useEffect(() => {
@@ -25,9 +27,15 @@ export const useFetchProfileEffect = (
           if(profile) {
             profile.links = await LinkService.getByUID(profile.uid);
 
-            setStateTo({ profile, status: RequestStatus.Success });
+            setStateTo({ ...state, profile, status: RequestStatus.Success });
           } else {
-            throw new Error(`Profile: ${match.params.username} does not exist.`);
+            console.error(`Profile: ${match.params.username} does not exist.`);
+
+            setStateTo({ 
+              ...defaultProfilePageState(), 
+              errorMessage: "This user does not exist!", 
+              status: RequestStatus.Error 
+            });
           }
         }
       } catch (err) {

@@ -12,6 +12,7 @@ import { UserStatus } from "../../enums/userStatus";
 
 interface PageProps {
   children: any;
+  errorMessage?: string;
   id: string;
   signInRequired?: boolean;
   status?: RequestStatus;
@@ -19,6 +20,12 @@ interface PageProps {
 
 export const Page: React.FC<PageProps> = (props: PageProps) => {
   const { userStatus } = useContext(AppContext);
+
+  if(props.signInRequired && userStatus === UserStatus.SignedOut) {
+    return (
+      <Redirect to="/" />
+    )
+  }
 
   const getContent = (): JSX.Element => {
     if(userStatus === UserStatus.Loading || props.status === RequestStatus.Loading) {
@@ -30,10 +37,16 @@ export const Page: React.FC<PageProps> = (props: PageProps) => {
     return props.children;
   }
 
-  if(props.signInRequired && userStatus === UserStatus.SignedOut) {
-    return (
-      <Redirect to="/" />
-    )
+  const getErrorMessage = (): JSX.Element => {
+    if(props.status === RequestStatus.Error) {
+      const message: string = props.errorMessage || "There was an error loading the page";
+      
+      return (
+        <div className="page-error-message">
+          <h1 className="rubik-font">{message}</h1>
+        </div>
+      )
+    }
   }
 
   return (
@@ -41,6 +54,7 @@ export const Page: React.FC<PageProps> = (props: PageProps) => {
       <Navbar />
       <MainMenu />
       {getContent()}
+      {getErrorMessage()}
     </div>
   )
 }

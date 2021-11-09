@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import { Page } from "../../components/page/page";
 import { Profile } from "../../components/profile/profile";
 
 import { useFetchProfileEffect } from "./effects";
 
-import { defaultProfilePageState, IProfilePageState } from "./models/profilePageState";
+import { ProfilePageContext } from "./profilePageWrapper";
 
 export const ProfilePage: React.FC = () => {
-  const [state, setStateTo] = useState<IProfilePageState>(defaultProfilePageState());
+  const { state } = useContext(ProfilePageContext);
 
-  useFetchProfileEffect(setStateTo);
+  useFetchProfileEffect();
 
   return (
-    <Page id="profile-page" status={state.status}>
+    <Page id="profile-page" status={state.status} errorMessage={state.errorMessage}>
       <Profile profile={state.profile} />
     </Page>
   )

@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 
-import { AccountPage, AdminPageWrapper, AuthPage, HomePage, ProfilePage, ResetPasswordPage, SignInPage, SignUpPage } from "../../pages/pages";
+import { AccountPage, AdminPageWrapper, AuthPage, HomePage, ProfilePageWrapper, ResetPasswordPage, SignInPage, SignUpPage } from "../../pages/pages";
 
 import { ReauthModal } from "../reauthModal/reauthModal";
 
@@ -36,7 +36,7 @@ export const App: React.FC = () => {
           <AccountPage />
         </Route>
         <Route exact path="/:username">
-          <ProfilePage />
+          <ProfilePageWrapper />
         </Route>
         <Route path="*">
           <Redirect to="/" />
