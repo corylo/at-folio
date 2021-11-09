@@ -7,18 +7,18 @@ import { IUpdateEmailModalState } from "../models/updateEmailModalState";
 import { FormError } from "../../../../../enums/formError";
 
 interface IUpdateEmailFormValidator {
-  validate: (state: IUpdateEmailModalState) => IUpdateEmailModalState;
+  validate: (state: IUpdateEmailModalState, currentEmail: string) => IUpdateEmailModalState;
 }
 
 export const UpdateEmailFormValidator: IUpdateEmailFormValidator = {
-  validate: (state: IUpdateEmailModalState): IUpdateEmailModalState => {
+  validate: (state: IUpdateEmailModalState, currentEmail: string): IUpdateEmailModalState => {
     const copy: IUpdateEmailModalState = LodashUtility.clone(state);
 
     const { errors, fields } = copy;
 
     if(!FormValidator.isNotEmpty(fields.email)) {
       errors.email = FormError.MissingValue;
-    } else if(!FormValidator.isValidEmail(fields.email)) {
+    } else if(!FormValidator.isValidEmail(fields.email) || fields.email === currentEmail) {
       errors.email = FormError.InvalidValue;
     } else {
       errors.email = FormError.None;

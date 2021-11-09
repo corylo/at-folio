@@ -40,7 +40,7 @@ export const UpdateEmailModal: React.FC = () => {
   }
 
   const update = async (): Promise<void> => {
-    const updates: IUpdateEmailModalState = UpdateEmailFormValidator.validate(state);
+    const updates: IUpdateEmailModalState = UpdateEmailFormValidator.validate(state, user.email);
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
