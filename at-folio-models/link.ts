@@ -1,4 +1,4 @@
-import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot } from "@firebase/firestore";
+import { DocumentData, QueryDocumentSnapshot } from "@firebase/firestore";
 
 export interface ILink {
   id: string;
@@ -13,7 +13,7 @@ export interface ILinkUpdate {
   url?: string;
 }
 
-export const linkConverter: FirestoreDataConverter<ILink> = {
+export const linkConverter: any = {
   toFirestore(link: ILink): DocumentData {
     return {
       label: link.label,

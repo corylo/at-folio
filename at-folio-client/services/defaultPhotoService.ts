@@ -2,6 +2,8 @@ import { doc, getDoc, DocumentReference, DocumentSnapshot } from "@firebase/fire
 
 import { db } from "../firebase";
 
+import { UnsplashUtility } from "../../at-folio-utilities/unsplashUtility";
+
 import { IUnsplashPhoto } from "../../at-folio-models/unsplashPhoto";
 import { IUnsplashPhotoGroup, unsplashPhotoGroupConverter } from "../../at-folio-models/unsplashPhotoGroup";
 
@@ -23,7 +25,7 @@ export const DefaultPhotoService: IDefaultPhotoService = {
     if(snap.exists()) {
       const group: IUnsplashPhotoGroup = snap.data();
       
-      return group.photos;
+      return UnsplashUtility.dedupe(group.photos);
     }
 
     return [];

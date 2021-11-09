@@ -1,4 +1,4 @@
-import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot } from "@firebase/firestore";
+import { DocumentData, QueryDocumentSnapshot } from "@firebase/firestore";
 
 import { ILink } from "./link";
 import { defaultProfileAdmin, IProfileAdmin } from "./profileAdmin";
@@ -31,7 +31,7 @@ export const defaultProfile = (): IProfile => ({
   username: ""
 });
 
-export const profileConverter: FirestoreDataConverter<IProfile> = {
+export const profileConverter: any = {
   toFirestore(profile: IProfile): DocumentData {
     return {
       background: profile.background,

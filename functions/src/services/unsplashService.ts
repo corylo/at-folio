@@ -19,6 +19,6 @@ export const UnsplashService: IUnsplashService = {
       collectionIds
     });
 
-    return UnsplashUtility.dedupe(UnsplashUtility.mapPhotos(res.response));
+    return UnsplashUtility.mapPhotos(res.response);
   }
 }
