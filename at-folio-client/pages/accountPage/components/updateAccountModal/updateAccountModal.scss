@@ -18,6 +18,23 @@
       box-shadow: $shadow3;
       min-height: 30px;
       padding: 10px;
+
+      .current-email {
+        margin-bottom: 10px;
+      }
+
+      .form {
+        .form-body {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .update-account-label {
+            color: white;
+            font-size: 1.25em;
+          }
+        }
+      }
     }
   }
 }

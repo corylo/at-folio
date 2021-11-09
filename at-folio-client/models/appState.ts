@@ -7,14 +7,17 @@ import { UserStatus } from "../enums/userStatus";
 
 export interface IAppToggles {
   mainMenu: boolean;
+  reauth: boolean;
 }
 
 export interface IAppTogglesUpdate {
   mainMenu?: boolean;
+  reauth?: boolean;
 }
 
 export const defaultAppToggles = (): IAppToggles => ({
-  mainMenu: false
+  mainMenu: false,
+  reauth: false
 });
 
 export interface IAppState {

@@ -16,9 +16,7 @@ import { defaultMainMenuState, IMainMenuState } from "./models/mainMenuState";
 import { RequestStatus } from "../../enums/requestStatus";
 
 export const MainMenu: React.FC = () => {
-  const { appState, setAppTogglesTo } = useContext(AppContext);
-
-  const { profile, toggles } = appState;
+  const { profile, toggles, setAppTogglesTo } = useContext(AppContext);
 
   const detoggle = () => {
     setAppTogglesTo({ mainMenu: false });

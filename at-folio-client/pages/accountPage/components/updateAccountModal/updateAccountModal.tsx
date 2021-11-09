@@ -10,6 +10,7 @@ import { AccountAction } from "../../enums/accountAction";
 interface UpdateAccountModalProps {
   action: AccountAction;
   children: any;
+  title?: string;
 }
 
 export const UpdateAccountModal: React.FC<UpdateAccountModalProps> = (props: UpdateAccountModalProps) => {
@@ -23,7 +24,7 @@ export const UpdateAccountModal: React.FC<UpdateAccountModalProps> = (props: Upd
       handleOnBackgroundClick={() => setActionTo(AccountAction.None)}
     >
       <div className="update-account-modal-header">
-        <h1 className="update-account-modal-title rubik-font">{props.action}</h1>
+        <h1 className="update-account-modal-title rubik-font">{props.title || props.action}</h1>
         <IconButton 
           className="close-button"
           icon="fa-regular fa-xmark" 

@@ -1,5 +1,6 @@
 export enum FormError {  
   InvalidValue = "Invalid Value",
   MissingValue = "Missing Value",
-  None = ""
+  None = "",
+  NotMatching = "Not Matching"
 }

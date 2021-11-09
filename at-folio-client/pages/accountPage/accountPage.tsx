@@ -75,7 +75,7 @@ export const AccountPage: React.FC = () => {
   }
 
   return (
-    <AccountPageContext.Provider value={{ state, setStateTo, setActionTo }}>
+    <AccountPageContext.Provider value={{ state, action: state.action, setStateTo, setActionTo }}>
       <Page id="account-page" signInRequired>
         {getContent()}
       </Page>

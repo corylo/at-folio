@@ -3,6 +3,8 @@ import { Redirect, Route, Switch } from "react-router";
 
 import { AccountPage, AdminPageWrapper, AuthPage, HomePage, ProfilePage, ResetPasswordPage, SignInPage, SignUpPage } from "../../pages/pages";
 
+import { ReauthModal } from "../reauthModal/reauthModal";
+
 import { useOnAuthStateChangedEffect } from "../../effects/authEffects";
 
 export const App: React.FC = () => {
@@ -10,6 +12,7 @@ export const App: React.FC = () => {
 
   return (
     <div id="at-folio-app">
+      <ReauthModal />
       <Switch>
         <Route exact path="/">
           <HomePage />

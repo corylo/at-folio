@@ -23,12 +23,12 @@ import { RequestStatus } from "../../../../enums/requestStatus";
 export const InitialProfileSetup: React.FC = () => {
   const { user, setProfileTo } = useContext(AppContext);
 
-  const [state, setState] = useState<IInitialSetupState>(defaultInitialSetupState());
+  const [state, setStateTo] = useState<IInitialSetupState>(defaultInitialSetupState());
 
   const { errors, fields } = state;
 
   const setValueTo = (key: string, value: string): void => {
-    setState({ ...state, fields: { ...fields, [key]: value } });
+    setStateTo({ ...state, fields: { ...fields, [key]: value } });
   }
 
   const save = async (): Promise<void> => {
@@ -36,7 +36,7 @@ export const InitialProfileSetup: React.FC = () => {
 
     if(FormUtility.determineIfValid(updates) && state.status !== RequestStatus.Loading) {
       try {
-        setState({ ...updates, status: RequestStatus.Loading });
+        setStateTo({ ...updates, status: RequestStatus.Loading });
 
         const profile: IProfileUpdate = {
           background: defaultUnsplashPhotoReference(),                    
@@ -51,10 +51,10 @@ export const InitialProfileSetup: React.FC = () => {
       } catch (err) {
         console.error(err);
         
-        setState({ ...updates, status: RequestStatus.Error });
+        setStateTo({ ...updates, status: RequestStatus.Error });
       }
     } else {      
-      setState(updates);
+      setStateTo(updates);
     }
   }
 

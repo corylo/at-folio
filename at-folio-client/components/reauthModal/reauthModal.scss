@@ -1,0 +1,24 @@
+.reauth-modal-wrapper {
+  z-index: 100002;
+  .modal {    
+    .reauth-modal-header {
+      align-items: center;
+      display: flex;
+      padding: 10px;
+
+      .reauth-modal-title {
+        color: white;
+        flex-grow: 1;
+        font-size: 1.25em;
+      }
+    }
+
+    .reauth-modal-content {
+      background-color: gray(30);
+      border-radius: 6px;
+      box-shadow: $shadow3;
+      min-height: 30px;
+      padding: 10px;
+    }
+  }
+}

@@ -75,7 +75,7 @@ export const ResetPasswordForm: React.FC = () => {
     }
 
     return (
-      <h1 className="auth-form-label-field rubik-font">{fields.email}</h1>
+      <h1 className="form-display-field rubik-font">{fields.email}</h1>
     )
   }
 

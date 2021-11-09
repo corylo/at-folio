@@ -32,6 +32,9 @@ export const FormUtility: IFormUtility = {
         
       case FormError.MissingValue:
         return "Required";
+        
+      case FormError.NotMatching:
+        return "Doesn't Match";
       default:
         return "";
     }
