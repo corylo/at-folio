@@ -7,21 +7,29 @@ import { Navbar } from "../navbar/navbar";
 
 import { AppContext } from "../app/appWrapper";
 
+import { UserUtility } from "../../utilities/userUtility";
+
 import { RequestStatus } from "../../enums/requestStatus";
 import { UserStatus } from "../../enums/userStatus";
 
 interface PageProps {
+  adminRequired?: boolean;
   children: any;
   errorMessage?: string;
   id: string;
   signInRequired?: boolean;
+  signOutRequired?: boolean;
   status?: RequestStatus;
 }
 
 export const Page: React.FC<PageProps> = (props: PageProps) => {
-  const { userStatus } = useContext(AppContext);
+  const { profile, userStatus } = useContext(AppContext);
 
-  if(props.signInRequired && userStatus === UserStatus.SignedOut) {
+  if(
+    (props.signInRequired && userStatus === UserStatus.SignedOut) ||
+    (props.signOutRequired && userStatus === UserStatus.SignedIn) ||
+    (props.adminRequired && UserUtility.isSignedOutOrNotAdmin(profile, userStatus))
+  ) {
     return (
       <Redirect to="/" />
     )

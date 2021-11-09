@@ -1,4 +1,5 @@
 import { AccountPage } from "./accountPage/accountPage";
+import { AdminPage } from "./adminPage/adminPage";
 import { AuthPage } from "./authPage/authPage";
 import { HomePage } from "./homePage/homePage";
 import { ProfileManagerPageWrapper } from "./profileManagerPage/profileManagerPageWrapper";
@@ -9,6 +10,7 @@ import { SignUpPage } from "./signUpPage/signUpPage";
 
 export {
   AccountPage,
+  AdminPage,
   AuthPage,
   HomePage,
   ProfileManagerPageWrapper,

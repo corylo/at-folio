@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 
 import { AuthPageBackground } from "../../components/authPageBackground/authPageBackground";
 import { AuthPageMessage } from "./components/authPageMessage/authPageMessage";
@@ -37,11 +37,7 @@ export const AuthPage: React.FC = () => {
   }
 
   useEffect(() => {
-    const param: string | null = params.get("mode");
-
-    if(param) {
-      setModeTo(FirebaseAuthUtility.getMode(param));
-    }
+    setModeTo(FirebaseAuthUtility.getMode(params.get("mode")));
   }, []);
 
   useEffect(() => {
@@ -129,6 +125,11 @@ export const AuthPage: React.FC = () => {
     }
   }
 
+  if(state.mode === FirebaseAuthMode.Invalid) {
+    return (
+      <Redirect to="/" />
+    )
+  }
   return (
     <Page id="auth-page" status={state.status}>      
       <AuthPageBackground />

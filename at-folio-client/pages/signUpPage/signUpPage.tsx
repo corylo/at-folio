@@ -1,26 +1,12 @@
-import React, { useContext } from "react";
-import { Redirect } from "react-router";
+import React from "react";
 
 import { AuthPageBackground } from "../../components/authPageBackground/authPageBackground";
 import { Page } from "../../components/page/page";
 import { SignUpForm } from "./components/signUpForm/signUpForm";
 
-import { AppContext } from "../../components/app/appWrapper";
-
-import { UserStatus } from "../../enums/userStatus";
-
-
 export const SignUpPage: React.FC = () => {
-  const { userStatus } = useContext(AppContext);
-
-  if(userStatus === UserStatus.SignedIn) {
-    return (
-      <Redirect to="/" />
-    )
-  }
-
   return (  
-    <Page id="sign-up-page">
+    <Page id="sign-up-page" signOutRequired>
       <SignUpForm />
       <AuthPageBackground />
     </Page>

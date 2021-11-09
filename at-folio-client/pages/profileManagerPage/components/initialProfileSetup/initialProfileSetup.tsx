@@ -9,6 +9,7 @@ import { Modal } from "../../../../components/modal/modal";
 import { AppContext } from "../../../../components/app/appWrapper";
 
 import { ProfileService } from "../../../../services/profileService";
+import { UsernameService } from "../../../../services/usernameService";
 
 import { InitialSetupValidator } from "./validators/initialSetupValidator";
 
@@ -17,8 +18,8 @@ import { FormUtility } from "../../../../utilities/formUtility";
 import { defaultInitialSetupState, IInitialSetupState } from "./models/initialSetupState";
 import { IProfileUpdate } from "../../../../../at-folio-models/profile";
 import { defaultUnsplashPhotoReference } from "../../../../../at-folio-models/unsplashPhotoReference";
+import { IUsername } from "../../../../../at-folio-models/username";
 
-import { FirebaseErrorCode } from "../../../../enums/firebaseErrorCode";
 import { RequestStatus } from "../../../../enums/requestStatus";
 
 export const InitialProfileSetup: React.FC = () => {
@@ -49,24 +50,26 @@ export const InitialProfileSetup: React.FC = () => {
       try {
         setStateTo({ ...updates, status: RequestStatus.Loading });
 
-        const profile: IProfileUpdate = {
-          background: defaultUnsplashPhotoReference(),                    
-          photo: defaultUnsplashPhotoReference(),
-          uid: user.uid,
-          username: fields.username
+        const username: IUsername = await UsernameService.get(fields.username);
+
+        if(username === null) {
+          const profile: IProfileUpdate = {
+            background: defaultUnsplashPhotoReference(),                    
+            photo: defaultUnsplashPhotoReference(),
+            uid: user.uid,
+            username: fields.username
+          }
+
+          await ProfileService.create(profile);
+
+          setProfileTo(profile);
+        } else {
+          setStateTo({ ...updates, status: RequestStatus.Error, errorMessage: "Username not available." });
         }
-
-        await ProfileService.create(profile);
-
-        setProfileTo(profile);
       } catch (err) {
         console.error(err);
 
-        if(err.code === FirebaseErrorCode.PermissionDenied) {
-          setStateTo({ ...updates, status: RequestStatus.Error, errorMessage: "Username not available." });
-        } else {        
-          setStateTo({ ...updates, status: RequestStatus.Error });
-        }
+        setStateTo({ ...updates, status: RequestStatus.Error });
       }
     } else {      
       setStateTo(updates);

@@ -11,6 +11,8 @@ import { AppContext } from "../app/appWrapper";
 
 import { AuthService } from "../../services/authService";
 
+import { UserUtility } from "../../utilities/userUtility";
+
 import { defaultMainMenuState, IMainMenuState } from "./models/mainMenuState";
 
 import { RequestStatus } from "../../enums/requestStatus";
@@ -40,6 +42,22 @@ export const MainMenu: React.FC = () => {
     }
   }
 
+  const getAdminOptions = (): JSX.Element => {
+    if(UserUtility.isAdmin(profile)) {
+      return (
+        <div className="main-menu-body-section">
+          <MainMenuOption 
+            description="Manage social platforms"
+            icon="fa-regular fa-user-astronaut"
+            label="Admin"
+            to="/admin" 
+            handleOnClick={detoggle}
+          />
+        </div>
+      )
+    }
+  }
+
   return (
     <Modal 
       contentID="main-menu" 
@@ -62,6 +80,7 @@ export const MainMenu: React.FC = () => {
           />
         </div>  
         <div id="main-menu-body">
+          {getAdminOptions()}
           <div className="main-menu-body-section">
             <MainMenuOption 
               description="Update your photo, background, and links"

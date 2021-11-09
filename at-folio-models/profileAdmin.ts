@@ -1,7 +1,10 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot } from "@firebase/firestore";
 
+import { UserRole } from "../at-folio-enums/userRole";
+
 export interface IProfileAdmin {
   id: string;
+  roles: UserRole[];
   tutorialComplete: boolean;
 }
 
@@ -11,12 +14,14 @@ export interface IProfileAdminUpdate {
 
 export const defaultProfileAdmin = (): IProfileAdmin => ({
   id: "",
+  roles: [],
   tutorialComplete: false
 });
 
 export const profileAdminConverter: FirestoreDataConverter<IProfileAdmin> = {
   toFirestore(admin: IProfileAdmin): DocumentData {
     return {
+      roles: admin.roles,
       tutorialComplete: admin.tutorialComplete
     }
   },
@@ -25,6 +30,7 @@ export const profileAdminConverter: FirestoreDataConverter<IProfileAdmin> = {
 
     return {
       id: snapshot.id,
+      roles: data.roles,
       tutorialComplete: data.tutorialComplete
     }
   }

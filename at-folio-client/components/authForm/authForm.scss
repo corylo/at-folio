@@ -3,7 +3,8 @@
   display: flex;
   height: 100vh;
   justify-content: center;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   right: 0px;
   width: 100%;
