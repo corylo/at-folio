@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import _debounce from "lodash.debounce";
 
+import { LoadableImage } from "../loadableImage/loadableImage";
+
 import { DefaultPhotoService } from "../../services/defaultPhotoService";
 
 import { CreatorGridBackgroundUtility } from "./utilities/creatorGridBackgroundUtility";
@@ -15,7 +17,6 @@ import { AppContext } from "../app/appWrapper";
 
 import { DefaultPhotoType } from "../../../at-folio-enums/defaultPhotoType";
 import { RequestStatus } from "../../enums/requestStatus";
-import { LoadableImage } from "../loadableImage/loadableImage";
 
 export const CreatorGridBackground: React.FC = () => {
   const { platforms } = useContext(AppContext);
