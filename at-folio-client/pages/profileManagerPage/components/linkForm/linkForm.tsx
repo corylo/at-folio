@@ -65,6 +65,10 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
     }
   }, [props.link]);
 
+  const getPlatformUrl = (platform: string): string => {
+    return SocialPlatformUtility.getUrlByPlatform(platform, platforms);
+  }
+
   const handleOnSave = async (): Promise<void> => {
     const updates: ILinkFormState = LinkFormValidator.validate(state, platforms);
 
@@ -75,7 +79,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
         const link: ILink = { 
           label: fields.label,
           platform: fields.platform, 
-          url: UrlUtility.finalize(fields.url, SocialPlatformUtility.getUrlByPlatform(fields.platform, platforms)),
+          url: UrlUtility.finalize(fields.url, getPlatformUrl(fields.platform)),
           id: props.link ? props.link.id : ""
         }
 
@@ -146,7 +150,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
             <input 
               type="text" 
               disabled={disabled}
-              placeholder="Enter url" 
+              placeholder={getPlatformUrl(fields.platform)} 
               value={fields.url}
               onChange={(e: any) => setValueTo("url", e.target.value)}
               onKeyDown={handleOnKeyDown}
