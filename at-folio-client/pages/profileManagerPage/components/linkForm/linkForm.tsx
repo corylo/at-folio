@@ -10,8 +10,10 @@ import { SocialPlatformPicker } from "../../../../components/socialPlatformPicke
 
 import { AppContext } from "../../../../components/app/appWrapper";
 
+import { CustomSocialPlatformValidator } from "../../../../validators/customSocialPlatformValidator";
 import { LinkFormValidator } from "./validators/linkFormValidator";
 
+import { CustomSocialPlatformUtility } from "../../../../utilities/customSocialPlatformUtility";
 import { FormUtility } from "../../../../utilities/formUtility";
 import { SocialPlatformUtility } from "../../../../utilities/socialPlatformUtility";
 import { UrlUtility } from "../../../../utilities/urlUtility";
@@ -20,6 +22,7 @@ import { IFormAction } from "../../../../models/formAction";
 import { ILink } from "../../../../../at-folio-models/link";
 import { defaultLinkFormState, ILinkFormState } from "./models/linkFormState";
 
+import { CustomSocialPlatform } from "../../../../../at-folio-enums/customSocialPlatform";
 import { FormError } from "../../../../enums/formError";
 import { FormMode } from "../../../../enums/formMode";
 import { RequestStatus } from "../../../../enums/requestStatus";
@@ -66,7 +69,11 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
   }, [props.link]);
 
   const getPlatformUrl = (platform: string): string => {
-    return UrlUtility.addHttpsProtocol(SocialPlatformUtility.getUrlByPlatform(platform, platforms));
+    if(CustomSocialPlatformValidator.exists(platform)) {
+      return CustomSocialPlatformUtility.getFormatByPlatform(platform as CustomSocialPlatform);
+    } else {
+      return UrlUtility.addHttpsProtocol(SocialPlatformUtility.getUrlByPlatform(platform, platforms));
+    }
   }
 
   const handleOnSave = async (): Promise<void> => {

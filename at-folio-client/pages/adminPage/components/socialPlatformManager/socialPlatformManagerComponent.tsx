@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
 import { AdminPageSection } from "../adminPageSection/adminPageSection";
+import { SocialPlatformManagerForm } from "./components/socialPlatformManagerForm/socialPlatformManagerForm";
 
 import { SocialPlatformManagerContext } from "./socialPlatformManager";
-import { SocialPlatformManagerForm } from "./components/socialPlatformManagerForm/socialPlatformManagerForm";
 
 import { useFetchSocialPlatformsEffect } from "./effects";
 

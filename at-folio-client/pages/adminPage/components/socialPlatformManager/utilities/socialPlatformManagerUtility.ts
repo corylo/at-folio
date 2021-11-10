@@ -1,5 +1,6 @@
 import _orderby from "lodash.orderby";
 
+import { CustomSocialPlatformValidator } from "../../../../../validators/customSocialPlatformValidator";
 import { UrlValidator } from "../../../../../validators/urlValidator";
 
 import { ISocialPlatform } from "../../../../../../at-folio-models/socialPlatform";
@@ -26,7 +27,7 @@ export const SocialPlatformManagerUtility: ISocialPlatformManagerUtility = {
               url: split[1]
             }
 
-            if(platform.name.trim() !== "" && UrlValidator.validate(platform.url)) {              
+            if(platform.name.trim() !== "" && UrlValidator.validate(platform.url) || CustomSocialPlatformValidator.exists(platform.name)) {              
               platforms.push(platform);
             }
           }

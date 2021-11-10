@@ -1,3 +1,4 @@
+import { CustomSocialPlatformValidator } from "../../../../../validators/customSocialPlatformValidator";
 import { FormValidator } from "../../../../../validators/formValidator";
 import { UrlValidator } from "../../../../../validators/urlValidator";
 
@@ -7,6 +8,7 @@ import { SocialPlatformUtility } from "../../../../../utilities/socialPlatformUt
 import { ILinkFormState } from "../models/linkFormState";
 import { ISocialPlatform } from "../../../../../../at-folio-models/socialPlatform";
 
+import { CustomSocialPlatform } from "../../../../../../at-folio-enums/customSocialPlatform";
 import { FormError } from "../../../../../enums/formError";
 
 interface ILinkFormValidator {
@@ -37,7 +39,9 @@ export const LinkFormValidator: ILinkFormValidator = {
     return copy;
   },
   validateUrl: (platform: string, url: string, platforms: ISocialPlatform[]): boolean => {
-    if(UrlValidator.validate(url)) {
+    if(CustomSocialPlatformValidator.exists(platform)) {
+      return CustomSocialPlatformValidator.validate(platform as CustomSocialPlatform, url);
+    } else if(UrlValidator.validate(url)) {
       return UrlValidator.validateSLD(url, SocialPlatformUtility.getUrlByPlatform(platform, platforms));
     }
 

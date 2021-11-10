@@ -6,6 +6,7 @@ import { UrlUtility } from "../../../utilities/urlUtility";
 
 import { ILink } from "../../../../at-folio-models/link";
 import { IProfile } from "../../../../at-folio-models/profile";
+import { CustomSocialPlatform } from "../../../../at-folio-enums/customSocialPlatform";
 
 interface ISocialPlatformNetworkUtility {
   getOptions: () => Options;
@@ -125,8 +126,10 @@ export const SocialPlatformNetworkUtility: ISocialPlatformNetworkUtility = {
     
     if(id && id !== 1) {
       const link: ILink = LinkUtility.getByID(id as string, links);
+
+      const url: string = link.platform === CustomSocialPlatform.Email ? `mailto:${link.url}` : link.url;
       
-      window.open(link.url, "_blank").focus();
+      window.open(url, "_blank").focus();
     }
   },
   handleOnNodeHover: (params: any, container: HTMLElement): void => {
