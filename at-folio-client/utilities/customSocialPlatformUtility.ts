@@ -1,12 +1,12 @@
 import { CustomSocialPlatform } from "../../at-folio-enums/customSocialPlatform"
 
 interface ICustomSocialPlatformUtility {  
-  getFormatByPlatform: (platform: CustomSocialPlatform) => string;
+  getFormat: (platform: CustomSocialPlatform) => string;
   list: () => CustomSocialPlatform[];
 }
 
 export const CustomSocialPlatformUtility: ICustomSocialPlatformUtility = {
-  getFormatByPlatform: (platform: CustomSocialPlatform): string => {
+  getFormat: (platform: CustomSocialPlatform): string => {
     switch(platform) {
       case CustomSocialPlatform.Email:
         return "my@email.com";

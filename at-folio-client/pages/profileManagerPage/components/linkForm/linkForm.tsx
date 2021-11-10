@@ -68,14 +68,6 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
     }
   }, [props.link]);
 
-  const getPlatformUrl = (platform: string): string => {
-    if(CustomSocialPlatformValidator.exists(platform)) {
-      return CustomSocialPlatformUtility.getFormatByPlatform(platform as CustomSocialPlatform);
-    } else {
-      return UrlUtility.addHttpsProtocol(SocialPlatformUtility.getUrlByPlatform(platform, platforms));
-    }
-  }
-
   const handleOnSave = async (): Promise<void> => {
     const updates: ILinkFormState = LinkFormValidator.validate(state, platforms);
 
@@ -86,7 +78,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
         const link: ILink = { 
           label: fields.label,
           platform: fields.platform, 
-          url: SocialPlatformUtility.finalize(fields.platform, fields.url, getPlatformUrl(fields.platform)),
+          url: SocialPlatformUtility.finalize(fields.platform, fields.url, SocialPlatformUtility.getUrlFormat(fields.platform, platforms)),
           id: props.link ? props.link.id : ""
         }
 
@@ -157,7 +149,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
             <input 
               type="text" 
               disabled={disabled}
-              placeholder={getPlatformUrl(fields.platform)} 
+              placeholder={SocialPlatformUtility.getUrlFormat(fields.platform, platforms)} 
               value={fields.url}
               onChange={(e: any) => setValueTo("url", e.target.value)}
               onKeyDown={handleOnKeyDown}

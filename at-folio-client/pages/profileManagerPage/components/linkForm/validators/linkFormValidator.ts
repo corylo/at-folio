@@ -42,7 +42,7 @@ export const LinkFormValidator: ILinkFormValidator = {
     if(CustomSocialPlatformValidator.exists(platform)) {
       return CustomSocialPlatformValidator.validate(platform as CustomSocialPlatform, url);
     } else if(UrlValidator.validate(url)) {
-      return UrlValidator.validateSLD(url, SocialPlatformUtility.getUrlByPlatform(platform, platforms));
+      return UrlValidator.validateSLD(url, SocialPlatformUtility.getUrlFormat(platform, platforms));
     }
 
     return false;
