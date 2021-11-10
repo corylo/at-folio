@@ -86,7 +86,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
         const link: ILink = { 
           label: fields.label,
           platform: fields.platform, 
-          url: UrlUtility.finalize(fields.url, getPlatformUrl(fields.platform)),
+          url: SocialPlatformUtility.finalize(fields.platform, fields.url, getPlatformUrl(fields.platform)),
           id: props.link ? props.link.id : ""
         }
 
