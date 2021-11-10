@@ -66,7 +66,7 @@ export const LinkForm: React.FC<LinkFormProps> = (props: LinkFormProps) => {
   }, [props.link]);
 
   const getPlatformUrl = (platform: string): string => {
-    return SocialPlatformUtility.getUrlByPlatform(platform, platforms);
+    return UrlUtility.addHttpsProtocol(SocialPlatformUtility.getUrlByPlatform(platform, platforms));
   }
 
   const handleOnSave = async (): Promise<void> => {
