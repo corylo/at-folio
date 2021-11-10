@@ -1,4 +1,5 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc, CollectionReference, DocumentReference, Query, QueryDocumentSnapshot, QuerySnapshot } from "@firebase/firestore";
+import _orderby from "lodash.orderby";
 
 import { db } from "../firebase";
 
@@ -31,9 +32,10 @@ export const LinkService: ILinkService = {
     const query: Query<ILink> = collection(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links)
       .withConverter<ILink>(linkConverter);
 
-    const snap: QuerySnapshot<ILink> = await getDocs(query);
+    const snap: QuerySnapshot<ILink> = await getDocs(query),
+      links: ILink[] = snap.docs.map((doc: QueryDocumentSnapshot<ILink>) => doc.data());
 
-    return snap.docs.map((doc: QueryDocumentSnapshot<ILink>) => doc.data());
+    return _orderby(links, "platform");
   },
   update: async (uid: string, id: string, update: ILinkUpdate): Promise<void> => {
     const ref: DocumentReference = doc(db, FirestoreCollectionID.Profiles, uid, FirestoreCollectionID.Links, id);
