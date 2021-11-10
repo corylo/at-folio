@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import _orderby from "lodash.orderby";
 
 import { LinkForm } from "../linkForm/linkForm";
 
@@ -17,7 +18,9 @@ export const AddLinkForm: React.FC = () => {
   const addLink = async (link: ILink): Promise<void> => {
     const id: string = await LinkService.create(profile.uid, link);
 
-    setProfileTo({ links: [...profile.links, { ...link, id }] });
+    const links: ILink[] = _orderby([...profile.links, { ...link, id }], "platform")
+
+    setProfileTo({ links });
   }
 
   const getActions = (): IFormAction[] => {
