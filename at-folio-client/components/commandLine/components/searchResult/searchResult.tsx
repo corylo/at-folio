@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 import { LoadingIcon } from "../../../loading/loadingIcon";
 import { ProfilePhoto } from "../../../profilePhoto/profilePhoto";
@@ -13,7 +14,6 @@ import { IProfile } from "../../../../../at-folio-models/profile";
 import { defaultSearchResultState, ISearchResultState } from "./models/searchResultState";
 
 import { RequestStatus } from "../../../../enums/requestStatus";
-import classNames from "classnames";
 
 interface SearchResultProps {
   index: number;

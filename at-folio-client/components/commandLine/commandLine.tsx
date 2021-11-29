@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import classNames from "classnames";
 
@@ -24,6 +24,8 @@ interface CommandLineProps {
 
 export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps) => {
   const { profile, setAppTogglesTo } = useContext(AppContext);
+  
+  const ref: React.MutableRefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
   const [state, setStateTo] = useState<ICommandLineState>(defaultCommandLineState());
 
@@ -114,6 +116,8 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
         history.push(`/${state.results[state.focusedIndex].username}`);
 
         setStateTo(defaultCommandLineState());
+
+        ref.current.blur();
       } else {
         handleGo();
       }
@@ -144,6 +148,7 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
             id="command-line-input"
             className="rubik-font"
             placeholder="Search"
+            ref={ref}
             type="text"        
             value={state.query}
             onFocus={() => setFocusedTo(true)}
