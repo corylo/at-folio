@@ -75,18 +75,16 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
   }
 
   const handleGo = async (): Promise<void> => {    
-    if(active && state.query !== state.activeQuery) {
-      try {
-        startSearch();
+    try {
+      startSearch();
 
-        const results: IProfileSearchResult[] = await AlgoliaService.search(state.query);
+      const results: IProfileSearchResult[] = await AlgoliaService.search(state.query);
 
-        completeSearch(results);
-      } catch (err) {
-        console.error(err);
+      completeSearch(results);
+    } catch (err) {
+      console.error(err);
 
-        setStatusTo(RequestStatus.Idle);
-      }
+      setStatusTo(RequestStatus.Idle);
     }
   }
 
@@ -118,7 +116,7 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
         setStateTo(defaultCommandLineState());
 
         ref.current.blur();
-      } else {
+      } else if (active && state.query !== state.activeQuery) {
         handleGo();
       }
     } else if (state.results.length > 0) {
