@@ -27,8 +27,14 @@ export const CommandLine: React.FC = () => {
   const ref: React.MutableRefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if(state.activeQuery !== "") {
-      setStateTo({ ...state, activeQuery: "", focusedIndex: -1, results: [] });
+    if(state.status !== RequestStatus.Idle) {
+      setStateTo({ 
+        ...state, 
+        activeQuery: "", 
+        focusedIndex: -1, 
+        results: [], 
+        status: RequestStatus.Idle 
+      });
     }
   }, [state.query]);
 
