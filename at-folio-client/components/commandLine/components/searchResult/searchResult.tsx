@@ -26,23 +26,21 @@ export const SearchResult: React.FC<SearchResultProps> = (props: SearchResultPro
 
   const [state, setStateTo] = useState<ISearchResultState>(defaultSearchResultState());
 
-  const setFocusedTo = (focused: boolean): void => {
-    setStateTo({ ...state, focused });
-  }
-
   useEffect(() => {
     const fetch = async (): Promise<void> => {
-      const profile: IProfile = await ProfileService.getByUID(props.uid);
+      try {
+        const profile: IProfile = await ProfileService.getByUID(props.uid);
 
-      setStateTo({ ...state, profile, status: RequestStatus.Success });
+        setStateTo({ ...state, profile, status: RequestStatus.Success });
+      } catch (err) {
+        console.error(err);
+
+        setStateTo({ ...state, status: RequestStatus.Idle });
+      }
     }
 
     fetch();
   }, []);
-
-  useEffect(() => {
-    setFocusedTo(props.index === commandLineState.focusedIndex);
-  }, [commandLineState.focusedIndex, state.status]);
 
   const handleOnClick = (): void => {
     setCommandLineStateTo(defaultCommandLineState());
@@ -51,23 +49,25 @@ export const SearchResult: React.FC<SearchResultProps> = (props: SearchResultPro
   const getProfilePhoto = (): JSX.Element => {
     if(state.status === RequestStatus.Success) {
       return (
-        <div className="search-result-profile-photo">
-          <ProfilePhoto photo={state.profile.photo} />
-        </div>
+        <ProfilePhoto photo={state.profile.photo} />
       )
     } else if(state.status === RequestStatus.Loading) {
       return (
-        <div className="search-result-profile-photo">
-          <LoadingIcon />
-        </div>
+        <LoadingIcon />
       )
     }
+
+    return (
+      <ProfilePhoto />
+    )
   }
 
   return (
-    <Link className={classNames("search-result", { focused: state.focused })} to={`/${props.username}`} onClick={handleOnClick}>
+    <Link className={classNames("search-result", { focused: props.index === commandLineState.focusedIndex })} to={`/${props.username}`} onClick={handleOnClick}>
       <div className="search-result-profile">
-        {getProfilePhoto()}
+        <div className="search-result-profile-photo">
+          {getProfilePhoto()}
+        </div>
         <h1 className="search-result-profile-username rubik-font">{props.username}</h1>
       </div>
       <i className="search-result-go-icon fa-regular fa-arrow-turn-down-right" />

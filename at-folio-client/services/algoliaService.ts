@@ -1,10 +1,12 @@
 import AlgoliaLite, { SearchClient, SearchIndex } from "algoliasearch/lite";
 
+import { algoliaConfig } from "../../config/algolia";
+
 import { AlgoliaUtility } from "../utilities/algoliaUtility";
 
 import { FirestoreCollectionID } from "../../at-folio-enums/firestoreCollectionID";
 
-const Algolia: SearchClient = AlgoliaLite("84NKRIQUWZ", "b1086508b76bb82c139ec9b4f5b6d1cd"),
+const Algolia: SearchClient = AlgoliaLite(algoliaConfig.appID, algoliaConfig.apiKey),
   ProfileIndex: SearchIndex = Algolia.initIndex(FirestoreCollectionID.Profiles);
 
 interface IAlgoliaService {

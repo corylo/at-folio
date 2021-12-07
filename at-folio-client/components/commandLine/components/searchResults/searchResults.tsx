@@ -10,11 +10,7 @@ import { IProfileSearchResult } from "../../../../../at-folio-models/profileSear
 
 import { RequestStatus } from "../../../../enums/requestStatus";
 
-interface SearchResultsProps {
-  
-}
-
-export const SearchResults: React.FC<SearchResultsProps> = (props: SearchResultsProps) => {  
+export const SearchResults: React.FC = () => {  
   const { state, setStateTo } = useContext(CommandLineContext);
 
   const handleOnBlur = (): void => {

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
-import classNames from "classnames";
 
 import { Logo } from "../logo/logo";
 import { ProfilePhoto } from "../profilePhoto/profilePhoto";
@@ -18,20 +17,14 @@ import { RequestStatus } from "../../enums/requestStatus";
 
 export const CommandLineContext = createContext<ICommandLineContext>(null);
 
-interface CommandLineProps {
-  
-}
-
-export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps) => {
+export const CommandLine: React.FC = () => {
   const { profile, setAppTogglesTo } = useContext(AppContext);
   
-  const ref: React.MutableRefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
-
   const [state, setStateTo] = useState<ICommandLineState>(defaultCommandLineState());
 
-  const active: boolean = state.query.trim() !== "";
-
   const history: any = useHistory();
+
+  const ref: React.MutableRefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if(state.results.length > 0) {
@@ -39,10 +32,6 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
     }
   }, [state.query]);
 
-  const setStatusTo = (status: RequestStatus): void => {
-    setStateTo({ ...state, status });
-  }
-  
   const setQueryTo = (query: string): void => {
     setStateTo({ ...state, query });
   }
@@ -84,7 +73,7 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
     } catch (err) {
       console.error(err);
 
-      setStatusTo(RequestStatus.Idle);
+      setStateTo({ ...state, status: RequestStatus.Idle });
     }
   }
 
@@ -111,12 +100,14 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
   const handleOnKeyDown = (e: any): void => {
     if(e.key === "Enter") {
       if(state.focusedIndex > -1) {
-        history.push(`/${state.results[state.focusedIndex].username}`);
+        const result: IProfileSearchResult = state.results[state.focusedIndex];
 
-        setStateTo(defaultCommandLineState());
+        history.push(`/${result.username}`);
 
         ref.current.blur();
-      } else if (active && state.query !== state.activeQuery) {
+
+        setStateTo(defaultCommandLineState());   
+      } else if (state.query.trim() !== "" && state.query !== state.activeQuery) {
         handleGo();
       }
     } else if (state.results.length > 0) {
@@ -124,6 +115,10 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
         handlePrevIndex(e);
       } else if (e.key === "Tab" || e.key === "ArrowDown") {
         handleNextIndex(e);
+      }
+    } else if (state.query.trim() === "") {
+      if(e.key === "Tab") {
+        setStateTo(defaultCommandLineState());
       }
     }
   }
@@ -138,8 +133,8 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
 
   return (
     <CommandLineContext.Provider value={{ state, setStateTo }}>
-      <div id="command-line-wrapper" className={classNames({ active })}>
-        <div id="command-line" className={classNames({ active })}>
+      <div id="command-line-wrapper">
+        <div id="command-line">
           <Logo />
           <input
             autoComplete="off"
@@ -149,9 +144,9 @@ export const CommandLine: React.FC<CommandLineProps> = (props: CommandLineProps)
             ref={ref}
             type="text"        
             value={state.query}
-            onFocus={() => setFocusedTo(true)}
             onChange={(e: any) => setQueryTo(e.target.value)}
             onKeyDown={handleOnKeyDown}
+            onFocus={() => setFocusedTo(true)}
           />
           <ProfilePhoto
             photo={profile.photo}

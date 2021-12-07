@@ -5,7 +5,7 @@ import { LoadableImage } from "../loadableImage/loadableImage";
 import { IUnsplashPhotoReference } from "../../../at-folio-models/unsplashPhotoReference";
 
 interface ProfilePhotoProps {
-  photo: IUnsplashPhotoReference;
+  photo?: IUnsplashPhotoReference;
   handleOnClick?: () => void;
 }
 
@@ -13,7 +13,7 @@ export const ProfilePhoto: React.FC<ProfilePhotoProps> = (props: ProfilePhotoPro
   const { photo } = props;
 
   const getImage = (): JSX.Element => {
-    if(photo.id !== "") {
+    if(photo && photo.id !== "") {
       return (
         <LoadableImage 
           className="profile-photo" 
