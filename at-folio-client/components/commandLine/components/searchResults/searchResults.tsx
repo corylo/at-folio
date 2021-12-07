@@ -9,6 +9,7 @@ import { useOnElementBlurEffect } from "../../../../effects/domEffects";
 import { IProfileSearchResult } from "../../../../../at-folio-models/profileSearchResult";
 
 import { RequestStatus } from "../../../../enums/requestStatus";
+import { SearchStatement } from "../searchStatement/searchStatement";
 
 export const SearchResults: React.FC = () => {  
   const { state, setStateTo } = useContext(CommandLineContext);
@@ -22,24 +23,21 @@ export const SearchResults: React.FC = () => {
   const getContent = (): JSX.Element => {
     if(state.status === RequestStatus.Loading) {
       return (
-        <div id="command-line-search-statement">
+        <SearchStatement text="Searching...">
           <LoadingIcon />
-          <h1 className="rubik-font">Searching...</h1>
-        </div>
+        </SearchStatement>
+      )
+    } else if (state.status === RequestStatus.Error) {
+      return (
+        <SearchStatement icon="fa-regular fa-magnifying-glass" text="Error loading results" />
       )
     } else if(state.query.trim() === "") {
       return (
-        <div id="command-line-search-statement">
-          <i className="fa-regular fa-magnifying-glass" />
-          <h1 className="rubik-font">Start typing</h1>
-        </div>
+        <SearchStatement icon="fa-regular fa-magnifying-glass" text="Start typing" />
       )
     } else if (state.query !== state.activeQuery) {
       return (
-        <div id="command-line-search-statement">
-          <i className="fa-regular fa-arrow-turn-down-left" />
-          <h1 className="rubik-font">Hit enter to search</h1>
-        </div>
+        <SearchStatement icon="fa-regular fa-arrow-turn-down-left" text="Hit enter to search" />
       )
     } else if (state.results.length > 0) {
       const results: JSX.Element[] = state.results.map((result: IProfileSearchResult, index: number) => (

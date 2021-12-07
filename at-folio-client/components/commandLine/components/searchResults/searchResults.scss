@@ -12,22 +12,6 @@
   top: 100%;
   width: calc(100% - 20px);
 
-  #command-line-search-statement {
-    align-items: center;
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-
-    i, h1 {
-      color: white;
-      text-shadow: 0px 0px 10px rgba(black, 0.75);
-    }
-
-    i {
-      font-size: 0.9em;
-    }
-  }
-
   #command-line-search-results-list {
     display: flex;
     flex-direction: column;
